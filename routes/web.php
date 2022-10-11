@@ -22,9 +22,7 @@ use App\Http\Controllers\RequestController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
 Route::get('login',[AuthController::class,'showLoginForm']);
 Route::post('login',[AuthController::class,'login'])->name('login');
 Route::post('logout',[AuthController::class,'logout']);
@@ -57,6 +55,9 @@ Route::post('tim-nguoi-dung',[InviteController::class,'searchUser']);
 
 
 Route::group(['middleware'=>['auth']],function(){
+    Route::get('/', function () {
+        return view('welcome');
+    });
     Route::get('danh-sach-yeu-cau',[RequestController::class,'index']);
     Route::get('khach-hang',[CustomerController::class,'index']);
     Route::post('create-old-wifi-request',[RequestController::class,'createOldRequest']);
@@ -71,4 +72,4 @@ Route::post('toggle-dark-mode',[HomeController::class,'toggleDarkMode']);
 
 // Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
