@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Imports\ImportSim;
 use Carbon\Carbon;
 use App\Models\Partner;
 use App\Models\SimCard;
@@ -40,7 +41,7 @@ class SimCardController extends Controller
         # code...
         if($request->hasFile('file')){
             $file = $request->file('file');
-            Excel::import(new ImportSimCard, $file);
+            Excel::import(new ImportSim, $file);
         }else{
             dd($request->all());
         }

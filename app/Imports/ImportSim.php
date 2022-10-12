@@ -2,11 +2,11 @@
 
 namespace App\Imports;
 
-use App\Models\Simcard as Sim;
+use App\Models\SimCard;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
-class ImportSimCard implements ToModel, WithHeadingRow
+class ImportSim implements ToModel, WithHeadingRow
 {
     /**
     * @param array $row
@@ -16,15 +16,13 @@ class ImportSimCard implements ToModel, WithHeadingRow
     public function model(array $row)
     {
         dd($row);
-        return new Sim([
+        return new SimCard([
             //
             'phone'=>$row['number'],
             'network'=>$row['network'],
             'iccid'=>$row['iccid'],
             'import_price'=>$row['entry_price'],
             'lease_price'=>$row['rental_price']
-
         ]);
     }
-
 }
