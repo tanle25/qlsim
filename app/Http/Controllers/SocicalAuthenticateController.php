@@ -27,7 +27,7 @@ class SocicalAuthenticateController extends Controller
         $user = Socialite::driver('google')->user();
         // dd($user);
         $this->registerOrLogin($user);
-        return redirect()->route('dealer');
+        return redirect()->to('khach-hang');
     }
 
     public function redirectToFacebook()
@@ -43,7 +43,7 @@ class SocicalAuthenticateController extends Controller
         // dd($user);
 
         $this->registerOrLogin($user);
-        return redirect()->route('dealer');
+        return redirect()->to('khach-hang');
     }
 
     public function registerOrLogin($data)
