@@ -10,6 +10,7 @@ use App\Http\Controllers\SimCardController;
 use App\Http\Controllers\LeechContentController;
 use App\Http\Controllers\PartnerController;
 use App\Http\Controllers\RequestController;
+use App\Http\Controllers\SocicalAuthenticateController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,6 +26,15 @@ use App\Http\Controllers\RequestController;
 
 Route::get('login',[AuthController::class,'showLoginForm']);
 Route::post('login',[AuthController::class,'login'])->name('login');
+// google login
+Route::get('login/google',[SocicalAuthenticateController::class,'redirectToGoogle'])->name('google.login');
+Route::get('login/google/callback',[SocicalAuthenticateController::class,'handleGoogleCallback']);
+
+// Facebook login
+
+Route::get('login/facebook',[SocicalAuthenticateController::class,'redirectToFacebook'])->name('facebook.login');
+Route::get('login/facebook/callback',[SocicalAuthenticateController::class,'handleFacebookCallback']);
+
 Route::post('logout',[AuthController::class,'logout']);
 Route::get('dang-ky',[AuthController::class,'showRegisterForm'])->middleware('guest');
 Route::post('register',[AuthController::class,'register']);

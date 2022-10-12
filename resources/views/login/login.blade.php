@@ -57,7 +57,7 @@
             </span>
             <div class="flex flex-col space-y-4">
               <a
-                href="#"
+                href="{{route('facebook.login')}}"
                 class="flex items-center justify-center px-4 py-2 space-x-2 transition-colors duration-300 border border-blue-500 rounded-md group hover:bg-blue-500 focus:outline-none h-11"
               >
                   <i class="fab fa-facebook text-blue-500 group-hover:text-white text-xl"></i>
@@ -65,7 +65,7 @@
                 <span class="text-sm font-medium text-gray-800 group-hover:text-white">Facebook</span>
               </a>
               <a
-                href="#"
+                href="{{route('google.login')}}"
                 class="flex items-center justify-center px-4 py-2 space-x-2 transition-colors duration-300 border border-blue-500 rounded-md group hover:bg-blue-500 focus:outline-none h-11"
               >
                 <i class="fab fa-google text-red-500 group-hover:text-white text-xl"></i>
