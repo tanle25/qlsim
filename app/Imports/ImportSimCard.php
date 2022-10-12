@@ -2,12 +2,12 @@
 
 namespace App\Imports;
 
-use App\Models\Simcard;
 use App\Models\User;
+use App\Models\Simcard;
 use Maatwebsite\Excel\Concerns\ToModel;
-use Maatwebsite\Excel\Concerns\WithStartRow;
+use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
-class ImportSimCard implements ToModel, WithStartRow
+class ImportSimCard implements ToModel, WithHeadingRow
 {
     /**
     * @param array $row
@@ -18,15 +18,13 @@ class ImportSimCard implements ToModel, WithStartRow
     {
         return new SimCard([
             //
-            'phone'=>$row[0],
-            'network'=>$row[1],
-            'iccid'=>$row[2]
+            'phone'=>$row['number'],
+            'network'=>$row['network'],
+            'iccid'=>$row['iccid'],
+            'import_price'=>$row['entry price'],
+            'lease_price'=>$row['rental price']
 
         ]);
-    }
-    public function startRow(): int
-    {
-        return 2;
     }
 
 }
