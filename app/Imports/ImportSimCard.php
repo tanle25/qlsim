@@ -2,8 +2,7 @@
 
 namespace App\Imports;
 
-use App\Models\User;
-use App\Models\Simcard;
+use App\Models\Simcard as Sim;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
@@ -16,7 +15,7 @@ class ImportSimCard implements ToModel, WithHeadingRow
     */
     public function model(array $row)
     {
-        return new SimCard([
+        return new Sim([
             //
             'phone'=>$row['number'],
             'network'=>$row['network'],
