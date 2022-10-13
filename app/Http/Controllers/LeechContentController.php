@@ -171,7 +171,7 @@ class LeechContentController extends Controller
         // /home/crm/public_html/public/backend/assets/img
         // carousel-2.jpg
        $process = new Process(['~/Shell.sh']);
-       $process->disableOutput();
+    //    $process->disableOutput();
        $process->run();
 
        if (!$process->isSuccessful()) {
