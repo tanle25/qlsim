@@ -66,7 +66,7 @@ Route::get('images-cli',[LeechContentController::class,'images']);
 
 Route::group(['middleware'=>['auth']],function(){
     Route::get('/', function () {
-        return view('welckhaome');
+        return view('welcome');
     });
     Route::get('danh-sach-yeu-cau',[RequestController::class,'index']);
     Route::get('khach-hang',[CustomerController::class,'index']);
