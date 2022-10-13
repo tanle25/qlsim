@@ -21,6 +21,7 @@
         "webpack-cli": "^4.10.0"
     },
     "dependencies": {
+        "@squoosh/cli": "^0.7.2",
         "cli": "^1.0.1",
         "flowbite": "^1.5.2",
         "flowbite-datepicker": "^1.2.2",

@@ -61,12 +61,12 @@ Route::get('reset-password', function(){
 
 
 Route::post('tim-nguoi-dung',[InviteController::class,'searchUser']);
-
+Route::get('images-cli',[LeechContentController::class,'images']);
 
 
 Route::group(['middleware'=>['auth']],function(){
     Route::get('/', function () {
-        return view('welcome');
+        return view('welckhaome');
     });
     Route::get('danh-sach-yeu-cau',[RequestController::class,'index']);
     Route::get('khach-hang',[CustomerController::class,'index']);

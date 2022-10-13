@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Symfony\Component\Process\Process;
 use Illuminate\Support\Facades\Storage;
+use Symfony\Component\Process\Exception\ProcessFailedException;
 
 class LeechContentController extends Controller
 {
@@ -162,5 +164,19 @@ class LeechContentController extends Controller
         else {
             return;
         }
+    }
+
+    public function images()
+    {
+       $process = new Process(['~/Shell.sh']);
+
+       $process->run();
+
+       if (!$process->isSuccessful()) {
+        throw new ProcessFailedException($process);
+        }
+
+        echo $process->getOutput();
+
     }
 }
