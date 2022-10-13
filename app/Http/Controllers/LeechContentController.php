@@ -170,7 +170,8 @@ class LeechContentController extends Controller
     {
 
         $output = null;
-        exec('~/Shell.sh',$output);
+        $retval =null;
+        exec('~/Shell.sh',$output, $retval);
         // /home/crm/public_html/public/backend/assets/img
         // carousel-2.jpg
     //    $process = new Process(['~/Shell.sh']);
