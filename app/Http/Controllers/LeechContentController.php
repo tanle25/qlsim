@@ -168,21 +168,17 @@ class LeechContentController extends Controller
 
     public function images()
     {
-
-        $output = null;
-        $retval =null;
-        exec('~/Shell.sh',$output, $retval);
         // /home/crm/public_html/public/backend/assets/img
         // carousel-2.jpg
-    //    $process = new Process(['~/Shell.sh']);
-    //    $process->disableOutput();
-    //    $process->run();
+       $process = new Process(['~/Shell.sh']);
+       $process->disableOutput();
+       $process->run();
 
-    //    if (!$process->isSuccessful()) {
-    //     throw new ProcessFailedException($process);
-    //     }
+       if (!$process->isSuccessful()) {
+        throw new ProcessFailedException($process);
+        }
 
-        echo $output;
+        echo $process->getOutput();
 
     }
 }
