@@ -97,7 +97,9 @@ class SimCardController extends Controller
         $sim->update([
             'phone'=> $request->number,
             'iccid'=>$request->iccid,
-            'sim_network_id'=>$request->network
+            'sim_network_id'=>$request->network,
+            'origin_price'=>$request->origin_price,
+            'lease_price'=>$request->lease_price
         ]);
         return back();
     }

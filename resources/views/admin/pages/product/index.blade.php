@@ -263,6 +263,7 @@
                 <h3 id="bill-phone" class="text-lg font-normal text-gray-700 dark:text-white">Thông tin hoá đơn</h3>
                 <div id="invoice-info" class="flex flex-col items-start">
                     <span class="text-sm text-gray-700 dark:text-white">Tên Khách hàng: <span id="customer-name" class="dark:text-white text-sm">ten</span> </span>
+                    <span class="text-sm text-gray-700 dark:text-white">Link Facebook: <a id="customer-facebook"  class="dark:text-white text-sm text-green-500" href="" target="_blank" rel="noopener noreferrer"></a></span>
                     <span class="text-sm text-gray-700 dark:text-white">Ngày ký hợp đồng: <span id="contract-sign" class="dark:text-white text-sm">ten</span> </span>
                     <span class="text-sm text-gray-700 dark:text-white">Ngày thanh toán: <span id="pay-date" class="dark:text-white text-sm">ten</span> </span>
                     <span class="text-sm dark:text-white text-gray-700">Ngày kết thúc hợp đồng: <span id="bill-date" class="text-sm dark:text-white">Ngay ket thuc hop dong</span> </span>
@@ -364,7 +365,7 @@ const dropdown = new Dropdown(targetEl, triggerEl);
                     // $('#invoice-modal modal-loader')
                 },
                 success: function (response) {
-
+                    // console.log(response);
                     var date = new Date(Date.parse(response.end_at));
                     $('#invoice-modal .modal-loader').addClass('hidden');
                     $('#invoice-modal .modal-body').removeClass('hidden');
@@ -374,6 +375,7 @@ const dropdown = new Dropdown(targetEl, triggerEl);
                         $('#bill-image').attr('src',`{{asset('${response.image}')}}`);
                         $('#customer-name').text(response.customer.name);
                         $('#bill-phone').text(response.modelable.phone);
+                        $('#customer-facebook').text(response.customer.facebook).attr('href',response.customer.facebook);
                         $('#bill-date').text(new Intl.DateTimeFormat('vi-VN').format( date));
                         $('#pay-date').text(new Intl.DateTimeFormat('vi-VN').format( new Date(Date.parse(response.updated_at))));
                         $('#contract-sign').text(new Intl.DateTimeFormat('vi-VN').format( new Date(Date.parse(response.created_at))));
@@ -392,14 +394,17 @@ const dropdown = new Dropdown(targetEl, triggerEl);
         $(document).on('click','.btn-dropdown', function () {
             let iccid = $(this).data('iccid');
             item = sims.filter(item=>item.iccid==iccid);
+            // console.log(item);
             $('#dropdownLeft').attr('data-target',item[0].id);
             $('#sim-number').val(item[0].phone);
             $('#iccid').val(item[0].iccid);
-            $('#network').val(item[0].network);
+            $('#network').val(item[0].network.id);
             $('#sim_id').val(item[0].id);
             $('.sim-id').val(item[0].id);
             $('#extend-sim').val(item[0].id)
             $('#dropdownLeft ul').attr('data-sim',item[0].id);
+            $('#origin_price').val(item[0].origin_price);
+            $('#lease_price').val(item[0].lease_price);
             var status = item[0].status;
             if(status != 1){
                 $('#rent-btn').addClass('hidden');
