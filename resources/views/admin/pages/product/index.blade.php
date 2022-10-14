@@ -398,7 +398,9 @@ const dropdown = new Dropdown(targetEl, triggerEl);
             $('#dropdownLeft').attr('data-target',item[0].id);
             $('#sim-number').val(item[0].phone);
             $('#iccid').val(item[0].iccid);
-            $('#network').val(item[0].network.id);
+            if (!jQuery.isEmptyObject(item[0].network)) {
+                $('#network').val(item[0].network.id);
+            }
             $('#sim_id').val(item[0].id);
             $('.sim-id').val(item[0].id);
             $('#extend-sim').val(item[0].id)
