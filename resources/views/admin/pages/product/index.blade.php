@@ -355,14 +355,14 @@ const dropdown = new Dropdown(targetEl, triggerEl);
 
         $('.invoice-btn').click(function(){
             let id = item[0].id;
-            $('#invoice-modal .modal-loader').addClass('hidden');
-            $('#invoice-modal .modal-body').removeClass('hidden');
+
             $.ajax({
                 type: "get",
                 url: "{{url('admin/get-bill-info')}}"+'/'+id,
                 dataType: "json",
                 beforSend:function(){
-                    // $('#invoice-modal modal-loader')
+                    $('#invoice-modal .modal-loader').removeClass('hidden');
+                    $('#invoice-modal .modal-body').addClass('hidden');
                 },
                 success: function (response) {
                     // console.log(response);
