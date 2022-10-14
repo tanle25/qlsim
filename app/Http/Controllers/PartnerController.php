@@ -101,9 +101,7 @@ class PartnerController extends Controller
 
         $user = User::find($request->user_id);
         $user->partnerRole()->updateOrCreate([
-            'role'=>1
-        ],[
-
+            'role'=>1,
             'partner_id'=>$request->partner_id
         ]);
         $user->syncPermissions(['user manager','add package']);
