@@ -378,4 +378,15 @@ class SimCardController extends Controller
 
     }
 
+    public function changeStatus($status, Request $request)
+    {
+        # code...
+        $listStatus = config('constrain.sim_status');
+        // dd(config('constrain.sim_status'));
+        if(!isset($listStatus[$status])){
+            return back()->withErrors(['fail'=>'Mã trạng thái không hợp lệ']);
+        }
+
+    }
+
 }

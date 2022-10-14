@@ -56,6 +56,7 @@ Route::group(['middleware'=>['auth','role:admin']],function(){
     Route::get('export-tuan-nay', [ExportController::class,'exportWeek']);
     Route::get('export-thang-nay', [ExportController::class,'exportMonth']);
     Route::post('export-tuy-chon',[ExportController::class,'exportCustom']);
+    Route::get('thay-doi-trang-thai-sim/{status}',[SimCardController::class,'changeStatus']);
 });
 
 

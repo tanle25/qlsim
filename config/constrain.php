@@ -7,7 +7,7 @@ return[
     'sim_status'=>[
         0=>[
             'text'=>'stop',
-            'color'=>'text-orange-500'
+            'color'=>'text-red-500'
         ],
         1=>[
             'text'=>'active',
@@ -17,6 +17,19 @@ return[
             'text'=>'rent',
             'color'=>'text-green-500'
         ],
+        3=>[
+            'text'=>'temporarily cut',
+            'color'=>'text-red-500'
+        ],
+        4=>[
+            'text'=>'Cancel',
+            'color'=>'text-red-500'
+        ],
+        5=>[
+            'text'=>'refreshing',
+            'color'=>'text-yellow-500'
+        ],
+
     ],
     'pakage'=>[
         1=>[
@@ -34,9 +47,7 @@ return[
     ],
     'wifi_request'=>[
         0=>'new',
-        1=>'step 1',
-        2=>'step 2',
-        3=>'Done'
+        1=>'Done'
     ],
     'owner'=>[
         1=>'owner',
