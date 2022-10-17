@@ -9,9 +9,11 @@ use App\Http\Controllers\SimCardController;
 use App\Http\Controllers\DashBoardController;
 use App\Http\Controllers\ExportController;
 use App\Http\Controllers\InvoiceController;
+use App\Http\Controllers\RequestStatusController;
 use App\Http\Controllers\SimNetworkController;
 use App\Http\Controllers\UserManagermentController;
 use App\Models\Invoice;
+use App\Models\RequestStatus;
 
 Route::group(['middleware'=>['auth','role:admin']],function(){
     // Route::get('/',function(){
@@ -46,6 +48,8 @@ Route::group(['middleware'=>['auth','role:admin']],function(){
     Route::post('add-wifi-network',[RequestController::class,'createNetwork']);
     Route::post('add-wifi-package',[RequestController::class,'createPackage']);
     Route::get('cong-tac-vien',[PartnerController::class,'index']);
+    Route::get('cong-tac-vien/{id}',[PartnerController::class,'showProduct']);
+    Route::post('cong-tac-vien/danh-sach-sim',[PartnerController::class,'showListSim']);
     Route::post('them-chu-so-huu',[PartnerController::class,'addOwner']);
     Route::get('nha-mang-sim',[SimNetworkController::class,'index']);
     Route::post('them-nha-mang-sim',[SimNetworkController::class,'store']);
@@ -57,6 +61,18 @@ Route::group(['middleware'=>['auth','role:admin']],function(){
     Route::get('export-thang-nay', [ExportController::class,'exportMonth']);
     Route::post('export-tuy-chon',[ExportController::class,'exportCustom']);
     Route::get('thay-doi-trang-thai-sim/{status}',[SimCardController::class,'changeStatus']);
+    Route::get('xac-nhan-yeu-cau/{id}',[RequestStatusController::class,'changeStatus']);
+    Route::get('xoa-yeu-cau/{id}',[RequestStatusController::class,'delete']);
+    Route::get('xoa-sim/{id}',[SimCardController::class,'delete']);
+    Route::get('get-sim-network/{id}',[SimNetworkController::class,'edit']);
+    Route::get('delete-sim-network/{id}',[SimNetworkController::class,'delete']);
+    Route::post('update-sim-network',[SimNetworkController::class,'update']);
+    Route::post('sua-nha-mang-wifi',[RequestController::class,'update']);
+    Route::post('delete-wifi-network',[RequestController::class,'delete']);
+
+    Route::get('get-wifi-package/{id}',[RequestController::class,'editPackage']);
+    Route::post('update-wifi-package',[RequestController::class,'updateWifiPackage']);
+    Route::post('delete-wifi-network',[RequestController::class,'deletePackage']);
 });
 
 

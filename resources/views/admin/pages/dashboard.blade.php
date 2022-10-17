@@ -168,6 +168,30 @@
             </div>
         </div>
     </div>
+
+    <div class="w-full max-w-full px-3 mb-6 sm:w-1/2 sm:flex-none xl:mb-2 lg:w-1/3 xl:w-1/4">
+        <div
+            class="relative flex flex-col min-w-0 break-words bg-white shadow-xl dark:bg-slate-850 dark:shadow-dark-xl rounded-2xl bg-clip-border">
+            <div class="flex-auto p-4">
+                <div class="flex flex-row -mx-3">
+                    <div class="flex-none w-2/3 max-w-full px-3">
+                        <div>
+                            <p
+                                class="mb-0 font-sans font-semibold leading-normal uppercase dark:text-white dark:opacity-60 text-size-sm text-truncate">
+                                {{__('Request status change')}}</p>
+                            <h5 class="mb-2 font-bold dark:text-white">{{$requestStatus->count()}}</h5>
+                        </div>
+                    </div>
+                    <div class="px-3 text-right basis-1/3">
+                        <div
+                            class="inline-block w-12 h-12 text-center rounded-circle bg-gradient-to-tl from-orange-500 to-yellow-500">
+                            <i class="fal fa-file-contract text-size-lg relative top-3.5 text-white"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <!-- cards row 2 -->
@@ -298,30 +322,31 @@
             </div>
             <div class="flex-auto p-4">
                 <ul class="flex flex-col pl-0 mb-0 rounded-lg">
-                    @foreach ($wifiRequests as $wifi )
+                    @foreach ($requestStatus as $status )
                     <li
                     class="relative flex justify-between py-2 pr-4 mb-2 border-0 rounded-t-lg rounded-xl text-inherit">
 
 
                     <div class="flex flex-col">
                         <h6 class="mb-1 leading-normal text-size-sm text-slate-700 dark:text-white">
-                            {{$wifi->customer->name}}</h6>
-                        <span class="leading-tight dark:text-white/80 text-size-xs">{{$wifi->content}}</span>
+                            {{$status->partner->name}}</h6>
+                        <span class="leading-tight dark:text-white/80 text-size-xs">{{$status->sim->phone}}</span>
                     </div>
                     <div class="flex flex-col">
                         <h6 class="mb-1 leading-normal text-size-sm text-slate-700 dark:text-white">
-                            {{$wifi->partner->name}}</h6>
+                            {{__(config("constrain.sim_status.$status->status.text")) }}</h6>
                     </div>
-                    <div class="flex flex-col">
+                    {{-- <div class="flex flex-col">
                         <h6 class="mb-1 leading-normal text-size-sm text-slate-700 dark:text-white">
                             {{__(config('constrain.wifi_request.'.$wifi->status))}}</h6>
-                    </div>
+                    </div> --}}
 
                     <div class="flex">
-                        <button
-                            class="group ease-in leading-pro text-size-xs rounded-3.5xl p-1.2 h-6.5 w-6.5 mx-0 my-auto inline-block cursor-pointer border-0 bg-transparent text-center align-middle font-bold text-slate-700 shadow-none transition-all dark:text-white"><i
-                                class="ni ease-bounce text-size-2xs group-hover:translate-x-1.25 ni-bold-right transition-all duration-200"
-                                aria-hidden="true"></i></button>
+                        {{-- <button class="btn-default">{{__('accept')}}</button> --}}
+                        {{-- <button class="btn-red">{{__('Delete')}}</button> --}}
+                        <a class="text-blue-600 hover:text-green-500 mr-4" href="{{url('admin/xac-nhan-yeu-cau',$status->id)}}">Đồng ý</a>
+                        <a class="text-red-600 hover:text-gray-600" href="{{url('admin/xoa-yeu-cau',$status->id)}}">Xoá</a>
+
                     </div>
                 </li>
                     @endforeach

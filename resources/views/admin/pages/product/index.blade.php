@@ -49,6 +49,9 @@
                                 {{__('iccid')}}
                             </th>
                             <th>
+                                {{__('Old ICCID')}}
+                            </th>
+                            <th>
                                 {{__('network')}}
                             </th>
                             <th>
@@ -79,8 +82,13 @@
                                     </p>
                                 </div>
                             </td>
-                            <td>
+                            <td >
                                 <p class="text-color whitespace-no-wrap">{{$simCard->iccid}}</p>
+                                {{-- <p class="text-red-500 whitespace-no-wrap"><i>{{$simCard->old_iccid}}</i> </p> --}}
+                            </td>
+                            <td >
+
+                                <p class="text-red-500 whitespace-no-wrap"><i>{{$simCard->old_iccid}}</i> </p>
                             </td>
                             <td>
                                 <p class="text-color whitespace-no-wrap">{{is_null($simCard->network) ? '' : $simCard->network->name}}</p>
@@ -90,13 +98,14 @@
                                 {{-- @dd($simCard->partner->name) --}}
                             </td>
                             <td>
-                                <p class="text-color whitespace-no-wrap">
-                                    {{is_null($simCard->bill) ? '' : $simCard->bill->customer->name}}
-                                </p>
+                                    @if (!is_null($simCard->bill) && $simCard->status ==2)
+                                        <p class="text-color whitespace-no-wrap">{{$simCard->bill->customer->name}}</p>
+                                    @endif
+                                    {{-- {{is_null($simCard->bill) ? '' : $simCard->bill->customer->name}} --}}
                             </td>
 
                             <td>
-                                <p class="text-color whitespace-no-wrap">
+                                <p class="whitespace-no-wrap {{$simCard->status == 2 && \Carbon\Carbon::parse($simCard->bill->end_at)->isPast() ? 'text-red-500' : 'text-color '}}">
                                     {{$simCard->status == 2 ? \Carbon\Carbon::parse($simCard->bill->end_at)->format('d/m/Y')  : '' }}
                                 </p>
                             </td>
@@ -128,23 +137,23 @@
 
 <div id="dropdownLeft" class="hidden z-10 w-44 bg-white rounded divide-y divide-gray-100 dark:bg-gray-700 border shadow-lg" data-target="">
     <ul class="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownLeftButton">
-        <li class="context-menu-item" data-status="1">
+        <li class="context-menu-item change-status" data-status="1">
 
-            <a href="{{url('admin/thay-doi-trang-thai-sim',1)}}" class="block py-2 px-4 hover:hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-white">{{__('active')}}</a>
+            <a href="#" class="block py-2 px-4 hover:hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-white">{{__('active')}}</a>
         </li>
         <li>
             <a href="#" class="block py-2 px-4 hover:hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-white" data-modal-toggle="edit-sim-modal">{{__('Edit')}}</a>
         </li>
-        <li class="context-menu-item" data-status="0">
+        <li class="context-menu-item change-status" data-status="3">
 
-            <a href="{{url('admin/thay-doi-trang-thai-sim',3)}}" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-white">{{__('temporarily cut')}}</a>
+            <a href="#" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-white">{{__('temporarily cut')}}</a>
         </li>
-        <li class="context-menu-item" data-status="0">
+        <li class="context-menu-item change-status" data-status="4">
 
-            <a href="{{url('admin/thay-doi-trang-thai-sim',4)}}" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-white">{{__('Cancel')}}</a>
+            <a href="#" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-white">{{__('Cancel')}}</a>
         </li>
-        <li>
-            <a href="{{url('admin/thay-doi-trang-thai-sim',5)}}" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-white">{{__('reset')}}</a>
+        <li  class="context-menu-item change-status" data-status="5">
+            <a href="#" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-white">{{__('reset')}}</a>
         </li>
         <li class="invoice-btn">
             <a href="#" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-white" data-modal-toggle="invoice-modal">{{__('Customer inofmation')}}</a>
@@ -154,6 +163,9 @@
         </li>
         <li id="btn-extend">
             <a href="#" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-white" data-modal-toggle="extend-modal">{{__('Extend')}}</a>
+        </li>
+        <li class="btn-delete-sim">
+            <a href="#" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-white">{{__('Delete')}}</a>
         </li>
     </ul>
 </div>
@@ -417,10 +429,12 @@ const dropdown = new Dropdown(targetEl, triggerEl);
             }
         });
         $('.context-menu-item').click(function(){
-            var target = $(this).parent().parent().data('target');
-            $('#status-form input[name=sim_id]').val(target);
-            $('#status-form input[name=status]').val($(this).data('status'));
-            $('#status-form').submit();
+            if(item.length > 0){
+                $('#status-form input[name=sim_id]').val(item[0].id);
+                $('#status-form input[name=status]').val($(this).data('status'));
+                $('#status-form').submit();
+            }
+
 
         });
         $(document).on('change','#import-file',function(){
@@ -440,6 +454,13 @@ const dropdown = new Dropdown(targetEl, triggerEl);
         });
         $(document).on('click','#dropdownSearchButton', function(){
             dropdown.show();
+        });
+
+        $('.btn-delete-sim').click(function(){
+            if(item.length > 0){
+                location.href="{{url('admin/xoa-sim')}}/"+item[0].id
+            }
+
         });
 
     } );

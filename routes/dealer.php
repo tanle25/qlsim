@@ -9,11 +9,11 @@ use App\Http\Controllers\Partner\ExportControlller;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SimCardController;
 use App\Http\Controllers\Partner\SimCardController as Dealer;
-
-
+use App\Http\Controllers\RequestStatusController;
 
 Route::group(['middleware'=>['auth','role:dealer|collab']], function(){
     Route::get('/',[DashBoardController::class,'userIndex'])->name('dealer');
+    Route::post('request-status-sim',[RequestStatusController::class,'sendRequest']);
     Route::post('cho-thue-sim',[Dealer::class,'rentSim']);
     Route::post('gia-han-hop-dong',[Dealer::class,'extendContract']);
     Route::post('khac-hang-moi-thue-sim',[Dealer::class,'rentSimNewCustomer']);

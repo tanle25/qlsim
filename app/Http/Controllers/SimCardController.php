@@ -94,9 +94,16 @@ class SimCardController extends Controller
             'network'=>__('network')
         ]);
 
+        $oldIccid = $sim->old_iccid;
+
+        if($request->iccid != $sim->iccid){
+            $oldIccid = $sim->iccid;
+        }
+
         $sim->update([
             'phone'=> $request->number,
             'iccid'=>$request->iccid,
+            'old_iccid'=>$oldIccid,
             'sim_network_id'=>$request->network,
             'origin_price'=>$request->origin_price,
             'lease_price'=>$request->lease_price
@@ -107,11 +114,15 @@ class SimCardController extends Controller
     public function updateStatus(Request $request)
     {
         # code...
+        $status = config('constrain.sim_status');
 
         $sim = SimCard::find($request->sim_id);
         if(is_null($sim)){
             return redirect()->back()->withErrors(['not_found'=>__('Not Found')]);
-        }else{
+        }else if(!isset($status[$request->status])){
+            return redirect()->back()->withErrors(['not_found'=>__(':attribute invalid',['attribute'=>__('status')])]);
+        }
+        else{
             $sim->update([
                 'status'=>$request->status
             ]);
@@ -171,10 +182,15 @@ class SimCardController extends Controller
                 $imageUrl = 'storage/images/'.$fileName;
             }
             $sim = SimCard::find($request->sim_id);
+            if($sim->status == 4){
+                return redirect()->back()->withErrors(['fail'=>__('Cannot rent because canceled status')]);
+            }
             $package = Pakage::find($request->package);
             $bill = $sim->bill()->create([
                 'image'=>$imageUrl,
                 'customer_id'=>$request->customer,
+                'packageable_type'=>Pakage::class,
+                'packageable_id'=>$package->id,
                 'start_at'=>Carbon::today()->toDateString(),
                 'end_at'=>Carbon::today()->addMonths($package->duration)->toDateString()
             ]);
@@ -193,7 +209,7 @@ class SimCardController extends Controller
         } catch (\Throwable $th) {
             //throw $th;
             DB::rollBack();
-            dd($th);
+            // dd($th);
 
         }
 
@@ -254,9 +270,14 @@ class SimCardController extends Controller
 
             // ]);
             $sim = SimCard::find($request->sim);
+            if($sim->status == 4){
+                return redirect()->back()->withErrors(['fail'=>__('Cannot rent because canceled status')]);
+            }
             $bill = $sim->bill()->create([
                 'customer_id'=>$customer->id,
                 'image'=>$imageUrl,
+                'packageable_type'=>Pakage::class,
+                'packageable_id'=>$package->id,
                 'start_at'=>$start_at,
                 'end_at'=>$end_at
             ]);
@@ -387,6 +408,13 @@ class SimCardController extends Controller
             return back()->withErrors(['fail'=>'Mã trạng thái không hợp lệ']);
         }
 
+    }
+
+    public function delete($id)
+    {
+        # code...
+        $sim = SimCard::findOrFail($id)->delete();
+        return back()->with(['success'=>__('Delete successfully')]);
     }
 
 }

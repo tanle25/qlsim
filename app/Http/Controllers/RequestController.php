@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\SimCard;
 use App\Models\Customer;
+use App\Models\RequestStatus;
 use App\Models\SimOwner;
 use App\Models\SimRequest;
 use App\Models\WifiNetwork;
@@ -28,11 +29,108 @@ class RequestController extends Controller
         return response()->view('dealer.wifi.index',['customers'=>$custommers,'networks'=>$networks,'packages'=>$packages,'requests'=>$requests]);
     }
 
+    public function edit($id)
+    {
+        # code...
+        $network = WifiNetwork::find($id);
+        $status = $network ? 200 : 404;
+        return response()->json($network,$status);
+    }
+    public function editRequest($id)
+    {
+        # code...
+        $request = WifiRequest::findOrFail($id);
+        $status = $request ? 200 :404;
+        return response()->json($request,$status);
+    }
+
+    public function updateRequest(Request $request)
+    {
+        # code...
+        // dd($request->all());
+        $request->validate(
+            ['status'=>'required'],
+            [
+                'required'=>__(':attribute required')
+            ],[
+                'status'=>__('status')
+            ]
+        );
+        $req = WifiRequest::findOrFail($request->id);
+        $req->update([
+            'status'=>$request->status,
+            'content'=>$request->content
+        ]);
+        return back()->with(['success'=>__('Update success')]);
+    }
+
+    public function editPackage($id)
+    {
+        # code...
+        $package = WifiPackage::findOrFail($id);
+        $status = $package ? 200 :404;
+        return response()->json($package,$status);
+    }
+
+    public function updateWifiPackage(Request $request)
+    {
+        # code...
+        // dd($request->all());
+        $request->validate([
+            'id'=>'required|exists:wifi_packages,id',
+            'name'=>'required',
+            'network'=>'required|exists:wifi_networks,id',
+            'duration'=>'required',
+            'price'=>'required',
+            'fee'=>'required'
+        ]);
+        $package = WifiPackage::find($request->id);
+        $package->update([
+            'name'=>$request->name,
+            'wifi_network_id'=>$request->network,
+            'number_of_month'=>$request->duration,
+            'price'=>$request->price,
+            'fee'=>$request->fee
+        ]);
+        return back()->with(['success'=>__('Update success')]);
+    }
+
+    public function deletePackage(Request $request)
+    {
+        # code...
+        $package = WifiPackage::findOrFail($request->id);
+        $package->delete();
+        return back()->with(['success'=>__('Delete successfully')]);
+    }
+    public function update(Request $request)
+    {
+        # code...
+        $request->validate([
+            'name'=>'required'
+        ],[
+            'required'=>__(':attribute required')
+        ],[
+            'name'=>__('pakage name')
+        ]);
+        $wifiNetwork = WifiNetwork::findOrFail($request->id);
+        $wifiNetwork->update([
+            'name'=>$request->name
+        ]);
+        return back();
+    }
+    public function delete(Request $request)
+    {
+        # code...
+        $network = WifiNetwork::findOrFail($request->id);
+        $network->delete();
+        return back();
+    }
     public function showRequestSim()
     {
         # code...
         $requestest = SimRequest::all();
-        return view('admin.pages.product.request',['requestest'=>$requestest]);
+        $statusRequests = RequestStatus::all();
+        return view('admin.pages.product.request',['requestest'=>$requestest,'statusRequest'=>$statusRequests]);
     }
 
     public function replyRequest(Request $request)
@@ -121,6 +219,8 @@ class RequestController extends Controller
             }
             $bill = $wifi->bill()->create([
                 'customer_id'=>$request->customer_id,
+                'packageable_type'=>WifiPackage::class,
+                'packageable_id'=>$wifiPackage->id,
                 'image'=>$imageUrl,
                 'start_at'=>$start_at,
                 'end_at'=>$end_at
@@ -209,6 +309,8 @@ class RequestController extends Controller
             }
             $bill = $req->bill()->create([
                 'customer_id'=>$custommer->id,
+                'packageable_type'=>WifiPackage::class,
+                'packageable_id'=>$wifiPackage->id,
                 'image'=>$imageUrl,
                 'start_at'=>$start_at,
                 'end_at'=>$end_at
@@ -248,13 +350,14 @@ class RequestController extends Controller
         // dd($request->all());
         $request->validate([
             'name' =>'required',
-            'network'=>'required',
+            'network'=>'required|numeric|exists:wifi_networks,id',
             'duration'=>'required|numeric',
             'price'=>'required',
             'fee'=>'required'
         ],[
             'required'=>__(':attribute required'),
-            'numeric'=>__(':attribute invalid')
+            'numeric'=>__(':attribute invalid'),
+            'exists'=>__(':attribute not exists')
         ],[
             'name'=>__('pakage name'),
             'network'=>__('network'),
@@ -262,6 +365,7 @@ class RequestController extends Controller
             'price'=>__('price'),
             'fee'=>__('Fee')
         ]);
+
 
         WifiPackage::create([
             'name'=>$request->name,

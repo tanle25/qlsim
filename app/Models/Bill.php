@@ -20,4 +20,15 @@ class Bill extends Model
         # code...
         return $this->morphTo();
     }
+
+    public function partner()
+    {
+        # code...
+        return $this->hasOne(Partner::class,'id','partner_id');
+    }
+    public function packageable()
+    {
+        # code...
+        return $this->morphTo();
+    }
 }

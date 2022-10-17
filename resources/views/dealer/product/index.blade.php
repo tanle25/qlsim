@@ -87,22 +87,18 @@
 
 <div id="dropdownLeft" class="hidden z-10 w-44 bg-white rounded divide-y divide-gray-100 dark:bg-gray-700 border shadow-lg" data-target="">
     <ul class="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownLeftButton">
-        {{-- <li class="context-menu-item" data-status="1">
-
-            <a href="#" class="block py-2 px-4 hover:hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-white">{{__('open')}}</a>
-        </li> --}}
-        {{-- <li>
-            <a href="#" class="block py-2 px-4 hover:hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-white" data-modal-toggle="edit-sim-modal">{{__('Edit')}}</a>
-        </li> --}}
         <li class="context-menu-item" data-status="0">
 
             <a href="#" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-white">{{__('stop')}}</a>
         </li>
-        <li class="context-menu-item" data-status="0">
+        <li class="context-menu-item" data-status="4">
 
             <a href="#" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-white">{{__('Cancel')}}</a>
         </li>
-        <li>
+        <li  class="context-menu-item" data-status="3">
+            <a href="#" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-white">{{__('temporarily cut')}}</a>
+        </li>
+        <li  class="context-menu-item" data-status="5">
             <a href="#" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-white">{{__('reset')}}</a>
         </li>
         <li class="invoice-btn">
@@ -267,7 +263,7 @@
 
 {{-- @include('admin.pages.components.edit-sim') --}}
 
-<form id="status-form" action="{{url('admin/update-status-sim')}}" method="post">
+<form id="status-form" action="{{url('dealer/request-status-sim')}}" method="post">
     @csrf
     <input id="status-sim-id" type="hidden" name="sim_id">
     <input type="hidden" name="status">
@@ -364,10 +360,12 @@ const dropdown = new Dropdown(targetEl, triggerEl);
             }
         });
         $('.context-menu-item').click(function(){
-            var target = $(this).parent().parent().data('target');
-            $('#status-form input[name=sim_id]').val(target);
-            $('#status-form input[name=status]').val($(this).data('status'));
-            $('#status-form').submit();
+            if(sim.length > 0){
+                $('#status-form input[name=sim_id]').val(sim[0].id);
+                $('#status-form input[name=status]').val($(this).data('status'));
+                $('#status-form').submit();
+            }
+
 
         });
         $(document).on('change','#import-file',function(){

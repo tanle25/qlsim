@@ -55,6 +55,9 @@ class SimCardController extends Controller
         try {
 
             $sim = SimCard::find($request->sim);
+            if($sim->status == 4){
+                return redirect()->back()->withErrors(['fail'=>__('Cannot rent because canceled status')]);
+            }
             $simOwner = SimOwner::where(['partner_id'=>Auth::user()->partner_id,'sim_card_id'=>$sim->id])->first();
 
             $imageUrl = '';
@@ -69,7 +72,10 @@ class SimCardController extends Controller
             $package = PartnerPackage::find($request->package);
             $bill = $sim->bill()->create([
                 'image'=>$imageUrl,
+                'partner_id'=>Auth::user()->partner_id,
                 'customer_id'=>$request->customer,
+                'packageable_type'=>Pakage::class,
+                'packageable_id'=>$package->package->id,
                 'start_at'=>Carbon::today()->toDateString(),
                 'end_at'=>Carbon::today()->addMonths($package->package->duration)->toDateString()
             ]);
@@ -77,6 +83,7 @@ class SimCardController extends Controller
             // dd($bill);
             $sim->invoice()->create([
                 'bill_id'=>$bill->id,
+                'partner_id'=>Auth::user()->partner_id,
                 'origin_price'=>$package->package->origin_price,
                 'lease_price'=>$package->package->rent_price,
                 'type'=>1
@@ -95,7 +102,6 @@ class SimCardController extends Controller
         } catch (\Throwable $th) {
             //throw $th;
             DB::rollBack();
-            dd($th);
 
         }
 
@@ -130,6 +136,9 @@ class SimCardController extends Controller
         ]);
 
             $sim = SimCard::find($request->sim);
+            if($sim->status == 4){
+                return redirect()->back()->withErrors(['fail'=>__('Cannot rent because canceled status')]);
+            }
             $simOwner = SimOwner::where(['partner_id'=>Auth::user()->partner_id,'sim_card_id'=>$sim->id])->first();
 
             if(is_null($simOwner->lease_price)){
@@ -159,6 +168,9 @@ class SimCardController extends Controller
 
             $bill = $sim->bill()->create([
                 'customer_id'=>$customer->id,
+                'partner_id'=>Auth::user()->partner_id,
+                'packageable_type'=>Pakage::class,
+                'packageable_id'=>$package->package->id,
                 'image'=>$imageUrl,
                 'start_at'=>$start_at,
                 'end_at'=>$end_at

@@ -38,3 +38,26 @@ if(!function_exists('diffDateTime')){
 
     }
 }
+
+if(!function_exists('getDateColor')){
+    function getDateColor(string $date){
+        $d1 = Carbon::parse($date);
+        if($d1->isPast()){
+            return 'text-error';
+        }else{
+            $d2 = Carbon::now();
+            $compase = $d1->diff($d2);
+            // dd($compase);
+            if($compase->days <= 5){
+                return 'text-warning';
+            }else{
+                return 'text-black dark:text-white';
+            }
+
+        }
+
+
+    }
+}
+
+

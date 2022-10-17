@@ -5,19 +5,20 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Customer extends Model
+class RequestStatus extends Model
 {
     use HasFactory;
     protected $guarded = ['id'];
 
-    public function bills()
+    public function sim()
     {
         # code...
-        return $this->hasMany(Bill::class);
+        return $this->hasOne(SimCard::class,'id','sim_card_id');
     }
-    public function bill()
+
+    public function partner()
     {
         # code...
-        return $this->hasOne(Bill::class);
+        return $this->hasOne(Partner::class,'id','partner_id');
     }
 }

@@ -7,103 +7,150 @@
 
 </div>
 
+<div class="mb-4 border-b border-gray-200 dark:border-gray-700">
+    <ul class="flex flex-wrap -mb-px text-sm font-medium text-center" id="myTab" data-tabs-toggle="#myTabContent" role="tablist">
+        <li class="mr-2" role="presentation">
+            <button class="inline-block p-4 rounded-t-lg border-b-2" id="profile-tab" data-tabs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false"><span class="font-bold uppercase">{{__('Request sim')}}</span> </button>
+        </li>
+        <li class="mr-2" role="presentation">
+            <button class="inline-block p-4 rounded-t-lg border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" id="dashboard-tab" data-tabs-target="#dashboard" type="button" role="tab" aria-controls="dashboard" aria-selected="false"> <span class="text-base uppercase">{{__('Request status change')}}</span></button>
+        </li>
+    </ul>
+</div>
+
+<div id="myTabContent">
+    <div class="hidden p-4 bg-gray-50 rounded-lg dark:bg-gray-800" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+
 <div class="mx-auto px-4">
-        <div class="-mx-4 sm:-mx-8 py-4 overflow-x-auto px-4">
-            <div class="inline-block w-full shadow-md rounded-lg overflow-hidden pb-5">
-                <table id="product-table" class="w-full leading-normal dark:text-gray-400">
-                    <thead class="bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                        <tr>
-                            <th class="nosort">
+    <div class="-mx-4 sm:-mx-8 py-4 overflow-x-auto px-4">
+        <div class="inline-block w-full shadow-md rounded-lg overflow-hidden pb-5">
+            <table id="product-table" class="w-full leading-normal dark:text-gray-400">
+                <thead class="bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                    <tr>
+                        <th class="nosort">
 
-                            </th>
-                            <th>
-                                {{__('phone')}}
-                            </th>
-                            <th>
-                                {{__('requester')}}
-                            </th>
-                            <th>
-                                {{__('ICCID')}}
-                            </th>
-                            <th>
-                                {{__('network')}}
-                            </th>
-                            <th class="nosort"></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($requestest as $resquested )
-                        <tr>
-                            <td>
-                                <input form="request-form" type="checkbox" name="sims[]" class="input-checkbox w-5 h-5" value="{{$resquested->id}}">
-                            </td>
-                            <td>
-                                <div class="ml-3">
-                                    <p class="text-color whitespace-no-wrap">
-                                        {{$resquested->sim->phone}}
-                                    </p>
-                                </div>
-                            </td>
+                        </th>
+                        <th>
+                            {{__('phone')}}
+                        </th>
+                        <th>
+                            {{__('requester')}}
+                        </th>
+                        <th>
+                            {{__('ICCID')}}
+                        </th>
+                        <th>
+                            {{__('network')}}
+                        </th>
+                        <th class="nosort"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($requestest as $resquested )
+                    <tr>
+                        <td>
+                            <input form="request-form" type="checkbox" name="sims[]" class="input-checkbox w-5 h-5" value="{{$resquested->id}}">
+                        </td>
+                        <td>
+                            <div class="ml-3">
+                                <p class="text-color whitespace-no-wrap">
+                                    {{$resquested->sim->phone}}
+                                </p>
+                            </div>
+                        </td>
 
-                            <td>
-                                <p class="text-color whitespace-no-wrap">{{$resquested->partner->name}}</p>
-                            </td>
+                        <td>
+                            <p class="text-color whitespace-no-wrap">{{$resquested->partner->name}}</p>
+                        </td>
 
-                            <td>
-                                <p class="text-color whitespace-no-wrap">{{$resquested->sim->iccid}}</p>
-                            </td>
-                            <td>
-                                <p class="text-color whitespace-no-wrap"> {{$resquested->sim->network}}</a></p>
-                            </td>
+                        <td>
+                            <p class="text-color whitespace-no-wrap">{{$resquested->sim->iccid}}</p>
+                        </td>
+                        <td>
+                            <p class="text-color whitespace-no-wrap"> {{$resquested->sim->network}}</a></p>
+                        </td>
 
-                            <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm text-right">
-                                <button type="button" class="inline-block text-gray-500 hover:text-gray-700 btn-dropdown" data-dropdown-toggle="dropdownLeft" data-dropdown-placement="left"
-                                >
-                                    <svg class="inline-block h-6 w-6 fill-current" viewBox="0 0 24 24">
-                                        <path
-                                            d="M12 6a2 2 0 110-4 2 2 0 010 4zm0 8a2 2 0 110-4 2 2 0 010 4zm-2 6a2 2 0 104 0 2 2 0 00-4 0z" />
-                                    </svg>
-                                </button>
+                        <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm text-right">
+                            <button type="button" class="inline-block text-gray-500 hover:text-gray-700 btn-dropdown" data-dropdown-toggle="dropdownLeft" data-dropdown-placement="left"
+                            >
+                                <svg class="inline-block h-6 w-6 fill-current" viewBox="0 0 24 24">
+                                    <path
+                                        d="M12 6a2 2 0 110-4 2 2 0 010 4zm0 8a2 2 0 110-4 2 2 0 010 4zm-2 6a2 2 0 104 0 2 2 0 00-4 0z" />
+                                </svg>
+                            </button>
 
-                            </td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</div>
+    <div class="hidden p-4 bg-gray-50 rounded-lg dark:bg-gray-800" id="dashboard" role="tabpanel" aria-labelledby="dashboard-tab">
+        <div class="inline-block w-full shadow-md rounded-lg overflow-hidden pb-5">
+            <table id="request-table" class="w-full leading-normal dark:text-gray-400">
+                <thead class="bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                    <tr>
+
+                        <th>
+                            {{__('phone')}}
+                        </th>
+                        <th>
+                            {{__('ICCID')}}
+                        </th>
+                        <th>
+                            {{__('requester')}}
+                        </th>
+                        <th>
+                            {{__('status')}}
+                        </th>
+                        <th class="nosort"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($statusRequest as $resquested )
+                    <tr>
+
+                        <td>
+                            <div class="ml-3">
+                                <p class="text-color whitespace-no-wrap">
+                                    {{$resquested->sim->phone}}
+                                </p>
+                            </div>
+                        </td>
+                        <td>
+                            <p class="text-color whitespace-no-wrap">{{$resquested->sim->iccid}}</p>
+                        </td>
+                        <td>
+                            <p class="text-color whitespace-no-wrap">{{$resquested->partner->name}}</p>
+                        </td>
+
+
+                        <td>
+                            <p class="text-color whitespace-no-wrap"> {{__(config("constrain.sim_status.$resquested->status.text"))  }}</a></p>
+                        </td>
+
+                        <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm text-right">
+                            <a href="{{url('admin/xac-nhan-yeu-cau',$resquested->id)}}" class="py-2 px-4 text-sm font-medium text-gray-900 bg-white rounded-l-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-blue-500 dark:focus:text-white">
+                                OK
+                            </a>
+
+                            <a href="{{url('admin/xoa-yeu-cau', $resquested->id)}}" class="py-2 px-4 text-sm font-medium text-gray-900 bg-white rounded-r-md border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-blue-500 dark:focus:text-white">
+                            {{__('refuse')}}
+                            </a>
+
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
 
 
-{{-- <div id="dropdownLeft" class="hidden z-10 w-44 bg-white rounded divide-y divide-gray-100 dark:bg-gray-700 border shadow-lg" data-target="">
-    <ul class="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownLeftButton">
-        <li class="context-menu-item" data-status="1">
-
-            <a href="#" class="block py-2 px-4 hover:hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-white">{{__('open')}}</a>
-        </li>
-        <li>
-            <a href="#" class="block py-2 px-4 hover:hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-white" data-modal-toggle="edit-sim-modal">{{__('Edit')}}</a>
-        </li>
-        <li class="context-menu-item" data-status="0">
-
-            <a href="#" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-white">{{__('stop')}}</a>
-        </li>
-        <li class="context-menu-item" data-status="0">
-
-            <a href="#" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-white">{{__('Cancel')}}</a>
-        </li>
-        <li>
-            <a href="#" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-white">{{__('reset')}}</a>
-        </li>
-        <li class="invoice-btn">
-            <a href="#" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-white" data-modal-toggle="invoice-modal">{{__('bill')}}</a>
-        </li>
-        <li>
-            <a href="#" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-white" data-modal-toggle="rent-modal">{{__('rent')}}</a>
-        </li>
-    </ul>
-</div> --}}
 <template id="btn-template">
     <button id="btn-request" type="button" class="light-btn" data-modal-toggle="popup-modal">{{__('accept / refuse')}}</button>
 </template>
@@ -150,6 +197,14 @@
     // $(document).ready( function () {
         // myCalendar.init();
         $('#product-table').DataTable( {
+            "order": [],
+            "columnDefs": [ {
+                'orderable': false,
+                "targets": 'nosort'
+                } ]
+        });
+
+        $('#request-table').DataTable( {
             "order": [],
             "columnDefs": [ {
                 'orderable': false,

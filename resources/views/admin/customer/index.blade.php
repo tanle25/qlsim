@@ -18,7 +18,13 @@
                                 {{__('Full name')}}
                             </th>
                             <th>
-                                {{__('Address')}}
+                                {{__('phone')}}
+                            </th>
+                            <th>
+                                {{__('iccid')}}
+                            </th>
+                            <th>
+                                {{__('pakage name')}}
                             </th>
                             <th>
                                 {{__('Facebook')}}
@@ -28,33 +34,39 @@
                     </thead>
                     <tbody>
                         @foreach ($customers as $customer )
-                        <tr>
+                        @foreach ($customer->bills as $bill )
 
-                            <td>
+                        <tr>
+                            @if ($loop->first)
+                               <td rowspan="{{$customer->bills->count()}}">
                                 <div class="ml-3">
                                     <p class="text-color whitespace-no-wrap">
                                         {{$customer->name}}
                                     </p>
                                 </div>
                             </td>
+                            @endif
+
+
                             <td>
-                                <p class="text-color whitespace-no-wrap">{{$customer->address}}</p>
+                                <p class="text-color whitespace-no-wrap">{{$bill->modelable->phone}}</p>
                             </td>
                             <td>
+                                <p class="text-color whitespace-no-wrap">{{$bill->modelable->iccid}}</p>
+                            </td>
+                            <td>
+                                <p class="text-color whitespace-no-wrap">{{$bill->packageable->name}}</p>
+                            </td>
+                            @if ($loop->first)
+                                <td rowspan="{{$customer->bills->count()}}">
                                 <p class="text-color whitespace-no-wrap"><a class="text-blue-500 font-medium hover:font-normal hover:text-blue-400" href="{{$customer->facebook}}" target="_blank" rel="noopener noreferrer"> {{$customer->facebook}}</a></p>
                             </td>
+                            @endif
 
-                            {{-- <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm text-right">
-                                <button type="button" class="inline-block text-gray-500 hover:text-gray-700 btn-dropdown" data-dropdown-toggle="dropdownLeft" data-dropdown-placement="left"
-                                >
-                                    <svg class="inline-block h-6 w-6 fill-current" viewBox="0 0 24 24">
-                                        <path
-                                            d="M12 6a2 2 0 110-4 2 2 0 010 4zm0 8a2 2 0 110-4 2 2 0 010 4zm-2 6a2 2 0 104 0 2 2 0 00-4 0z" />
-                                    </svg>
-                                </button>
-
-                            </td> --}}
                         </tr>
+                        @endforeach
+
+
                         @endforeach
                     </tbody>
                 </table>
@@ -63,34 +75,6 @@
     </div>
 </div>
 
-{{-- <div id="dropdownLeft" class="hidden z-10 w-44 bg-white rounded divide-y divide-gray-100 dark:bg-gray-700 border shadow-lg" data-target="">
-    <ul class="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownLeftButton">
-        <li class="context-menu-item" data-status="1">
-
-            <a href="#" class="block py-2 px-4 hover:hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-white">{{__('open')}}</a>
-        </li>
-        <li>
-            <a href="#" class="block py-2 px-4 hover:hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-white" data-modal-toggle="edit-sim-modal">{{__('Edit')}}</a>
-        </li>
-        <li class="context-menu-item" data-status="0">
-
-            <a href="#" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-white">{{__('stop')}}</a>
-        </li>
-        <li class="context-menu-item" data-status="0">
-
-            <a href="#" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-white">{{__('Cancel')}}</a>
-        </li>
-        <li>
-            <a href="#" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-white">{{__('reset')}}</a>
-        </li>
-        <li class="invoice-btn">
-            <a href="#" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-white" data-modal-toggle="invoice-modal">{{__('bill')}}</a>
-        </li>
-        <li>
-            <a href="#" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-white" data-modal-toggle="rent-modal">{{__('rent')}}</a>
-        </li>
-    </ul>
-</div> --}}
 
 @stop
 

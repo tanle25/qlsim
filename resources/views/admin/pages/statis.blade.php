@@ -16,7 +16,10 @@
                         <tr>
 
                             <th>
-                                {{__('custommers')}}
+                                {{__('dealer & colllab')}}
+                            </th>
+                            <th>
+                                {{__('phone')}}
                             </th>
                             <th>
                                 {{__('type')}}
@@ -41,9 +44,18 @@
                             <td>
                                 <div class="ml-3">
                                     <p class="text-color whitespace-no-wrap">
-                                        {{$invoice->invoiceable->bill->customer->name}}
+                                        {{-- @if ($invoice->invoiceable->bill->partner)
+                                            @dd($invoice->invoiceable->bill->partner)
+                                        @endif --}}
+                                        {{$invoice->invoiceable->bill->partner->name ?? ''}}
                                     </p>
                                 </div>
+                            </td>
+                            <td>
+                                <p class="text-color whitespace-no-wrap">
+
+                                    {{$invoice->type == 1 || $invoice->type ==2 ? __($invoice->invoiceable->phone) : ''}}
+                                </p>
                             </td>
                             <td>
                                 <p class="text-color whitespace-no-wrap">{{__($invoice->model_name) }}</p>

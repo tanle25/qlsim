@@ -9,6 +9,7 @@ use App\Models\Partner;
 use App\Models\SimCard;
 use App\Models\Customer;
 use App\Models\PartnerInvoice;
+use App\Models\RequestStatus;
 use App\Models\SimOwner;
 use Carbon\CarbonPeriod;
 use App\Models\WifiRequest;
@@ -27,7 +28,7 @@ class DashBoardController extends Controller
 
         $simCount = SimCard::all()->count();
         $customers = Customer::all()->count();
-
+        $requestStatus = RequestStatus::all();
         $dealers = Partner::all()->count();
         $wifiRequests = WifiRequest::whereNot('status',3)->get();
         $invoices_wifi = Invoice::whereBetween('created_at',[Carbon::now()->startOfWeek()->toDateString(),Carbon::now()->endOfWeek()->toDateString()])
@@ -64,7 +65,7 @@ class DashBoardController extends Controller
         })->get();
 
         // dd($simAlerts);
-        return view('admin.pages.dashboard',['simCount'=>$simCount,'customers'=>$customers,'dealers'=>$dealers,'wifiRequests'=>$wifiRequests,'dataSim'=>$data_sim,'dataWifi'=>$data_wifi,'simAlerts'=>$simAlerts]);
+        return view('admin.pages.dashboard',['simCount'=>$simCount,'customers'=>$customers,'dealers'=>$dealers,'wifiRequests'=>$wifiRequests,'dataSim'=>$data_sim,'dataWifi'=>$data_wifi,'simAlerts'=>$simAlerts,'requestStatus'=>$requestStatus]);
     }
 
     public function userIndex()

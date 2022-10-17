@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Partner;
+use App\Models\SimCard;
+use App\Models\SimOwner;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -64,6 +66,25 @@ class PartnerController extends Controller
         $partner = Partner::find($request->partner_id);
         $partner->update($request->all());
         return back()->with(['success'=>__('Updated.')]);
+
+    }
+
+    public function showListSim(Request $request)
+    {
+        # code...
+        // dd($request->all());
+        $sims = SimOwner::whereIn('partner_id',$request->partner)->get();
+        // dd($sims);
+        return view('admin.pages.list-sim',['sims'=>$sims]);
+    }
+
+    public function showProduct($id)
+    {
+        # code...
+
+        $partner = Partner::findOrFail($id);
+        // dd($partner);
+        return view('admin.pages.list-sim',['sims'=>$partner->sims]);
 
     }
 

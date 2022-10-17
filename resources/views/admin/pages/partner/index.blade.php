@@ -15,6 +15,7 @@
                 <table id="product-table" class="w-full leading-normal dark:text-gray-400">
                     <thead class="bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                         <tr>
+                            <th></th>
 
                             <th>
                                 {{__('Name')}}
@@ -34,8 +35,9 @@
                     <tbody>
                         @foreach ($partners as $partner )
                         <tr>
+                            <td><input value="{{$partner->id}}" type="checkbox" name="partner[]" form="list-sim"></td>
                             <td>
-                                {{$partner->name}}
+                                <a href="{{url('admin/cong-tac-vien',$partner->id)}}">{{$partner->name}}</a>
                             </td>
                             <td>
                                 <div class="ml-3">
@@ -233,9 +235,15 @@
     </ul>
 </div>
 
+<form id="list-sim" action="{{url('admin/cong-tac-vien/danh-sach-sim')}}" method="POST">
+    @csrf
+
+</form>
+
 
 <template id="btn-template">
     <button  type="button" class="light-btn" data-modal-toggle="add-partner" style="margin: 0; margin-left:10px;">{{__('Add')}}</button>
+    <button type="submit" form="list-sim" class="light-btn"  style="margin: 0; margin-left:10px;">{{__('list sim')}}</button>
 </template>
 @stop
 

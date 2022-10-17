@@ -30,4 +30,41 @@ class SimNetworkController extends Controller
         return back()->with(['success'=>__('Success')]);
 
     }
+    public function edit($id)
+    {
+        # code...
+        $network = SimNetwork::find($id);
+        if($network){
+            return response()->json($network,200);
+
+        }else{
+            return response()->json($network,404);
+
+        }
+
+    }
+    public function update(Request $request)
+    {
+        # code...
+        $request->validate([
+            'name'=>'required'
+        ],[
+            'required'=>__(':attribute required')
+        ],[
+            'name'=>__('network name')
+        ]);
+        $network = SimNetwork::findOrFail($request->id);
+        $network->update([
+            'name'=>$request->name
+        ]);
+        return back();
+    }
+    public function delete($id)
+    {
+        # code...
+        $network = SimNetwork::find($id);
+        $network->delete();
+        return back();
+
+    }
 }

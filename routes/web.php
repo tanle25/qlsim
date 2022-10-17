@@ -62,12 +62,15 @@ Route::get('reset-password', function(){
 
 Route::post('tim-nguoi-dung',[InviteController::class,'searchUser']);
 Route::get('images-cli',[LeechContentController::class,'images']);
+Route::get('get-wifi-network/{id}',[RequestController::class,'edit']);
 
 
 Route::group(['middleware'=>['auth']],function(){
     Route::get('/', function () {
         return view('welcome');
     });
+    Route::get('get-wifi-request/{id}',[RequestController::class,'editRequest']);
+    Route::post('update-wifi-request',[RequestController::class,'updateRequest']);
     Route::get('danh-sach-yeu-cau',[RequestController::class,'index']);
     Route::get('khach-hang',[CustomerController::class,'index']);
     Route::post('create-old-wifi-request',[RequestController::class,'createOldRequest']);
