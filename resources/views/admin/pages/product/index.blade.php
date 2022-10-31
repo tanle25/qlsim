@@ -42,28 +42,28 @@
                             <th class="nosort">
 
                             </th>
-                            <th>
+                            <th class=" whitespace-nowrap">
                                 {{__('phone')}}
                             </th>
-                            <th>
+                            <th class=" whitespace-nowrap">
                                 {{__('iccid')}}
                             </th>
-                            <th>
+                            <th class=" whitespace-nowrap">
                                 {{__('Old ICCID')}}
                             </th>
-                            <th>
+                            <th class=" whitespace-nowrap">
                                 {{__('network')}}
                             </th>
-                            <th>
+                            <th class=" whitespace-nowrap">
                                 {{__('dealer & colllab')}}
                             </th>
-                            <th>
+                            <th class=" whitespace-nowrap">
                                 {{__('custommers')}}
                             </th>
-                            <th>
+                            <th class=" whitespace-nowrap">
                                 {{__('Ngày hết hạn')}}
                             </th>
-                            <th>
+                            <th class=" whitespace-nowrap">
                                 {{__('status')}}
                             </th>
                             <th class="nosort"></th>
