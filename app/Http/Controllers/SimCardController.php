@@ -248,6 +248,10 @@ class SimCardController extends Controller
         DB::beginTransaction();
         try {
             //code...
+            $sim = SimCard::find($request->sim);
+            if($sim->origin_price == null || $sim->lease_price == null){
+                return back()->withErrors(['fail'=>'Sim chưa có giá nhập vào hoặc giá cho thuê']);
+            }
             $customer = Customer::create([
                 'name'=>$request->name,
                 'address'=>$request->address,
@@ -269,7 +273,6 @@ class SimCardController extends Controller
             //     'sim_card_id'=>$request->sim,
 
             // ]);
-            $sim = SimCard::find($request->sim);
             if($sim->status == 4){
                 return redirect()->back()->withErrors(['fail'=>__('Cannot rent because canceled status')]);
             }
@@ -286,6 +289,9 @@ class SimCardController extends Controller
                 'origin_price'=>$sim->origin_price,
                 'lease_price'=>$sim->lease_price,
                 'type'=>1
+            ]);
+            $sim->update([
+                'status'=>2
             ]);
             DB::commit();
         } catch (\Throwable $th) {

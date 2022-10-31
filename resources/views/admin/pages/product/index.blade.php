@@ -99,6 +99,7 @@
                             </td>
                             <td>
                                     @if (!is_null($simCard->bill) && $simCard->status ==2)
+                                        {{-- @dd($simCard->bill) --}}
                                         <p class="text-color whitespace-no-wrap">{{$simCard->bill->customer->name}}</p>
                                     @endif
                                     {{-- {{is_null($simCard->bill) ? '' : $simCard->bill->customer->name}} --}}
