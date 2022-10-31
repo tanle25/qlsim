@@ -94,7 +94,7 @@ class AuthController extends Controller
 
         $request->merge(['password'=>Hash::make($request->password)]);
         $user = User::create($request->all());
-        Mail::to('tanle.coder@gmail.com')->send(new VerifyEmail($user));
+        Mail::to($user->email)->send(new VerifyEmail($user));
         // dd('passed');
         Session::put('verifyUser',$user);
         return redirect(url('verify-user'));

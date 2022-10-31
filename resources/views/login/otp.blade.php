@@ -4,7 +4,7 @@
 {{__('OTP verifycation')}}
 @stop
 @php
-    $user = Session::has('verifyUser') ? Session::get('verifyUser')->id : Auth::user()->id;
+    $user = Session::has('verifyUser') ? Session::get('verifyUser') : Auth::user();
 @endphp
 @section('content')
 <div class="bg-gradient-to-tr from-green-300 to-green-600 h-screen w-full flex justify-center items-center">
