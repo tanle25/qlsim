@@ -67,7 +67,7 @@
                             <p class="text-color whitespace-no-wrap">{{$resquested->sim->iccid}}</p>
                         </td>
                         <td>
-                            <p class="text-color whitespace-no-wrap"> {{$resquested->sim->network}}</a></p>
+                            <p class="text-color whitespace-no-wrap"> {{$resquested->sim->network->name}}</a></p>
                         </td>
 
                         <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm text-right">
