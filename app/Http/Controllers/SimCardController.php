@@ -316,7 +316,7 @@ class SimCardController extends Controller
     {
         # code...
         $all = SimCard::whereNotNull(['origin_price','lease_price'])->doesntHave('partner')->doesntHave('request')->get();
-        $requestest = Auth::user()->partner->requests;
+        $requestest = Auth::user()->partner ?  Auth::user()->partner->requests : collect();
         return view('dealer.product.request',['all'=>$all,'requestest'=>$requestest]);
     }
 
