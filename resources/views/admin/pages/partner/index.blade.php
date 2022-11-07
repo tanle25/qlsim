@@ -310,7 +310,7 @@
 
 
                     $.each(results, function (index, item) {
-                        li += `<li  class="user-item" data-id="${item.id}" data-value="${item.name}">
+                        li += `<li  class="user-item hover:bg-gray-300" data-id="${item.id}" data-value="${item.name}">
                                     <div class="ml-2 text-sm">
                                         <div> <span class="font-medium text-base">${item.name}</span></div>
                                         <p id="helper-radio-text-4" class="text-xs font-normal text-gray-500 dark:text-gray-300">${item.phone}</p>
@@ -330,7 +330,7 @@
                     }
 
             });
-            $('.user-item').on('click', function(){
+            $(document).on('click','.user-item', function(){
                 $('#search-user').val($(this).data('value'));
                 $('#user-id').val($(this).data('id'));
                 $('#partner-selected').val(item[0].id);
