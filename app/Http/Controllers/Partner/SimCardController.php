@@ -23,7 +23,7 @@ class SimCardController extends Controller
     {
         # code...
         $user = Auth::user();
-        $simCards = $user->partner->sims;
+        $simCards = $user->partner ? $user->partner->sims : collect();
         $customers = Customer::all();
         $packages = PartnerPackage::all();
 
