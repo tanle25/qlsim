@@ -305,7 +305,7 @@
                     let results = users;
                     results = users.filter(function(item){
                         console.log(item);
-                        return item.name.search(expression) != -1 || item.phone.search(expression) != -1;
+                        return item.name.search(expression) != -1;
                     });
                     var li ='';
 
