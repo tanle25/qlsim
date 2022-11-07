@@ -304,7 +304,6 @@
                     var expression = new RegExp(keyword, "i");
                     let results = users;
                     results = users.filter(function(item){
-                        console.log(item);
                         return item.name.search(expression) != -1;
                     });
                     var li ='';
@@ -335,6 +334,7 @@
                 $('#search-user').val($(this).data('value'));
                 $('#user-id').val($(this).data('id'));
                 $('#partner-selected').val(item[0].id);
+                console.log('click');
                 dropdown.hide();
             })
         });
