@@ -109,7 +109,7 @@
                             {{-- @dd($requested->sim) --}}
                             <tr>
                                 <td>
-                                    <input form="send-request" type="checkbox" name="sims[]" class="input-checkbox w-5 h-5" value="{{$sim->id}}">
+                                    <input form="send-request" type="checkbox" name="sims[]" class="input-checkbox w-5 h-5" value="{{$requested->sim->id}}">
                                 </td>
                                 <td>
                                     <div class="ml-3">
