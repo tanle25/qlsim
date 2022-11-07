@@ -72,7 +72,7 @@ class DashBoardController extends Controller
     {
         # code...
         $user = Auth::user();
-        $simCount = $user->partner->sims->count();
+        $simCount = $user->partner ?  $user->partner->sims->count() : 0;
         $customers = Customer::all()->count();
         $dealers = Partner::all()->count();
         $wifiRequests = WifiRequest::whereNot('status',3)->get();
