@@ -15,6 +15,8 @@
     "status":"Trạng thái",
     "Request sim":"Yêu cầu sim",
     "new":"Mới",
+    "Processing":"Đang xử lý",
+    "History request":"Lịch sử yêu cầu",
     "requested":"Đã yêu cầu",
     "no request":"Chưa yêu cầu",
     "not is partner":"Bạn không phải cộng tác viên hoặc đại lý",

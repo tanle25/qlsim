@@ -32,6 +32,12 @@ class Partner extends Model
         return $this->hasMany(User::class);
     }
 
+    public function statuss()
+    {
+        # code...
+        return $this->hasMany(RequestStatus::class);
+    }
+
 
 
 }

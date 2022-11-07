@@ -104,6 +104,9 @@
                             {{__('requester')}}
                         </th>
                         <th>
+                            {{__('Created at')}}
+                        </th>
+                        <th>
                             {{__('status')}}
                         </th>
                         <th class="nosort"></th>
@@ -126,7 +129,9 @@
                         <td>
                             <p class="text-color whitespace-no-wrap">{{$resquested->partner->name}}</p>
                         </td>
-
+                        <td>
+                            <p class="text-color whitespace-no-wrap">{{$resquested->created_at->format('d-m-Y H:i:s')}}</p>
+                        </td>
 
                         <td>
                             <p class="text-color whitespace-no-wrap"> {{__(config("constrain.sim_status.$resquested->status.text"))  }}</a></p>

@@ -57,5 +57,6 @@ return[
         1=>'rent sim',
         2=>'Extend sim',
         3=>'Wifi installation'
-    ]
+    ],
+
 ];

@@ -51,12 +51,12 @@ class SimCardController extends Controller
     {
         # code...
         $request->validate([
-            'number'=>'required|unique:sim_cards,phone',
-            'iccid'=>'required|numeric|unique:sim_cards,iccid',
+            'number'=>'required|integer|unique:sim_cards,phone',
+            'iccid'=>'required|integer|unique:sim_cards,iccid',
             'network'=>'required'
         ],[
             'required'=>__(':attribute required'),
-            'numeric'=>__(':attribute invalid'),
+            'integer'=>__(':attribute invalid'),
             'unique'=>__(':attribute exists'),
         ],[
             'number'=>__('phone'),
@@ -317,7 +317,10 @@ class SimCardController extends Controller
         # code...
         $all = SimCard::whereNotNull(['origin_price','lease_price'])->doesntHave('partner')->doesntHave('request')->get();
         $requestest = Auth::user()->partner ?  Auth::user()->partner->requests : collect();
-        return view('dealer.product.request',['all'=>$all,'requestest'=>$requestest]);
+        $requests =  $status = Auth::user()->partner ? $status = Auth::user()->partner->statuss : collect();
+        // dd($status = Auth::user()->partner->statuss);
+
+        return view('dealer.product.request',['all'=>$all,'requestest'=>$requestest,'requestes'=>$requests]);
     }
 
     public function simRequest(Request $request)

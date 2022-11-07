@@ -18,7 +18,7 @@ class ImportSim implements ToModel, WithHeadingRow
         // dd($row);
         return new SimCard([
             //
-            'phone'=>$row['number'],
+            'phone'=> preg_replace("/[^0-9]/", "",$row['number']),
             'network'=>$row['network'],
             'iccid'=>$row['iccid'],
             'import_price'=>$row['entry_price'],
