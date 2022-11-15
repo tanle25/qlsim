@@ -162,11 +162,12 @@
                                 <th>
                                     {{__('ICCID')}}
                                 </th>
-                                <th>
-                                    {{__('request')}}
-                                </th>
+
                                 <th>
                                     {{__('Created at')}}
+                                </th>
+                                <th>
+                                    {{__('request')}}
                                 </th>
                                 <th>
                                     {{__('status')}}
@@ -178,9 +179,7 @@
                             @foreach ($requestes as $requested )
                             {{-- @dd($requestes) --}}
                             <tr>
-                                {{-- <td>
-                                    <input form="send-request" type="checkbox" name="sims[]" class="input-checkbox w-5 h-5" value="{{$requested->sim->id}}">
-                                </td> --}}
+
                                 <td>
                                     <div class="ml-3">
                                         <p class="text-color whitespace-no-wrap">
@@ -191,11 +190,12 @@
                                 <td>
                                     <p class="text-color whitespace-no-wrap">{{$requested->sim->iccid}}</p>
                                 </td>
-                                <td>
-                                    <p class="text-color whitespace-no-wrap">{{__(config("constrain.sim_status.$requested->request.text") )}}</a></p>
-                                </td>
+
                                 <td>
                                     <p class="text-color whitespace-no-wrap">{{$requested->created_at->format('d-m-Y H:i:s')}}</p>
+                                </td>
+                                <td>
+                                    <p class="text-color whitespace-no-wrap">{{__(config("constrain.sim_status.$requested->request.text") )}}</a></p>
                                 </td>
                                 <td>
                                     <p class="text-color whitespace-no-wrap">{{__($requested->status ? 'Done' : 'Processing') }}</p>

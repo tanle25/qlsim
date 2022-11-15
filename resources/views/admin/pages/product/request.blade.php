@@ -109,6 +109,9 @@
                         <th>
                             {{__('status')}}
                         </th>
+                        <th>
+                            {{__('request')}}
+                        </th>
                         <th class="nosort"></th>
                     </tr>
                 </thead>
@@ -132,7 +135,9 @@
                         <td>
                             <p class="text-color whitespace-no-wrap">{{$resquested->created_at->format('d-m-Y H:i:s')}}</p>
                         </td>
-
+                        <td>
+                            <p class="text-color whitespace-no-wrap">{{__($resquested->status ? 'Done' : '')}}</p>
+                        </td>
                         <td>
                             <p class="text-color whitespace-no-wrap"> {{__(config("constrain.sim_status.$resquested->status.text"))  }}</a></p>
                         </td>
