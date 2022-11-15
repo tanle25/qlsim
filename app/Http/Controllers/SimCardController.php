@@ -27,7 +27,7 @@ class SimCardController extends Controller
         # code...
         // $role = Auth::user()->roles;
         // dd($role);
-        $simCards = SimCard::all();
+        $simCards = SimCard::orderBy('desc','created_at')->get();
         $partners = Partner::all();
         $customers = Customer::all();
         $packages = Pakage::all();
