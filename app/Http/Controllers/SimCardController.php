@@ -14,6 +14,7 @@ use App\Models\Bill;
 use App\Models\Pakage;
 use App\Models\SimNetwork;
 use App\Models\SimRequest;
+use App\Models\User;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -28,7 +29,7 @@ class SimCardController extends Controller
         // $role = Auth::user()->roles;
         // dd($role);
         $simCards = SimCard::orderBy('created_at','desc')->get();
-        $partners = Partner::all();
+        $partners = User::role(['dealer','collab'])->get();
         $customers = Customer::all();
         $packages = Pakage::all();
         $networks = SimNetwork::all();
@@ -51,8 +52,8 @@ class SimCardController extends Controller
     {
         # code...
         $request->validate([
-            'number'=>'required|integer|unique:sim_cards,phone',
-            'iccid'=>'required|integer|unique:sim_cards,iccid',
+            'number'=>'required|digits:10|unique:sim_cards,phone',
+            'iccid'=>'required|unique:sim_cards,iccid',
             'network'=>'required'
         ],[
             'required'=>__(':attribute required'),
@@ -111,6 +112,16 @@ class SimCardController extends Controller
         return back();
     }
 
+    public function updates(Request $request)
+    {
+        # code...
+        $sims = SimCard::whereIn('id',$request->sims)->get();
+        if (is_null($sims)) {
+            # code...
+            return redirect()->back()->withErrors(['not_found'=>__('Not Found')]);
+        }
+    }
+
     public function updateStatus(Request $request)
     {
         # code...
@@ -141,13 +152,25 @@ class SimCardController extends Controller
         }
         foreach ($sims as $sim) {
             # code...
+            // dd($sim->partner);
             $sim->partner()->updateOrCreate([
-                'partner_id'=>$request->partner
+                'user_id'=>$request->partner,
+                'sim_card_id'=>$sim->id
             ],
             [
                 'origin_price'=>$sim->lease_price
             ]
         );
+        // if($sim->partner){
+        //     $sim->partner->update([
+        //         'user_id'=>$request->partner
+        //     ]);
+        // }else{
+        //     $sim->partner->create([
+        //         'user_id'=>$request->partner,
+        //         'origin_price'=>$sim->lease_price
+        //     ]);
+        // }
         }
         return back();
     }

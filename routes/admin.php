@@ -30,6 +30,7 @@ Route::group(['middleware'=>['auth','role:admin']],function(){
     Route::post('import-sim',[SimCardController::class,'import']);
     Route::post('phan-phoi-sim',[SimCardController::class,'distribution']);
     Route::post('update-sim',[SimCardController::class,'update']);
+    Route::post('update-sims',[SimCardController::class,'updates']);
     Route::post('update-status-sim',[SimCardController::class,'updateStatus']);
     Route::post('rent-sim', [SimCardController::class,'rentSim']);
     Route::get('get-bill-info/{id}',[SimCardController::class,'getBill']);

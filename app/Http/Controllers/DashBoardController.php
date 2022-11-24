@@ -72,7 +72,7 @@ class DashBoardController extends Controller
     {
         # code...
         $user = Auth::user();
-        $simCount = $user->partner ?  $user->partner->sims->count() : 0;
+        $simCount = $user->simS->count();
         $customers = Customer::all()->count();
         $dealers = Partner::all()->count();
         $wifiRequests = WifiRequest::whereNot('status',3)->get();
@@ -106,9 +106,10 @@ class DashBoardController extends Controller
         }
 
         $end_date = Carbon::today()->addDays(5);
-        $simAlerts = SimOwner::where('partner_id', Auth::user()->partner_id)->whereRelation('sim.bills', function($q) use ($end_date){
-            return $q->where('end_at','<=', $end_date->toDateString())->where('end_at','>=',Carbon::today()->toDateString());
-        })->get();
+        // $simAlerts = SimOwner::where('partner_id', Auth::user()->partner_id)->whereRelation('sim.bills', function($q) use ($end_date){
+        //     return $q->where('end_at','<=', $end_date->toDateString())->where('end_at','>=',Carbon::today()->toDateString());
+        // })->get();
+        $simAlerts = collect();
         return view('dealer.dashboard',['simCount'=>$simCount,'customers'=>$customers,'dealers'=>$dealers,'wifiRequests'=>$wifiRequests,'dataSim'=>$data_sim,'dataWifi'=>$data_wifi,'simAlerts'=>$simAlerts]);
     }
 

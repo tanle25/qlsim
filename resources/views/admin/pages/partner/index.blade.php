@@ -24,36 +24,30 @@
                                 {{__('phone')}}
                             </th>
                             <th>
-                                {{__('Address')}}
-                            </th>
-                            <th>
                                 {{__('type')}}
                             </th>
                             <th class="nosort"></th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($partners as $partner )
+                        @foreach ($users as $user )
                         <tr>
-                            <td><input value="{{$partner->id}}" type="checkbox" name="partner[]" form="list-sim"></td>
+                            <td><input value="{{$user->id}}" type="checkbox" name="partner[]" form="list-sim"></td>
                             <td>
-                                <a href="{{url('admin/cong-tac-vien',$partner->id)}}">{{$partner->name}}</a>
+                                <a href="{{url('admin/cong-tac-vien',$user->id)}}">{{$user->name}}</a>
                             </td>
                             <td>
                                 <div class="ml-3">
                                     <p class="text-color whitespace-no-wrap">
-                                        {{$partner->phone}}
+                                        {{$user->phone}}
                                     </p>
                                 </div>
                             </td>
                             <td>
-                                <p class="text-color whitespace-no-wrap">{{$partner->address}}</p>
-                            </td>
-                            <td>
-                                <p class="text-color whitespace-no-wrap">{{__(Config::get('constrain.partner.'.$partner->type))}}</p>
+                                <p class="text-color whitespace-no-wrap">{{__($user->roles->first()->name)}}</p>
                             </td>
                             <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm text-right">
-                                <button type="button" class="inline-block text-gray-500 hover:text-gray-700  btn-dropdown" data-dropdown-toggle="dropdownLeft" data-dropdown-placement="left" data-id="{{$partner->id}}">
+                                <button type="button" class="inline-block text-gray-500 hover:text-gray-700  btn-dropdown" data-dropdown-toggle="dropdownLeft" data-dropdown-placement="left" data-id="{{$user->id}}">
                                     <svg class="inline-block h-6 w-6 fill-current" viewBox="0 0 24 24">
                                         <path
                                             d="M12 6a2 2 0 110-4 2 2 0 010 4zm0 8a2 2 0 110-4 2 2 0 010 4zm-2 6a2 2 0 104 0 2 2 0 00-4 0z" />
@@ -85,44 +79,6 @@
             <a id="btn-add-owner"  data-modal-toggle="owner-modal" href="#" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-white">{{__('Team Owner')}}</a>
         </li>
     </ul>
-</div>
-<div id="add-partner" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full">
-    <div class="relative p-4 w-full max-w-md h-full md:h-auto">
-        <!-- Modal content -->
-        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-            <button type="button" class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white" data-modal-toggle="add-partner">
-                <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
-                <span class="sr-only">Close modal</span>
-            </button>
-            <div class="py-6 px-6 lg:px-8">
-                <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">{{__('Add agents or collaborators')}}</h3>
-                <form class="space-y-6" action="{{url('admin/them-dai-ly')}}" method="POST">
-                    @csrf
-                    <div>
-                        <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">{{__("agent or collaborator name")}}</label>
-                        <input type="text" placeholder="{{__('agent or collaborator name')}}" name="name" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" >
-                    </div>
-                    <div>
-                        <label for="phone" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">{{__('phone')}}</label>
-                        <input type="text" placeholder="{{__('phone')}}" name="phone" id="phone" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white">
-                    </div>
-
-                    <div>
-                        <label for="type" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">{{__('dealer & colllab')}}</label>
-                        <select name="type" id="type" class="input-field">
-                            <option value="0">{{__('dealer')}}</option>
-                            <option value="1">{{__('collab')}}</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label for="address" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">{{__('Address')}}</label>
-                        <input type="address" placeholder="{{__('Address')}}" name="address" id="address" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white">
-                    </div>
-                    <button type="submit" class="btn-default w-full">{{__('Create')}}</button>
-                </form>
-            </div>
-        </div>
-    </div>
 </div>
 
 {{-- EDIT PARTNER --}}
@@ -240,11 +196,6 @@
 
 </form>
 
-
-<template id="btn-template">
-    <button  type="button" class="light-btn" data-modal-toggle="add-partner" style="margin: 0; margin-left:10px;">{{__('Add')}}</button>
-    <button type="submit" form="list-sim" class="light-btn"  style="margin: 0; margin-left:10px;">{{__('list sim')}}</button>
-</template>
 @stop
 
 @section('js')
@@ -265,10 +216,7 @@
                 "targets": 'nosort'
                 } ]
         });
-        var temp = document.getElementById('btn-template');
-        var button = temp.content.cloneNode(true);
-        $('#product-table_filter').addClass('flex');
-        $('#product-table_filter').append(button);
+
         var partners = @json($partners);
         var item = null;
         $(document).ready(function () {

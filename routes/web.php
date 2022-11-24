@@ -11,6 +11,7 @@ use App\Http\Controllers\LeechContentController;
 use App\Http\Controllers\PartnerController;
 use App\Http\Controllers\RequestController;
 use App\Http\Controllers\SocicalAuthenticateController;
+use App\Models\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,7 +23,10 @@ use App\Http\Controllers\SocicalAuthenticateController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+Route::get('test', function(){
+    $user = User::find(5)->sims;
+    dd($user);
+});
 
 Route::get('login',[AuthController::class,'showLoginForm']);
 Route::post('login',[AuthController::class,'login'])->name('login');

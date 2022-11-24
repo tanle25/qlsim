@@ -91,6 +91,11 @@ class User extends Authenticatable
         # code...
         return $this->hasOne(UserRole::class);
     }
+    public function sims()
+    {
+        # code...
+        return $this->hasMany(SimOwner::class);
+    }
 
 
 

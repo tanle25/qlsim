@@ -14,6 +14,7 @@ class SimCard extends Model
     {
         # code...
         return $this->hasOne(SimOwner::class);
+        // return $this->hasOneThrough(User::class, SimOwner::class,'user_id','id');
     }
     public function partners()
     {

@@ -238,8 +238,9 @@
 <script src="{{asset('backend/assets/js/plugins/chartjs.min.js')}}" async></script>
 <!-- plugin for scrollbar  -->
 <script src="{{asset('backend/assets/js/perfect-scrollbar.js')}}" async></script>
-<!-- main script file  -->
+
 <script src="{{asset('backend/assets/js/argon-dashboard-tailwind.js')}}" async></script>
+
 <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 <script>
     $(document).ready(function () {

@@ -13,7 +13,7 @@ class SimOwner extends Model
     public function partner()
     {
         # code...
-        return $this->hasOne(Partner::class,'id','partner_id');
+        return $this->hasOne(User::class,'id','user_id');
     }
     public function sim()
     {

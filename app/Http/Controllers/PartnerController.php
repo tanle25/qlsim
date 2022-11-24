@@ -15,7 +15,9 @@ class PartnerController extends Controller
     {
         # code...
         $partners = Partner::all();
-        $users = User::all();
+        // $users = User::all();
+        $users = User::role(['dealer','collab'])->get();
+        // dd($users);
 
         return view('admin.pages.partner.index',['partners'=>$partners,'users'=>$users]);
     }
@@ -40,6 +42,7 @@ class PartnerController extends Controller
         ]);
         $request->request->add(['status'=>1]);
         Partner::create($request->all());
+        dd($request);
         return back();
     }
 

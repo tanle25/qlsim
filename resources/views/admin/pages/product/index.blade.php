@@ -7,7 +7,7 @@
 
 </div>
 
-
+{{-- @dd($simCards) --}}
 <div class="mx-auto px-4">
         <div class="flex justify-end">
 
@@ -22,7 +22,7 @@
                 @csrf
                 @include('admin.pages.components.add-sim')
             </form>
-
+            <button class="light-btn" type="button" data-modal-toggle="edit-sims-modal">{{__('Edit')}}</button>
             <form id="import-form" action="{{url('admin/import-sim')}}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <button type="button" class="light-btn">
@@ -94,8 +94,8 @@
                                 <p class="text-color whitespace-no-wrap">{{is_null($simCard->network) ? '' : $simCard->network->name}}</p>
                             </td>
                             <td>
-                                <p class="text-color whitespace-no-wrap">{{ is_null($simCard->partner) ? '' : $simCard->partner->partner->name}}</p>
-                                {{-- @dd($simCard->partner->name) --}}
+                                <p class="text-color whitespace-no-wrap">{{ $simCard->partner->partner->name ?? ''}}</p>
+                                {{-- @dd($simCard->partner) --}}
                             </td>
                             <td>
                                     @if (!is_null($simCard->bill) && $simCard->status ==2)
@@ -327,6 +327,7 @@
 
 
 @include('admin.pages.components.edit-sim')
+@include('admin.pages.components.edit-sims')
 
 <form id="status-form" action="{{url('admin/update-status-sim')}}" method="post">
     @csrf
@@ -365,7 +366,7 @@ const dropdown = new Dropdown(targetEl, triggerEl);
                 } ]
         });
         // initDatePicker();
-
+        $('input[name=form=share-sim]:checked');
         $('.invoice-btn').click(function(){
             let id = item[0].id;
 
