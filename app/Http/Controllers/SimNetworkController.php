@@ -55,15 +55,22 @@ class SimNetworkController extends Controller
     {
         # code...
         $request->validate([
-            'name'=>'required'
+            'name'=>'required',
+            'price'=>'required|integer',
+            'lease_price'=>'required|integer',
+            'duration'=>'required|integer'
         ],[
-            'required'=>__(':attribute required')
+            'required'=>__(':attribute required'),
+            'integer'=>__(':attribute invalid')
         ],[
             'name'=>__('network name')
         ]);
         $network = SimNetwork::findOrFail($request->id);
         $network->update([
-            'name'=>$request->name
+            'name'=>$request->name,
+            'price'=>$request->price,
+            'lease_price'=>$request->lease_price,
+            'duration'=>$request->duration
         ]);
         return back();
     }

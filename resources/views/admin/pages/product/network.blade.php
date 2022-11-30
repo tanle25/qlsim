@@ -159,6 +159,15 @@
                     {{-- <svg aria-hidden="true" class="mx-auto mb-4 w-14 h-14 text-gray-400 dark:text-gray-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg> --}}
                     <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">{{__('Edit')}}</h3>
                     <input id="network-name" type="text" name="name" class="input-field">
+                    <div class="my-2">
+                        <input id="edit-network-price" type="number" name="price" id="" class="input-field" placeholder="{{__('price')}}">
+                    </div>
+                    <div class="my-2">
+                        <input  type="number" name="lease_price" id="" class="input-field" placeholder="{{__('rent price')}}">
+                    </div>
+                    <div class="my-2">
+                        <input type="number" name="duration" id="" class="input-field" placeholder="{{__('duration')}}">
+                    </div>
                     <input type="hidden" name="id" id="network-id">
                     <div class="mt-3">
                         <button type="submit" class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2">
@@ -206,7 +215,9 @@
                     if(xhr.status == 200){
                         $('#network-name').val(response.name);
                         $('#network-id').val(response.id);
-
+                        $('#edit-network-modal input[name=price]').val(response.price);
+                        $('#edit-network-modal input[name=lease_price]').val(response.lease_price);
+                        $('#edit-network-modal input[name=duration]').val(response.duration);
                     }
 
                 }
