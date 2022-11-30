@@ -17,7 +17,7 @@ return new class extends Migration
     {
         Schema::table('request_statuses', function (Blueprint $table) {
             //
-            $table->dropConstrainedForeignIdFor(Partner::class);
+            // $table->dropConstrainedForeignIdFor(Partner::class);
             $table->foreignIdFor(User::class)->after('id')->constrained()->cascadeOnDelete();
         });
     }
