@@ -17,9 +17,9 @@ class ExportControlller extends Controller
     public function index()
     {
         # code...
-        $invoices = PartnerInvoice::where('partner_id', Auth::user()->partner_id)->get();
+        // $invoices = PartnerInvoice::where('partner_id', Auth::user()->partner_id)->get();
         // dd($invoices);
-        return view('dealer.statis.index',['statis'=>$invoices]);
+        // return view('dealer.statis.index',['statis'=>$invoices]);
     }
 
     public function exportToday()

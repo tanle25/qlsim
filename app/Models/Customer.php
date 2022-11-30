@@ -20,4 +20,10 @@ class Customer extends Model
         # code...
         return $this->hasOne(Bill::class);
     }
+
+    public function invoice()
+    {
+        # code...
+        return $this->morphMany(Invoice::class,'invoiceable');
+    }
 }

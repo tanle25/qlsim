@@ -15,14 +15,7 @@
                                 <input type="text" id="iccid" class="input-field" name="iccid" placeholder="iccid">
                             </div>
                         </div>
-                        <div class="flex mt-5">
-                            <div class="mr-2 w-1/2">
-                                <input type="number" id="origin_price" name="origin_price" class="input-field" placeholder="{{__('origin price')}}">
-                            </div>
-                            <div class="ml-2 w-1/2">
-                                <input type="number" id="lease_price" class="input-field" name="lease_price" placeholder="{{__('rent price')}}">
-                            </div>
-                        </div>
+
                         <div class="flex mt-5">
                             <div class="w-1/2">
                                 <select name="network" id="network" class="input-field" id="">

@@ -63,7 +63,7 @@
                                     <p class="text-color whitespace-no-wrap">{{__(config("constrain.sim_status.$requested->request.text") )}}</a></p>
                                 </td>
                                 <td>
-                                    <p class="text-color whitespace-no-wrap">{{__($requested->status ? 'Done' : 'Processing') }}</p>
+                                    <p class="text-color whitespace-no-wrap">{{__(config("constrain.request.$requested->status") ) }}</p>
                                 </td>
 
                                 <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm text-right">

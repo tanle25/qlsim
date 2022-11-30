@@ -14,6 +14,7 @@ use App\Models\Bill;
 use App\Models\PartnerPackage;
 use App\Models\SimOwner;
 use Illuminate\Support\Facades\Auth;
+use Upload;
 
 class SimCardController extends Controller
 {
@@ -25,10 +26,10 @@ class SimCardController extends Controller
         $user = Auth::user();
         $simCards = $user->sims;
         $customers = Customer::all();
-        $packages = PartnerPackage::all();
+        // $packages = PartnerPackage::all();
 
 
-        return view('dealer.product.index',['simCards'=>$simCards,'customers'=>$customers,'packages'=>$packages]);
+        return view('dealer.product.index',['simCards'=>$simCards,'customers'=>$customers]);
 
     }
 
@@ -210,7 +211,6 @@ class SimCardController extends Controller
         // dd($request->all());
         $request->validate([
             'sim_id'=>'required|exists:sim_owners,id',
-            'package'=>'required|exists:partner_packages,id',
             'image'=>'required|image|mimes:png,jpg,jpeg'
         ],[
             'required'=>__(':attribute required'),
@@ -218,39 +218,11 @@ class SimCardController extends Controller
             'image'=>__(':attribute invalid')
         ],[
             'sim_id'=>__('bill'),
-            'package'=>__('pakage'),
             'image'=>__('Photo')
         ]);
-        $imageUrl = '';
-        if($request->hasFile('image')){
-            $image = $request->file('image');
+        $imageUrl = Upload::store($request->file('image'));
 
-            $ext = $image->getClientOriginalExtension();
-            $fileName = Str::random(16).'.'.$ext;
-            $request->file('image')->storeAs('/public/images',$fileName);
-            $imageUrl = 'storage/images/'.$fileName;
-        }
         $sim = SimOwner::find($request->sim_id);
-        $bill = $sim->sim->bill;
-        $package = PartnerPackage::find($request->package);
-        $end_date = Carbon::parse($bill->end_at)->addMonths($package->package->duration);
-        $bill->update([
-            'end_at'=>$end_date->toDateString(),
-            'image'=>$imageUrl
-        ]);
-        $sim->sim->invoice()->create([
-            'bill_id'=>$bill->id,
-            'origin_price'=>$package->package->origin_price,
-            'lease_price'=>$package->package->rent_price,
-            'type'=>2
-        ]);
-        $sim->sim->partnerInvoice()->create([
-            'partner_id'=>Auth::user()->partner_id,
-            'bill_id'=>$bill->id,
-            'origin_price'=>$package->package->rent_price,
-            'lease_price'=>$package->lease_price,
-            'type'=>2
-        ]);
 
         return back()->with(['success'=>__('Update success')]);
     }

@@ -23,6 +23,16 @@
                         {{__('network name')}}
                     </th>
 
+                    <th>
+                        {{__('price')}}
+                    </th>
+                    <th>
+                        {{__('rent price')}}
+                    </th>
+                    <th>
+                        {{__('duration')}}
+                    </th>
+
                     <th class="nosort"></th>
                 </tr>
             </thead>
@@ -41,6 +51,29 @@
                         <div class="ml-3">
                             <p class="text-color whitespace-no-wrap">
                                 {{$network->name}}
+                            </p>
+                        </div>
+                    </td>
+
+                    <td>
+                        <div class="ml-3">
+                            <p class="text-color whitespace-no-wrap">
+                                {{$network->price}}
+                            </p>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="ml-3">
+                            <p class="text-color whitespace-no-wrap">
+                                {{$network->lease_price}}
+                            </p>
+                        </div>
+                    </td>
+
+                    <td>
+                        <div class="ml-3">
+                            <p class="text-color whitespace-no-wrap">
+                                {{$network->duration}}
                             </p>
                         </div>
                     </td>
@@ -79,6 +112,15 @@
 
                         <div class="my-2">
                             <input type="text" name="name" id="" class="input-field" placeholder="{{__('network name')}}">
+                        </div>
+                        <div class="my-2">
+                            <input type="number" name="price" id="" class="input-field" placeholder="{{__('price')}}">
+                        </div>
+                        <div class="my-2">
+                            <input type="number" name="lease_price" id="" class="input-field" placeholder="{{__('rent price')}}">
+                        </div>
+                        <div class="my-2">
+                            <input type="number" name="duration" id="" class="input-field" placeholder="{{__('duration')}}">
                         </div>
                     <button data-modal-toggle="add-pakage" type="button" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">Đóng</button>
                     <button  type="submit" class="text-white bg-green-600 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2">

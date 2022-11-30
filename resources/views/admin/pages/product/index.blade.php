@@ -11,8 +11,8 @@
 <div class="mx-auto px-4">
         <div class="flex justify-end">
 
-            <button class="light-btn" type="button" data-modal-toggle="distribution">{{__('distribution')}}</button>
-            <form id="share-sim" action="{{url('admin/phan-phoi-sim')}}" method="POST">
+            <button class="light-btn" type="button" data-modal-toggle="distribution">{{__('Action')}}</button>
+            <form id="share-sim" action="{{url('admin/phan-phoi-sim')}}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @include('admin.pages.components.phan-phoi')
 
@@ -22,7 +22,6 @@
                 @csrf
                 @include('admin.pages.components.add-sim')
             </form>
-            <button class="light-btn" type="button" data-modal-toggle="edit-sims-modal">{{__('Edit')}}</button>
             <form id="import-form" action="{{url('admin/import-sim')}}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <button type="button" class="light-btn">
@@ -55,10 +54,10 @@
                                 {{__('network')}}
                             </th>
                             <th class=" whitespace-nowrap">
-                                {{__('dealer & colllab')}}
+                                {{__('custommers')}}
                             </th>
                             <th class=" whitespace-nowrap">
-                                {{__('custommers')}}
+                                {{__('type')}}
                             </th>
                             <th class=" whitespace-nowrap">
                                 {{__('Ngày hết hạn')}}
@@ -77,9 +76,9 @@
                             </td>
                             <td>
                                 <div class="ml-3">
-                                    <p class="text-color whitespace-no-wrap">
+                                    <a href="{{url('admin/lich-su', $simCard->id)}}" class="text-color whitespace-no-wrap">
                                         {{$simCard->phone}}
-                                    </p>
+                                    </a>
                                 </div>
                             </td>
                             <td >
@@ -93,21 +92,20 @@
                             <td>
                                 <p class="text-color whitespace-no-wrap">{{is_null($simCard->network) ? '' : $simCard->network->name}}</p>
                             </td>
+
                             <td>
-                                <p class="text-color whitespace-no-wrap">{{ $simCard->partner->partner->name ?? ''}}</p>
+                                <p class="text-color whitespace-no-wrap">{{ $simCard->is_rent ? $simCard->invoice->last()->invoiceable->name ?? '' : ''}}</p>
                                 {{-- @dd($simCard->partner) --}}
                             </td>
                             <td>
-                                    @if (!is_null($simCard->bill) && $simCard->status ==2)
-                                        {{-- @dd($simCard->bill) --}}
-                                        <p class="text-color whitespace-no-wrap">{{$simCard->bill->customer->name}}</p>
+                                    @if ($simCard->is_rent )
+                                        {{$simCard->invoice->last()->type ?? ''}}
                                     @endif
-                                    {{-- {{is_null($simCard->bill) ? '' : $simCard->bill->customer->name}} --}}
                             </td>
 
                             <td>
-                                <p class="whitespace-no-wrap {{$simCard->status == 2 && \Carbon\Carbon::parse($simCard->bill->end_at)->isPast() ? 'text-red-500' : 'text-color '}}">
-                                    {{$simCard->status == 2 ? \Carbon\Carbon::parse($simCard->bill->end_at)->format('d/m/Y')  : '' }}
+                                <p class="whitespace-no-wrap {{ $simCard->expired !=null && $simCard->expired->isPast() ? 'text-red-500' : ''}} ">
+                                    {{$simCard->is_rent && $simCard->expired !=null ? $simCard->expired->format('d-m-Y') : '' }}
                                 </p>
                             </td>
                             <td>
@@ -204,12 +202,12 @@
                                 </div>
                             </div>
 
-                            <select name="package" id="" class="input-field h-11 mb-3">
+                            {{-- <select name="package" id="" class="input-field h-11 mb-3">
                                 <option >{{__('Choose package')}}</option>
                                 @foreach ($packages as $package )
                                 <option value="{{$package->id}}">{{$package->name}}</option>
                                 @endforeach
-                            </select>
+                            </select> --}}
 
                             <input class="block w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 cursor-pointer dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" aria-describedby="file_input_help" id="file_input" type="file" accept="image/png, image/jpeg, image/jpg" name="image">
                             <p class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="file_input_help">PNG, JPG or JPEG (MAX. 800x400px).</p>
@@ -304,12 +302,12 @@
                         <div>
                             <input id="extend-sim" type="hidden" name="sim_id">
                             <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">{{__('Extend contract')}}</h3>
-                            <select name="package" id="" class="input-field h-11 mb-3">
+                            {{-- <select name="package" id="" class="input-field h-11 mb-3">
                                 <option >{{__('Choose package')}}</option>
                                 @foreach ($packages as $package )
                                 <option value="{{$package->id}}">{{$package->name}}</option>
                                 @endforeach
-                            </select>
+                            </select> --}}
                             <input class="block w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 cursor-pointer dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" aria-describedby="file_input_help" id="file_input" type="file" accept="image/png, image/jpeg, image/jpg" name="image">
                             <p class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="file_input_help">PNG, JPG or JPEG (MAX. 800x400px).</p>
                         </div>
@@ -341,8 +339,6 @@
 
 <script src="//cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
 <script src="https://unpkg.com/flowbite@1.5.2/dist/flowbite.js"></script>
-{{-- <script src="https://unpkg.com/flowbite@1.5.3/dist/datepicker.js"></script> --}}
-{{-- <script src="{{asset('backend/assets/js/picker.js')}}"></script> --}}
 <script src="{{asset('backend/assets/js/test.js')}}"></script>
 <script>
 const targetEl = document.getElementById('dropdownSearch');
@@ -366,7 +362,6 @@ const dropdown = new Dropdown(targetEl, triggerEl);
                 } ]
         });
         // initDatePicker();
-        $('input[name=form=share-sim]:checked');
         $('.invoice-btn').click(function(){
             let id = item[0].id;
 
@@ -492,9 +487,5 @@ const dropdown = new Dropdown(targetEl, triggerEl);
             $(ul).append(li);
         });
     }
-
-
-
-
 </script>
 @stop

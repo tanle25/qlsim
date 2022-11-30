@@ -11,19 +11,23 @@
 <div class="mx-auto px-4">
         <div class="-mx-4 sm:-mx-8 py-4 overflow-x-auto px-4">
             <div class="inline-block w-full shadow-md rounded-lg overflow-hidden pb-5">
+                <div class="my-3">
+                    <span class=" font-bold">Tổng doanh thu: {{number_format($statis->sum('price')) }}</span>
+                </div>
                 <table id="product-table" class="w-full leading-normal dark:text-gray-400">
                     <thead class="bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                         <tr>
 
                             <th>
-                                {{__('dealer & colllab')}}
-                            </th>
-                            <th>
-                                {{__('phone')}}
+                                {{__('custommers')}}
                             </th>
                             <th>
                                 {{__('type')}}
                             </th>
+                            <th>
+                                {{__('phone')}}
+                            </th>
+
                             <th>
                                 {{__('origin price')}}
                             </th>
@@ -33,7 +37,6 @@
                             <th>
                                 {{__('Created.')}}
                             </th>
-                            {{-- <th class="nosort"></th> --}}
                         </tr>
                     </thead>
                     <tbody>
@@ -47,25 +50,25 @@
                                         {{-- @if ($invoice->invoiceable->bill->partner)
                                             @dd($invoice->invoiceable->bill->partner)
                                         @endif --}}
-                                        {{$invoice->invoiceable->bill->partner->name ?? ''}}
+                                        {{$invoice->invoiceable->name}}
                                     </p>
                                 </div>
                             </td>
                             <td>
                                 <p class="text-color whitespace-no-wrap">
 
-                                    {{$invoice->type == 1 || $invoice->type ==2 ? __($invoice->invoiceable->phone) : ''}}
+                                    {{$invoice->type}}
                                 </p>
                             </td>
                             <td>
-                                <p class="text-color whitespace-no-wrap">{{__($invoice->model_name) }}</p>
+                                <p class="text-color whitespace-no-wrap">{{__($invoice->sim->phone) }}</p>
                             </td>
                             <td>
-                                <p class="text-color whitespace-no-wrap">{{number_format($invoice->origin_price) }}</p>
+                                <p class="text-color whitespace-no-wrap">{{number_format($invoice->sim->network->price) }}</p>
                             </td>
 
                             <td>
-                                <p class="text-color whitespace-no-wrap">{{number_format($invoice->lease_price) }}</p>
+                                <p class="text-color whitespace-no-wrap">{{number_format($invoice->price) }}</p>
                             </td>
                             <td>
                                 <p class="text-color whitespace-no-wrap">{{\Carbon\Carbon::parse($invoice->created_at)->format('d/m/Y') }}</p>

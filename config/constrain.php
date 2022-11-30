@@ -14,7 +14,8 @@ return[
             'color'=>'text-green-500'
         ],
         2=>[
-            'text'=>'rent',
+            // 'text'=>'rent',
+            'text'=>'active',
             'color'=>'text-green-500'
         ],
         3=>[
@@ -58,5 +59,10 @@ return[
         2=>'Extend sim',
         3=>'Wifi installation'
     ],
+    'request'=>[
+        0=>'no process',
+        1=>'Done',
+        2=>'refuse'
+    ]
 
 ];

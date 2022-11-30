@@ -195,8 +195,8 @@
 </div>
 
 <!-- cards row 2 -->
-<div class="flex flex-wrap mt-6 -mx-3">
-    <div class="w-full max-w-full px-3 mt-0 lg:w-7/12 lg:flex-none">
+<div class=" mt-6 -mx-3">
+    <div class="w-full max-w-full px-3 mt-0 ">
         <div
             class="border-black/12.5 dark:bg-slate-850 dark:shadow-dark-xl shadow-xl relative z-20 flex min-w-0 flex-col break-words rounded-2xl border-0 border-solid bg-white bg-clip-border">
             <div class="border-black/12.5 mb-0 rounded-t-2xl border-b-0 border-solid p-6 pt-4 pb-0">
@@ -211,8 +211,7 @@
         </div>
     </div>
 
-    <div class="w-full max-w-full px-3 lg:w-5/12 lg:flex-none">
-
+    {{-- <div class="w-full max-w-full px-3 lg:w-5/12 lg:flex-none">
         <div
             class="border-black/12.5 dark:bg-slate-850 dark:shadow-dark-xl shadow-xl relative z-20 flex min-w-0 flex-col break-words rounded-2xl border-0 border-solid bg-white bg-clip-border">
             <div class="border-black/12.5 mb-0 rounded-t-2xl border-b-0 border-solid p-6 pt-4 pb-0">
@@ -225,7 +224,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
 </div>
 
 <!-- cards row 3 -->
@@ -334,18 +333,14 @@
                     </div>
                     <div class="flex flex-col">
                         <h6 class="mb-1 leading-normal text-size-sm text-slate-700 dark:text-white">
-                            {{__(config("constrain.sim_status.$status->status.text")) }}</h6>
+                            {{__(config("constrain.sim_status.$status->request.text")) }}</h6>
                     </div>
-                    {{-- <div class="flex flex-col">
-                        <h6 class="mb-1 leading-normal text-size-sm text-slate-700 dark:text-white">
-                            {{__(config('constrain.wifi_request.'.$wifi->status))}}</h6>
-                    </div> --}}
 
                     <div class="flex">
-                        {{-- <button class="btn-default">{{__('accept')}}</button> --}}
-                        {{-- <button class="btn-red">{{__('Delete')}}</button> --}}
+                        @if ($status->status == 0)
                         <a class="text-blue-600 hover:text-green-500 mr-4" href="{{url('admin/xac-nhan-yeu-cau',$status->id)}}">Đồng ý</a>
                         <a class="text-red-600 hover:text-gray-600" href="{{url('admin/xoa-yeu-cau',$status->id)}}">Xoá</a>
+                        @endif
 
                     </div>
                 </li>
@@ -361,10 +356,8 @@
 @section('js')
 <script src="{{asset('backend/assets/js/plugins/chartjs.min.js')}}"></script>
 <script>
-var days = "{{\Carbon\Carbon::today()->daysInMonth}}";
-var date = [ "@lang('Su')", "@lang('Mo')", "@lang('Tu')", "@lang('We')", "@lang('Th')", "@lang('Fri')","@lang('Sa')"];
-var dataSim =@json($dataSim);
-var dataWifi =@json($dataWifi);
+// var days = "{{\Carbon\Carbon::today()->daysInMonth}}";
+var date = @json(array_keys($data));
 var simLabel = "@lang('rent sim')";
 var wifiLabel = "@lang('request wifi')";
 
@@ -383,7 +376,7 @@ gradientStroke1.addColorStop(0, 'rgba(94, 114, 228, 0)');
 new Chart(ctx1, {
   type: "line",
   data: {
-    labels: date,
+    // labels: date,
     datasets: [{
       label: simLabel,
       tension: 0.4,
@@ -393,7 +386,7 @@ new Chart(ctx1, {
       backgroundColor: gradientStroke1,
       borderWidth: 3,
       fill: true,
-      data: dataSim,
+      data: @json($data),
       maxBarThickness: 6
     }],
   },
@@ -481,7 +474,7 @@ new Chart(ctx1, {
       backgroundColor: gradientStroke1,
       borderWidth: 3,
       fill: true,
-      data: dataWifi,
+      data: [],
       maxBarThickness: 6
     }],
   },

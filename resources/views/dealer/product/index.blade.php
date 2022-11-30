@@ -28,7 +28,7 @@
                             </th>
 
                             <th>
-                                {{__('custommers')}}
+                                {{__('Expire date')}}
                             </th>
                             <th>
                                 {{__('status')}}
@@ -54,9 +54,10 @@
                                 <p class="text-color whitespace-no-wrap">{{!is_null($simCard->sim->network) ? $simCard->sim->network->name : '' }}</p>
                             </td>
 
+
                             <td>
-                                <p class="text-color whitespace-no-wrap">
-                                    {{is_null($simCard->sim->bill) ? '' : $simCard->sim->bill->customer->name}}
+                                <p class="{{$simCard->expired->isPast() ? 'text-red-500' : ''}}">
+                                    {{ $simCard->expired->format('d-m-Y')}}
                                 </p>
                             </td>
                             <td>
@@ -66,6 +67,7 @@
                                     <span class="relative">{{__(config('constrain.sim_status.'.$simCard->sim->status.'.text'))}}</span>
                                 </span>
                             </td>
+
                             <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm text-right">
                                 <button type="button" class="inline-block text-gray-500 hover:text-gray-700 btn-dropdown" data-dropdown-toggle="dropdownLeft" data-dropdown-placement="left"
                                 data-iccid="{{$simCard->sim->iccid}}" data-status="{{$simCard->sim->status}}">
@@ -90,9 +92,9 @@
         <li class="context-menu-item" data-status="1">
             <a href="#" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-white">{{__('active')}}</a>
         </li>
-        <li class="context-menu-item" data-status="4">
+        {{-- <li class="context-menu-item" data-status="4">
             <a href="#" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-white">{{__('Cancel')}}</a>
-        </li>
+        </li> --}}
         <li class="context-menu-item" data-status="3">
             <a href="#" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-white">{{__('temporarily cut')}}</a>
         </li>
@@ -102,12 +104,12 @@
         <li class="invoice-btn">
             <a href="#" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-white" data-modal-toggle="invoice-modal">{{__('bill')}}</a>
         </li>
-        <li id="rent-btn">
+        {{-- <li id="rent-btn">
             <a href="#" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-white" data-modal-toggle="rent-modal">{{__('rent')}}</a>
         </li>
         <li id="btn-extend" class="hidden">
             <a href="#" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-white" data-modal-toggle="extend-modal">{{__('Extend')}}</a>
-        </li>
+        </li> --}}
     </ul>
 </div>
 <div id="rent-modal" tabindex="-1" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 md:inset-0 h-modal md:h-full">
@@ -143,12 +145,6 @@
                             </div>
                         </div>
 
-                        <select name="package" id="" class="input-field h-11 mb-3">
-                            <option >{{__('Choose package')}}</option>
-                            @foreach ($packages as $package )
-                            <option value="{{$package->id}}">{{$package->package->name}}</option>
-                            @endforeach
-                        </select>
 
                         <input class="block w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 cursor-pointer dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" aria-describedby="file_input_help" id="file_input" type="file" accept="image/png, image/jpeg, image/jpg" name="image">
                         <p class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="file_input_help">PNG, JPG or JPEG (MAX. 800x400px).</p>
@@ -169,12 +165,7 @@
                             <input name="name" type="text" class="input-field" placeholder="{{__('Full name')}}">
                             <input name="address" type="text" class="input-field mt-3" placeholder="{{__('Address')}}">
                             <input name="facebook" type="text" class="input-field mt-3" placeholder="{{__('Facebook')}}">
-                            <select name="package" id="" class="input-field h-11 mt-3 mb-3">
-                                <option >{{__('Choose package')}}</option>
-                                @foreach ($packages as $package )
-                                <option value="{{$package->id}}">{{$package->package->name}}</option>
-                                @endforeach
-                            </select>
+
                             <input class="block w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 cursor-pointer dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" aria-describedby="file_input_help" id="file_input" type="file" accept="image/png, image/jpeg, image/jpg" name="image">
                             <p class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="file_input_help">PNG, JPG or JPEG (MAX. 800x400px).</p>
                             <div class="modal-footer">
@@ -185,9 +176,7 @@
                             </div>
                         </form>
                     </div>
-
                 </div>
-
             </div>
         </div>
     </div>
@@ -238,12 +227,7 @@
                         <div>
                             <input id="extend-sim" type="hidden" name="sim_id">
                             <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">{{__('Extend contract')}}</h3>
-                            <select name="package" id="" class="input-field h-11 mb-3">
-                                <option >{{__('Choose package')}}</option>
-                                @foreach ($packages as $package )
-                                <option value="{{$package->id}}">{{$package->package->name}}</option>
-                                @endforeach
-                            </select>
+
                             <input class="block w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 cursor-pointer dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" aria-describedby="file_input_help" id="file_input" type="file" accept="image/png, image/jpeg, image/jpg" name="image">
                             <p class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="file_input_help">PNG, JPG or JPEG (MAX. 800x400px).</p>
                         </div>

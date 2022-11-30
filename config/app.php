@@ -196,6 +196,8 @@ return [
         App\Providers\RouteServiceProvider::class,
         Spatie\Permission\PermissionServiceProvider::class,
         Ichtrojan\Otp\OtpServiceProvider::class,
+        Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
+        // \App\Http\Facade\InvoiceFacade::class,
 
     ],
 
@@ -213,6 +215,8 @@ return [
     'aliases' => Facade::defaultAliases()->merge([
         // 'ExampleClass' => App\Example\ExampleClass::class,
         'Otp' => Ichtrojan\Otp\Otp::class,
+        'Invoice' => App\Http\Facade\InvoiceFacade::class,
+        'Upload' => App\Http\Facade\UploadFacade::class,
     ])->toArray(),
 
 ];

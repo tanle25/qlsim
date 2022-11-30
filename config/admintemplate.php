@@ -51,20 +51,20 @@ return [
                     'role'=>['dealer','collab']
                 ],
 
-                [
-                    'text'=>'pakage',
-                    'icon'=>'fal fa-circle',
-                    'active_icon'=>'fad fa-circle',
-                    'url'=>'dealer/goi-cuoc',
-                    'role'=>['dealer','collab']
-                ],
-                [
-                    'text'=>'pakage',
-                    'icon'=>'fal fa-circle',
-                    'active_icon'=>'fad fa-circle',
-                    'url'=>'admin/goi-cuoc',
-                    'role'=>'admin'
-                ],
+                // [
+                //     'text'=>'pakage',
+                //     'icon'=>'fal fa-circle',
+                //     'active_icon'=>'fad fa-circle',
+                //     'url'=>'dealer/goi-cuoc',
+                //     'role'=>['dealer','collab']
+                // ],
+                // [
+                //     'text'=>'pakage',
+                //     'icon'=>'fal fa-circle',
+                //     'active_icon'=>'fad fa-circle',
+                //     'url'=>'admin/goi-cuoc',
+                //     'role'=>'admin'
+                // ],
                 // <i class="fal fa-box-full"></i>
                 [
                     'text'=>'request sim',
@@ -106,12 +106,12 @@ return [
             'url'=>'admin/doanh-thu',
             'role'=>'admin'
         ],
-        [
-            'text'=>'statis',
-            'icon'=>'fal fa-chart-line',
-            'url'=>'dealer/doanh-thu',
-            'role'=>['dealer','collab']
-        ],
+        // [
+        //     'text'=>'statis',
+        //     'icon'=>'fal fa-chart-line',
+        //     'url'=>'dealer/doanh-thu',
+        //     'role'=>['dealer','collab']
+        // ],
         [
             'text'=>'register wifi',
             'icon'=>'fal fa-router',
@@ -147,12 +147,12 @@ return [
             'url'=>'admin/nguoi-dung',
             'role'=>'admin',
         ],
-        [
-            'text'=>'Staff',
-            'icon'=>'fal fa-user-shield',
-            'url'=>'dealer/nhan-vien',
-            'role'=>'dealer',
-            'can'=>'user manager'
-        ],
+        // [
+        //     'text'=>'Staff',
+        //     'icon'=>'fal fa-user-shield',
+        //     'url'=>'dealer/nhan-vien',
+        //     'role'=>'dealer',
+        //     'can'=>'user manager'
+        // ],
     ],
 ];

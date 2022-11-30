@@ -2,13 +2,27 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class SimCard extends Model
 {
     use HasFactory;
     protected $guarded = ['id'];
+
+    protected $casts=[
+        'is_rent'=>'boolean'
+    ];
+
+    protected function expired() : Attribute
+    {
+        # code...
+        return Attribute::make(
+            get: fn($value)=>Carbon::parse($value)
+        );
+    }
 
     public function partner()
     {
@@ -48,7 +62,7 @@ class SimCard extends Model
     public function invoice()
     {
         # code...
-       return $this->morphOne(Invoice::class,'invoiceable');
+       return $this->hasMany(Invoice::class);
     }
 
     public function invoices()
@@ -74,5 +88,7 @@ class SimCard extends Model
         # code...
         return $this->hasOne(SimNetwork::class,'id','sim_network_id');
     }
+
+
 
 }

@@ -88,38 +88,7 @@
     </div>
 
     <!-- card4 -->
-    <div class="w-full max-w-full px-3 mb-6 sm:w-1/2 sm:flex-none xl:mb-2 lg:w-1/3 xl:w-1/4">
-        <div
-            class="relative flex flex-col min-w-0 break-words bg-white shadow-xl dark:bg-slate-850 dark:shadow-dark-xl rounded-2xl bg-clip-border">
-            <div class="flex-auto p-4">
-                <div class="flex flex-row -mx-3">
-                    <div class="flex-none w-2/3 max-w-full px-3">
-                        <div>
-                            <p
-                                class="mb-0 font-sans font-semibold leading-normal uppercase dark:text-white dark:opacity-60 text-size-sm text-truncate">
-                                {{__('dealer & colllab')}}</p>
-                            <h5 class="mb-2 font-bold dark:text-white">{{$dealers}}</h5>
-                            {{-- <p class="mb-0 dark:text-white dark:opacity-60">
-                                <span
-                                    class="font-bold leading-normal text-size-sm text-emerald-500">+5%</span>
-                                than last month
-                            </p> --}}
-                        </div>
-                    </div>
-                    <div class="px-3 text-right basis-1/3">
-                        <div
-                            class="inline-block w-12 h-12 text-center rounded-circle bg-gradient-to-tl from-orange-500 to-yellow-500">
-                            {{-- <i class="ni ni-cart text-size-lg relative top-3.5 text-white"></i> --}}
-                            <i class="fal fa-users text-size-lg relative top-3.5 text-white"></i>
 
-                        </div>
-                    </div>
-
-
-                </div>
-            </div>
-        </div>
-    </div>
 
     <div class="w-full max-w-full px-3 mb-6 sm:w-1/2 sm:flex-none xl:mb-2 lg:w-1/3 xl:w-1/4">
         <div
@@ -145,7 +114,7 @@
         </div>
     </div>
 
-    <div class="w-full max-w-full px-3 mb-6 sm:w-1/2 sm:flex-none xl:mb-2 lg:w-1/3 xl:w-1/4">
+    {{-- <div class="w-full max-w-full px-3 mb-6 sm:w-1/2 sm:flex-none xl:mb-2 lg:w-1/3 xl:w-1/4">
         <div
             class="relative flex flex-col min-w-0 break-words bg-white shadow-xl dark:bg-slate-850 dark:shadow-dark-xl rounded-2xl bg-clip-border">
             <div class="flex-auto p-4">
@@ -160,7 +129,6 @@
                     </div>
                     <div class="px-3 text-right basis-1/3">
                         <div
-                        {{-- <i class="fal fa-file-contract"></i> --}}
                             class="inline-block w-12 h-12 text-center rounded-circle bg-gradient-to-tl from-orange-500 to-yellow-500">
                             <i class="fal fa-file-contract text-size-lg relative top-3.5 text-white"></i>
                         </div>
@@ -168,7 +136,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
 </div>
 
 <!-- cards row 2 -->
@@ -219,37 +187,10 @@
                 </div>
             </div>
             <div class="overflow-x-auto">
-                <table
+                {{-- <table
                     class="items-center w-full mb-4 align-top border-collapse border-gray-200 dark:border-white/40">
-                    {{-- <thead class="bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                        <tr>
-                            <th>
-                                {{__('phone')}}
-                            </th>
-                            <th>
-                                {{__('iccid')}}
-                            </th>
-                            <th>
-                                {{__('network')}}
-                            </th>
-                            <th>
-                                {{__('dealer & colllab')}}
-                            </th>
-                            <th>
-                                {{__('custommers')}}
-                            </th>
-                            <th>
-                                {{__('Ngày hết hạn')}}
-                            </th>
-
-
-                        </tr>
-                    </thead> --}}
                     <tbody>
                         @foreach ($simAlerts->take(5) as $arlert )
-                        {{-- @dd($arlert) --}}
-
-
                         <tr>
 
                             <td>
@@ -267,7 +208,6 @@
                             </td>
                             <td>
                                 <p class="text-color whitespace-no-wrap">{{ is_null($arlert->sim->partner) ? '' : $arlert->sim->partner->partner->name}}</p>
-                                {{-- @dd($arlert->partner->name) --}}
                             </td>
                             <td>
                                 <p class="text-color whitespace-no-wrap">
@@ -285,7 +225,7 @@
                         @endforeach
 
                     </tbody>
-                </table>
+                </table> --}}
             </div>
         </div>
     </div>
@@ -339,8 +279,7 @@
 <script>
 var days = "{{\Carbon\Carbon::today()->daysInMonth}}";
 var date = [ "@lang('Su')", "@lang('Mo')", "@lang('Tu')", "@lang('We')", "@lang('Th')", "@lang('Fri')","@lang('Sa')"];
-var dataSim =@json($dataSim);
-var dataWifi =@json($dataWifi);
+
 var simLabel = "@lang('rent sim')";
 var wifiLabel = "@lang('request wifi')";
 
@@ -349,86 +288,86 @@ if(document.querySelector("#chart-line")){
 
 
 
-var ctx1 = document.getElementById("chart-line").getContext("2d");
+// var ctx1 = document.getElementById("chart-line").getContext("2d");
 
-var gradientStroke1 = ctx1.createLinearGradient(0, 230, 0, 50);
+// var gradientStroke1 = ctx1.createLinearGradient(0, 230, 0, 50);
 
-gradientStroke1.addColorStop(1, 'rgba(94, 114, 228, 0.2)');
-gradientStroke1.addColorStop(0.2, 'rgba(94, 114, 228, 0.0)');
-gradientStroke1.addColorStop(0, 'rgba(94, 114, 228, 0)');
-new Chart(ctx1, {
-  type: "line",
-  data: {
-    labels: date,
-    datasets: [{
-      label: simLabel,
-      tension: 0.4,
-      borderWidth: 0,
-      pointRadius: 0,
-      borderColor: "#5e72e4",
-      backgroundColor: gradientStroke1,
-      borderWidth: 3,
-      fill: true,
-      data: dataSim,
-      maxBarThickness: 6
-    }],
-  },
-  options: {
-    responsive: true,
-    maintainAspectRatio: false,
-    plugins: {
-      legend: {
-        display: false,
-      }
-    },
-    interaction: {
-      intersect: false,
-      mode: 'index',
-    },
-    scales: {
-      y: {
-        grid: {
-          drawBorder: false,
-          display: true,
-          drawOnChartArea: true,
-          drawTicks: false,
-          borderDash: [5, 5]
-        },
-        ticks: {
-          display: true,
-          padding: 10,
-          color: '#fbfbfb',
-          font: {
-            size: 11,
-            family: "Open Sans",
-            style: 'normal',
-            lineHeight: 2
-          },
-        }
-      },
-      x: {
-        grid: {
-          drawBorder: false,
-          display: false,
-          drawOnChartArea: false,
-          drawTicks: false,
-          borderDash: [5, 5]
-        },
-        ticks: {
-          display: true,
-          color: '#ccc',
-          padding: 20,
-          font: {
-            size: 11,
-            family: "Open Sans",
-            style: 'normal',
-            lineHeight: 2
-          },
-        }
-      },
-    },
-  },
-});
+// gradientStroke1.addColorStop(1, 'rgba(94, 114, 228, 0.2)');
+// gradientStroke1.addColorStop(0.2, 'rgba(94, 114, 228, 0.0)');
+// gradientStroke1.addColorStop(0, 'rgba(94, 114, 228, 0)');
+// new Chart(ctx1, {
+//   type: "line",
+//   data: {
+//     labels: date,
+//     datasets: [{
+//       label: simLabel,
+//       tension: 0.4,
+//       borderWidth: 0,
+//       pointRadius: 0,
+//       borderColor: "#5e72e4",
+//       backgroundColor: gradientStroke1,
+//       borderWidth: 3,
+//       fill: true,
+//       data: dataSim,
+//       maxBarThickness: 6
+//     }],
+//   },
+//   options: {
+//     responsive: true,
+//     maintainAspectRatio: false,
+//     plugins: {
+//       legend: {
+//         display: false,
+//       }
+//     },
+//     interaction: {
+//       intersect: false,
+//       mode: 'index',
+//     },
+//     scales: {
+//       y: {
+//         grid: {
+//           drawBorder: false,
+//           display: true,
+//           drawOnChartArea: true,
+//           drawTicks: false,
+//           borderDash: [5, 5]
+//         },
+//         ticks: {
+//           display: true,
+//           padding: 10,
+//           color: '#fbfbfb',
+//           font: {
+//             size: 11,
+//             family: "Open Sans",
+//             style: 'normal',
+//             lineHeight: 2
+//           },
+//         }
+//       },
+//       x: {
+//         grid: {
+//           drawBorder: false,
+//           display: false,
+//           drawOnChartArea: false,
+//           drawTicks: false,
+//           borderDash: [5, 5]
+//         },
+//         ticks: {
+//           display: true,
+//           color: '#ccc',
+//           padding: 20,
+//           font: {
+//             size: 11,
+//             family: "Open Sans",
+//             style: 'normal',
+//             lineHeight: 2
+//           },
+//         }
+//       },
+//     },
+//   },
+// });
 }
 
 
@@ -436,87 +375,87 @@ if(document.querySelector("#chart-line2")){
 
 
 
-var ctx1 = document.getElementById("chart-line2").getContext("2d");
+// var ctx1 = document.getElementById("chart-line2").getContext("2d");
 
-var gradientStroke1 = ctx1.createLinearGradient(0, 230, 0, 50);
+// var gradientStroke1 = ctx1.createLinearGradient(0, 230, 0, 50);
 
-gradientStroke1.addColorStop(1, 'rgba(94, 114, 228, 0.2)');
-gradientStroke1.addColorStop(0.2, 'rgba(94, 114, 228, 0.0)');
-gradientStroke1.addColorStop(0, 'rgba(94, 114, 228, 0)');
-new Chart(ctx1, {
-  type: "line",
-  data: {
-    labels: date,
-    datasets: [
-    {
-      label: wifiLabel,
-      tension: 0.4,
-      borderWidth: 0,
-      pointRadius: 0,
-      borderColor: "rgb(34 197 94)",
-      backgroundColor: gradientStroke1,
-      borderWidth: 3,
-      fill: true,
-      data: dataWifi,
-      maxBarThickness: 6
-    }],
-  },
-  options: {
-    responsive: true,
-    maintainAspectRatio: false,
-    plugins: {
-      legend: {
-        display: false,
-      }
-    },
-    interaction: {
-      intersect: false,
-      mode: 'index',
-    },
-    scales: {
-      y: {
-        grid: {
-          drawBorder: false,
-          display: true,
-          drawOnChartArea: true,
-          drawTicks: false,
-          borderDash: [5, 5]
-        },
-        ticks: {
-          display: true,
-          padding: 10,
-          color: '#fbfbfb',
-          font: {
-            size: 11,
-            family: "Open Sans",
-            style: 'normal',
-            lineHeight: 2
-          },
-        }
-      },
-      x: {
-        grid: {
-          drawBorder: false,
-          display: false,
-          drawOnChartArea: false,
-          drawTicks: false,
-          borderDash: [5, 5]
-        },
-        ticks: {
-          display: true,
-          color: '#ccc',
-          padding: 20,
-          font: {
-            size: 11,
-            family: "Open Sans",
-            style: 'normal',
-            lineHeight: 2
-          },
-        }
-      },
-    },
-  },
-});
+// gradientStroke1.addColorStop(1, 'rgba(94, 114, 228, 0.2)');
+// gradientStroke1.addColorStop(0.2, 'rgba(94, 114, 228, 0.0)');
+// gradientStroke1.addColorStop(0, 'rgba(94, 114, 228, 0)');
+// new Chart(ctx1, {
+//   type: "line",
+//   data: {
+//     labels: date,
+//     datasets: [
+//     {
+//       label: wifiLabel,
+//       tension: 0.4,
+//       borderWidth: 0,
+//       pointRadius: 0,
+//       borderColor: "rgb(34 197 94)",
+//       backgroundColor: gradientStroke1,
+//       borderWidth: 3,
+//       fill: true,
+//       data: dataWifi,
+//       maxBarThickness: 6
+//     }],
+//   },
+//   options: {
+//     responsive: true,
+//     maintainAspectRatio: false,
+//     plugins: {
+//       legend: {
+//         display: false,
+//       }
+//     },
+//     interaction: {
+//       intersect: false,
+//       mode: 'index',
+//     },
+//     scales: {
+//       y: {
+//         grid: {
+//           drawBorder: false,
+//           display: true,
+//           drawOnChartArea: true,
+//           drawTicks: false,
+//           borderDash: [5, 5]
+//         },
+//         ticks: {
+//           display: true,
+//           padding: 10,
+//           color: '#fbfbfb',
+//           font: {
+//             size: 11,
+//             family: "Open Sans",
+//             style: 'normal',
+//             lineHeight: 2
+//           },
+//         }
+//       },
+//       x: {
+//         grid: {
+//           drawBorder: false,
+//           display: false,
+//           drawOnChartArea: false,
+//           drawTicks: false,
+//           borderDash: [5, 5]
+//         },
+//         ticks: {
+//           display: true,
+//           color: '#ccc',
+//           padding: 20,
+//           font: {
+//             size: 11,
+//             family: "Open Sans",
+//             style: 'normal',
+//             lineHeight: 2
+//           },
+//         }
+//       },
+//     },
+//   },
+// });
 }
 </script>
 @stop

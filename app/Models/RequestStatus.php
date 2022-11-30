@@ -9,9 +9,7 @@ class RequestStatus extends Model
 {
     use HasFactory;
     protected $guarded = ['id'];
-    protected $casts = [
-        'status'=>'boolean'
-    ];
+
 
     public function sim()
     {
@@ -22,6 +20,6 @@ class RequestStatus extends Model
     public function partner()
     {
         # code...
-        return $this->hasOne(Partner::class,'id','partner_id');
+        return $this->hasOne(User::class,'id','user_id');
     }
 }

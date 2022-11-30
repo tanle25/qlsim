@@ -76,8 +76,11 @@ Route::group(['middleware'=>['auth','role:admin']],function(){
     Route::post('delete-wifi-network',[RequestController::class,'deletePackage']);
 });
 
+Route::get('lich-su/{sim}',[SimCardController::class,'history']);
 
-
+Route::post('update-multiple', [SimCardController::class,'updates']);
+Route::get('get-invoice-image/{invoice}',[SimCardController::class,'invoiceImage']);
+Route::post('xoa-lich-su-cho-thue-sim', [SimCardController::class,'deleteHistory']);
 
 Route::get('{any}',function(){
     return view('admin.layout.app');

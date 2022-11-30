@@ -10,13 +10,16 @@ class Invoice extends Model
 {
     use HasFactory;
     protected $guarded = ['id'];
-    protected $appends = ['model_name'];
+    protected $casts =[
+        'from_date'=>'date:d-m-Y',
+        'to_date'=>'date:d-m-Y',
+    ];
 
-    public function getModelNameAttribute()
-    {
-        $status = config('constrain.invoice');
-        return $status[$this->type];
-    }
+    // public function getModelNameAttribute()
+    // {
+    //     $status = config('constrain.invoice');
+    //     return $status[$this->type];
+    // }
 
     public function invoiceable()
     {
@@ -29,4 +32,26 @@ class Invoice extends Model
         # code...
         return $this->hasOne(Bill::class,'id','bill_id');
     }
+
+    public function sim()
+    {
+        # code...
+        return $this->hasOne(SimCard::class, 'id','sim_card_id');
+    }
+
+    public function getTypeAttribute()
+    {
+        # code...
+
+        $type = '';
+        if($this->invoiceable_type == User::class){
+            $type = $this->invoiceable->roles[0]->name;
+        }else{
+            $type = 'custommers';
+        }
+
+        return __($type);
+    }
+
+
 }

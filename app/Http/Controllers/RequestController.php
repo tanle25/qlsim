@@ -128,8 +128,8 @@ class RequestController extends Controller
     public function showRequestSim()
     {
         # code...
-        $requestest = SimRequest::all();
-        $statusRequests = RequestStatus::all();
+        $requestest = SimRequest::orderBy('created_at','DESC')->get();
+        $statusRequests = RequestStatus::orderBy('created_at','DESC')->get();
         return view('admin.pages.product.request',['requestest'=>$requestest,'statusRequest'=>$statusRequests]);
     }
 

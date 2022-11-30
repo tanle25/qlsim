@@ -9,9 +9,9 @@
 
 <div class="mb-4 border-b border-gray-200 dark:border-gray-700">
     <ul class="flex flex-wrap -mb-px text-sm font-medium text-center" id="myTab" data-tabs-toggle="#myTabContent" role="tablist">
-        <li class="mr-2" role="presentation">
+        {{-- <li class="mr-2" role="presentation">
             <button class="inline-block p-4 rounded-t-lg border-b-2" id="profile-tab" data-tabs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false"><span class="font-bold uppercase">{{__('Request sim')}}</span> </button>
-        </li>
+        </li> --}}
         <li class="mr-2" role="presentation">
             <button class="inline-block p-4 rounded-t-lg border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" id="dashboard-tab" data-tabs-target="#dashboard" type="button" role="tab" aria-controls="dashboard" aria-selected="false"> <span class="text-base uppercase">{{__('Request status change')}}</span></button>
         </li>
@@ -21,7 +21,7 @@
 <div id="myTabContent">
     <div class="hidden p-4 bg-gray-50 rounded-lg dark:bg-gray-800" id="profile" role="tabpanel" aria-labelledby="profile-tab">
 
-<div class="mx-auto px-4">
+{{-- <div class="mx-auto px-4">
     <div class="-mx-4 sm:-mx-8 py-4 overflow-x-auto px-4">
         <div class="inline-block w-full shadow-md rounded-lg overflow-hidden pb-5">
             <table id="product-table" class="w-full leading-normal dark:text-gray-400">
@@ -86,7 +86,7 @@
             </table>
         </div>
     </div>
-</div>
+</div> --}}
 </div>
     <div class="hidden p-4 bg-gray-50 rounded-lg dark:bg-gray-800" id="dashboard" role="tabpanel" aria-labelledby="dashboard-tab">
         <div class="inline-block w-full shadow-md rounded-lg overflow-hidden pb-5">
@@ -136,20 +136,28 @@
                             <p class="text-color whitespace-no-wrap">{{$resquested->created_at->format('d-m-Y H:i:s')}}</p>
                         </td>
                         <td>
-                            <p class="text-color whitespace-no-wrap">{{__($resquested->status ? 'Done' : '')}}</p>
+                            <p class="text-color whitespace-no-wrap">{{__(config("constrain.request.$resquested->status"))}}</p>
                         </td>
                         <td>
-                            <p class="text-color whitespace-no-wrap"> {{__(config("constrain.sim_status.$resquested->status.text"))  }}</a></p>
+                            <p class="text-color whitespace-no-wrap"> {{__(config("constrain.sim_status.$resquested->request.text"))  }}</a></p>
                         </td>
 
                         <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm text-right">
-                            <a href="{{url('admin/xac-nhan-yeu-cau',$resquested->id)}}" class="py-2 px-4 text-sm font-medium text-gray-900 bg-white rounded-l-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-blue-500 dark:focus:text-white">
+                            @if ($resquested->status == 0)
+                            {{-- <a href="{{url('admin/xac-nhan-yeu-cau',$resquested->id)}}" class="py-2 px-4 text-sm font-medium text-gray-900 bg-white rounded-l-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-blue-500 dark:focus:text-white">
                                 OK
+                            </a> --}}
+                            <a class="text-green-500 px-3" href="{{url('admin/xac-nhan-yeu-cau',$resquested->id)}}">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
                             </a>
-
-                            <a href="{{url('admin/xoa-yeu-cau', $resquested->id)}}" class="py-2 px-4 text-sm font-medium text-gray-900 bg-white rounded-r-md border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-blue-500 dark:focus:text-white">
+                            <a class="text-red-500 px-3" href="{{url('admin/xoa-yeu-cau', $resquested->id)}}">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            </a>
+                            {{-- <a href="{{url('admin/xoa-yeu-cau', $resquested->id)}}" class="py-2 px-4 text-sm font-medium text-gray-900 bg-white rounded-r-md border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-blue-500 dark:focus:text-white">
                             {{__('refuse')}}
-                            </a>
+                            </a> --}}
+                            @endif
+
 
                         </td>
                     </tr>

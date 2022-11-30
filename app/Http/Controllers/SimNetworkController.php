@@ -18,12 +18,20 @@ class SimNetworkController extends Controller
     {
         # code...
         $request->validate([
-            'name'=>'required|unique:sim_networks,name'
+            'name'=>'required|unique:sim_networks,name',
+            'price'=>'required|numeric',
+            'lease_price'=>'required|numeric',
+            'duration'=>'required|integer'
         ],[
             'required'=>__(':attribute required'),
-            'unique'=>__(':attribute exists')
+            'unique'=>__(':attribute exists'),
+            'numeric'=>__(':attribute invalid'),
+            'integer'=>__(':attribute invalid')
         ],[
-            'name'=>__('network name')
+            'name'=>__('network name'),
+            'price'=>__('price'),
+            'lease_price'=>__('rent price'),
+            'duration'=>__('duration')
         ]);
 
         SimNetwork::create($request->all());

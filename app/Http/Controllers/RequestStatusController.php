@@ -40,7 +40,7 @@ class RequestStatusController extends Controller
 
         RequestStatus::create([
             'sim_card_id'=>$sim->sim_card_id,
-            'partner_id'=>Auth::user()->partner_id,
+            'user_id'=>Auth::user()->id,
             'request'=>$request->status,
         ]);
         return back()->with(['success'=>__('Success')]);
@@ -50,11 +50,13 @@ class RequestStatusController extends Controller
     {
         # code...
         $request = RequestStatus::findOrFail($id);
+        $sim = $request->sim;
         DB::beginTransaction();
         try {
-            //code...
-            $request->sim()->update([
-                'request'=> $request->status,
+            $sim->update([
+                'status'=>$request->request,
+            ]);
+            $request->update([
                 'status'=>1
             ]);
             // $request->delete();
@@ -72,8 +74,9 @@ class RequestStatusController extends Controller
     {
         # code...
         $request = RequestStatus::findOrFail($id);
-
-        // $request->delete();
+        $request->update([
+            'status'=>2
+        ]);
         return back();
     }
 }

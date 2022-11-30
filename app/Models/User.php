@@ -97,6 +97,12 @@ class User extends Authenticatable
         return $this->hasMany(SimOwner::class);
     }
 
+    public function invoices()
+    {
+        # code...
+        return $this->morphMany(Invoice::class,'invoiceable');
+    }
+
 
 
 
