@@ -315,7 +315,7 @@
         <div
             class="border-black/12.5 shadow-xl dark:bg-slate-850 dark:shadow-dark-xl relative flex min-w-0 flex-col break-words rounded-2xl border-0 border-solid bg-white bg-clip-border">
             <div class="p-4 pb-0 rounded-t-4 flex justify-between">
-                <h6 class="mb-0 dark:text-white">{{__('New request wifi')}}</h6>
+                <h6 class="mb-0 dark:text-white">{{__('Yêu cầu mới')}}</h6>
                 <h6 class="dark:text-white text-sm text-blue-500"><a href="{{url('danh-sach-yeu-cau')}}">{{__('Read more')}}</a></h6>
 
             </div>
