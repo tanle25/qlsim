@@ -92,22 +92,7 @@
     </div>
 </div>
 
-<div id="dropdownMenu" class="hidden z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700">
-    <ul class="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownButton">
-      <li>
-        <a href="{{url('admin/export-hom-nay')}}" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Hôm nay</a>
-      </li>
-      <li>
-        <a href="{{url('admin/export-tuan-nay')}}" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Tuần này</a>
-      </li>
-      <li>
-        <a href="{{url('admin/export-thang-nay')}}" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Tháng này</a>
-      </li>
-      <li>
-        <a href="#" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="date-picker-modal">Tuỳ chọn</a>
-      </li>
-    </ul>
-</div>
+
 
 <div id="date-picker-modal" tabindex="-1" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 md:inset-0 h-modal md:h-full">
     <div class="relative p-4 w-full max-w-md h-full md:h-auto">
@@ -137,7 +122,7 @@
 </div>
 
 <template id="btn-template">
-    <button id="btn-export" data-dropdown-toggle="dropdownMenu" type="button" class="light-btn">{{__('Export Excel')}} <svg class="ml-2 w-4 h-4" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></button>
+    <a href="{{url('admin/export-doanh-thu')}}" id="btn-export"  class="light-btn">{{__('Export Excel')}} <svg class="ml-2 w-4 h-4" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></a>
 </template>
 @stop
 

@@ -93,12 +93,14 @@ return [
             'text'=>'dealer & colllab',
             'icon'=>'fal fa-users',
             'url'=>'admin/cong-tac-vien',
-            'role'=>'admin'
+            'role'=>'admin',
         ],
         [
             'text'=>'custommers',
             'icon'=>'fal fa-users',
-            'url'=>'khach-hang'
+            'url'=>'khach-hang',
+            'role'=>'admin'
+
         ],
         [
             'text'=>'statis',

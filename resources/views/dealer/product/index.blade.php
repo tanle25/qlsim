@@ -10,7 +10,10 @@
 
 <div class="mx-auto px-4">
 
-
+<div class="flex justify-end">
+    <a href="{{url('dealer/export-sim')}} " class="light-btn">
+        {{__('Export file')}} </a>
+</div>
         <div class="-mx-4 sm:-mx-8 py-4 overflow-x-auto px-4">
             <div class="inline-block w-full shadow-md rounded-lg overflow-hidden pb-5">
                 <table id="product-table" class="w-full leading-normal dark:text-gray-400">
@@ -25,6 +28,10 @@
                             </th>
                             <th>
                                 {{__('network')}}
+                            </th>
+
+                            <th>
+                                {{__('Created at')}}
                             </th>
 
                             <th>
@@ -53,7 +60,9 @@
                             <td>
                                 <p class="text-color whitespace-no-wrap">{{!is_null($simCard->sim->network) ? $simCard->sim->network->name : '' }}</p>
                             </td>
-
+                            <td>
+                                <p class="text-color whitespace-no-wrap">{{$simCard->created_at->format('d-m-Y')}}</p>
+                            </td>
 
                             <td>
                                 <p class="{{$simCard->expired->isPast() ? 'text-red-500' : ''}}">

@@ -75,8 +75,9 @@ Route::group(['middleware'=>['auth','role:admin']],function(){
     Route::post('update-wifi-package',[RequestController::class,'updateWifiPackage']);
     Route::post('delete-wifi-network',[RequestController::class,'deletePackage']);
 });
-
+Route::get('export-sim',[ExportController::class,'exportAll']);
 Route::get('lich-su/{sim}',[SimCardController::class,'history']);
+Route::get('export-doanh-thu',[ExportController::class,'exportStatis']);
 
 Route::post('update-multiple', [SimCardController::class,'updates']);
 Route::get('get-invoice-image/{invoice}',[SimCardController::class,'invoiceImage']);

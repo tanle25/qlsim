@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\DashBoardController;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\ExportController;
 use App\Http\Controllers\InviteController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\PakageController;
@@ -34,4 +35,5 @@ Route::group(['middleware'=>['auth','role:dealer|collab']], function(){
     Route::post('export-doanh-thu-tuy-chinh',[ExportControlller::class,'customExport']);
 
     Route::post('invite',[InviteController::class,'invite']);
+    Route::get('export-sim',[ExportController::class,'exportPartner']);
 });

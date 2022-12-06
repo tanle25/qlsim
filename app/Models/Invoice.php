@@ -15,11 +15,6 @@ class Invoice extends Model
         'to_date'=>'date:d-m-Y',
     ];
 
-    // public function getModelNameAttribute()
-    // {
-    //     $status = config('constrain.invoice');
-    //     return $status[$this->type];
-    // }
 
     public function invoiceable()
     {

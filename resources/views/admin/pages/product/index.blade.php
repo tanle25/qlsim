@@ -31,6 +31,9 @@
                     class="hidden">
             </form>
 
+            <a href="{{url('admin/export-sim')}} " class="light-btn">
+                {{__('Export file')}} </a>
+
         </div>
 
         <div class="-mx-4 sm:-mx-8 py-4 overflow-x-auto px-4">
@@ -58,6 +61,9 @@
                             </th>
                             <th class=" whitespace-nowrap">
                                 {{__('type')}}
+                            </th>
+                            <th class=" whitespace-nowrap">
+                                {{__('Created at')}}
                             </th>
                             <th class=" whitespace-nowrap">
                                 {{__('Ngày hết hạn')}}
@@ -101,6 +107,10 @@
                                     @if ($simCard->is_rent )
                                         {{$simCard->invoice->last()->type ?? ''}}
                                     @endif
+                            </td>
+
+                            <td>
+                                {{$simCard->created_at->format('d-m-Y')}}
                             </td>
 
                             <td>

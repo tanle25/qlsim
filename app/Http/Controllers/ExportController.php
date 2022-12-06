@@ -2,10 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\ExportPartnerSim;
+use Carbon\Carbon;
+use App\Models\SimCard;
+use App\Exports\ExportSim;
+use Illuminate\Http\Request;
 use App\Exports\StatisExport;
 use App\Exports\StatisExportToday;
-use Carbon\Carbon;
-use Illuminate\Http\Request;
+use App\Models\Invoice as ModelsInvoice;
+use Auth;
+use Invoice;
 use Maatwebsite\Excel\Facades\Excel;
 
 class ExportController extends Controller
@@ -48,5 +54,28 @@ class ExportController extends Controller
         $end = Carbon::createFromFormat('d/m/Y',$ranger[1])->toDateString();
         return (new StatisExport($start, $end))->download("doanh-thu-tu-{$start}-den-{$end}.xlsx");
 
+    }
+
+    public function exportStatis()
+    {
+        # code...
+        $date = Carbon::today()->toDateString();
+        // dd(ModelsInvoice::all());
+        $invoices = ModelsInvoice::all();
+        return Excel::download(new StatisExport($invoices),"$date.xlsx");
+    }
+
+    public function exportAll()
+    {
+        # code...
+        $sims = SimCard::all();
+        return Excel::download(new ExportSim($sims),'danh-sach-sim.xlsx');
+    }
+
+    public function exportPartner()
+    {
+        # code...
+        $sims = Auth::user()->sims;
+        return Excel::download(new ExportPartnerSim($sims),'danh-sach-sim.xlsx');
     }
 }

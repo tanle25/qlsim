@@ -311,6 +311,7 @@
             </div>
         </div>
     </div>
+
     <div class="w-full max-w-full px-3 mt-0 lg:w-5/12 lg:flex-none">
         <div
             class="border-black/12.5 shadow-xl dark:bg-slate-850 dark:shadow-dark-xl relative flex min-w-0 flex-col break-words rounded-2xl border-0 border-solid bg-white bg-clip-border">

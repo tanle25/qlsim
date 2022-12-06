@@ -5,44 +5,54 @@ namespace App\Exports;
 use App\Models\Invoice;
 use Maatwebsite\Excel\Concerns\FromQuery;
 use Maatwebsite\Excel\Concerns\Exportable;
+use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithMapping;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
 use Maatwebsite\Excel\Concerns\WithColumnFormatting;
 use PhpOffice\PhpSpreadsheet\Shared\Date;
 
-class StatisExport implements FromQuery, WithMapping, WithHeadings, WithColumnFormatting
+class StatisExport implements FromCollection, WithMapping, WithHeadings, WithColumnFormatting
 {
     /**
     * @return \Illuminate\Support\Collection
     */
     use Exportable;
 
-    public function __construct(string $start, string $end)
+    protected $invoices;
+
+    public function __construct($invoices)
     {
-        $this->start = $start;
-        $this->end = $end;
+        $this->invoices = $invoices;
     }
-    public function query()
+    public function collection()
     {
-        // dd($this->start, $this->end);
-        return Invoice::whereBetween('created_at',[$this->start, $this->end]);
+        return Invoice::all();
     }
 
     public function map($invoice): array
     {
         # code...
         return [
-            __($invoice->model_name),
-            $invoice->origin_price,
-            $invoice->lease_price,
+            $invoice->invoiceable->name,
+            $invoice->type,
+            $invoice->sim->phone,
+            $invoice->sim->network->price,
+            $invoice->price,
             Date::dateTimeToExcel($invoice->created_at),
 
         ];
     }
     public function headings(): array
     {
-        return [__('type'), __('origin price'), __('rent price'),__('Created at')];
+        return [
+            'Khách hàng',
+            'Loại',
+            'Số điện thoại',
+            'Giá nhập',
+            'Giá cho thuê',
+            'Ngày tạo'
+        ];
     }
     public function columnFormats(): array
     {

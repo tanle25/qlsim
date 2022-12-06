@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\ExportSim;
 use Upload;
 use Carbon\Carbon;
 use App\Models\Bill;
@@ -446,5 +447,6 @@ class SimCardController extends Controller
         Invoice::whereIn('id', $request->id)->delete();
         return back();
     }
+
 
 }
