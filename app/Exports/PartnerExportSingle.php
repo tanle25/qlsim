@@ -18,6 +18,7 @@ class PartnerExportSingle implements  FromQuery, WithMapping, WithHeadings, With
     /**
     * @return \Illuminate\Support\Collection
     */
+
     public function query()
     {
         //

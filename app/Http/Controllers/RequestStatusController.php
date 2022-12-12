@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\RequestStatus;
+use App\Models\History;
 use App\Models\SimCard;
 use App\Models\SimOwner;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use App\Models\RequestStatus;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class RequestStatusController extends Controller
 {
@@ -53,20 +54,26 @@ class RequestStatusController extends Controller
         $sim = $request->sim;
         DB::beginTransaction();
         try {
+            History::create([
+                'sim_card_id'=>$sim->id,
+                'requester'=>$request->id,
+                'user_id'=>Auth::user()->id,
+                'action'=>1,
+                'content'=> $sim->load('network')->toJson()
+            ]);
             $sim->update([
                 'status'=>$request->request,
             ]);
+            if($request->request == 4){
+                $sim->partner->delete();
+            }
             $request->update([
                 'status'=>1
             ]);
-            // $request->delete();
             DB::commit();
         } catch (\Throwable $th) {
-            //throw $th;
             DB::rollBack();
         }
-
-
         return back();
     }
 

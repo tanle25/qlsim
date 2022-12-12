@@ -91,7 +91,6 @@ class AuthController extends Controller
             'password_confirmation'=>__('Confirm Password')
         ]);
         $request->request->add(['status'=>0]);
-
         $request->merge(['password'=>Hash::make($request->password)]);
         $user = User::create($request->all());
         Mail::to($user->email)->send(new VerifyEmail($user));

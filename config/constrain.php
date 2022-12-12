@@ -63,6 +63,14 @@ return[
         0=>'no process',
         1=>'Done',
         2=>'refuse'
+    ],
+
+    'action'=>[
+        0=>'add sim',
+        1=>'edit sim',
+        3=>'delete sim',
+        4=>'rent',
+        5=>'extend'
     ]
 
 ];

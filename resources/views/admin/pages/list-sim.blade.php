@@ -27,12 +27,8 @@
                     <th>
                         {{__('dealer')}}
                     </th>
-
                     <th>
-                        {{__('custommers')}}
-                    </th>
-                    <th>
-                        {{__('pakage')}}
+                        {{__('Ngày thuê')}}
                     </th>
                     <th>
                         {{__('Expire date')}}
@@ -66,21 +62,16 @@
                         </del>
                         </div>
                     </td>
+                    {{-- @dd($sim) --}}
                     <td>
-                        <p class="text-color whitespace-no-wrap">{{$sim->partner->name}}</p>
+                        <p class="text-color whitespace-no-wrap">{{$sim->ownerable->name}}</p>
                     </td>
                     <td>
-                        <p class="text-color whitespace-no-wrap">{{$sim->sim->status == 2 ? $sim->sim->bill->customer->name : ''}}</p>
+                        <p class="text-color whitespace-no-wrap">{{$sim->created_at->format('d-m-Y')}}</p>
                     </td>
                     <td>
-                        <p class="text-color whitespace-no-wrap">{{$sim->sim->status == 2 ? $sim->sim->bill->packageable->name : ''}}</p>
-                        {{-- @dd($simCard->partner->name) --}}
-
-                    </td>
-                    <td>
-                        <p class="{{ $sim->sim->status == 2 ? getDateColor($sim->sim->bill->end_at) : ''}} whitespace-no-wrap">
-                            {{$sim->sim->status == 2 ? $sim->sim->bill->end_at : ''}}
-
+                        <p class="{{$sim->expired->isPast() ? 'text-red-400' : ''}} whitespace-no-wrap">
+                            {{$sim->expired->format('d-m-Y')}}
                         </p>
                     </td>
 
@@ -89,7 +80,6 @@
                             {{__(config("constrain.sim_status.".$sim->sim->status.".text"))}}
                         </p>
                     </td>
-
                     <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm text-right">
                         <button type="button" class="inline-block text-gray-500 hover:text-gray-700 btn-dropdown" data-dropdown-toggle="dropdownLeft" data-dropdown-placement="left"
                         >
@@ -110,7 +100,8 @@
 </div>
 
 <template id="btn-template">
-    <button id="btn-request" type="button" class="light-btn" data-modal-toggle="add-pakage">{{__('Add')}}</button>
+    <button  type="button" class="btn-request light-btn" data-modal-toggle="add-pakage">{{__('Add')}}</button>
+    <a href="{{ url('admin/export-sim-partner',$user->id)}}" class="btn-request light-btn">{{__('Export')}}</a>
 </template>
 @stop
 @section('js')
@@ -129,7 +120,7 @@
         var button = temp.content.cloneNode(true);
         $('#product-table_filter').addClass('flex');
         $('#product-table_filter').append(button)
-        $('#btn-request').css({margin:0, 'margin-left':10});
+        $('.btn-request').css({margin:0, 'margin-left':10});
     </script>
 
 @stop

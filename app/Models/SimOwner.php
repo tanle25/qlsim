@@ -21,11 +21,23 @@ class SimOwner extends Model
         );
     }
 
-    public function partner()
+    public function ownerable()
     {
         # code...
-        return $this->hasOne(User::class,'id','user_id');
+        return $this->morphTo();
     }
+
+    public function getTypeAttribute()
+    {
+        # code...
+        return $this->ownerable_type == User::class ? 'Đại lý' :'Khách lẻ';
+    }
+
+    // public function partner()
+    // {
+    //     # code...
+    //     return $this->hasOne(User::class,'id','user_id');
+    // }
     public function sim()
     {
         # code...

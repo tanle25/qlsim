@@ -94,7 +94,7 @@ class User extends Authenticatable
     public function sims()
     {
         # code...
-        return $this->hasMany(SimOwner::class);
+        return $this->morphMany(SimOwner::class,'ownerable');
     }
 
     public function invoices()

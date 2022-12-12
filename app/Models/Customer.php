@@ -26,4 +26,10 @@ class Customer extends Model
         # code...
         return $this->morphMany(Invoice::class,'invoiceable');
     }
+
+    public function sims()
+    {
+        # code...
+        return $this->morphMany(SimOwner::class,'ownerable');
+    }
 }

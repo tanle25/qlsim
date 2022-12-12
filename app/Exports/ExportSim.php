@@ -31,7 +31,12 @@ class ExportSim implements FromCollection, WithHeadings, WithMapping
             $sim->phone,
             $sim->iccid,
             $sim->created_at,
-            $sim->network->name ?? ''
+            $sim->network->name ?? '',
+            $sim->partner->ownerable->name ?? '',
+            $sim->partner->type ?? '',
+            $sim->partner->created_at ?? '',
+            $sim->partner->expired ?? ''
+
         ];
     }
 
@@ -39,7 +44,7 @@ class ExportSim implements FromCollection, WithHeadings, WithMapping
     {
         # code...
         return[
-            'Số điện thoại','ICCID','Ngày tạo','Nhà mạng'
+            'Số điện thoại','ICCID','Ngày tạo','Nhà mạng','Khách hàng','Loại khách hàng','Ngày thuê', 'Ngày hết hạn'
         ];
     }
 }

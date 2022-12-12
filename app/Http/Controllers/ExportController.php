@@ -6,6 +6,7 @@ use App\Exports\ExportPartnerSim;
 use Carbon\Carbon;
 use App\Models\SimCard;
 use App\Exports\ExportSim;
+use App\Exports\ExportSimOfPartner;
 use Illuminate\Http\Request;
 use App\Exports\StatisExport;
 use App\Exports\StatisExportToday;
@@ -77,5 +78,12 @@ class ExportController extends Controller
         # code...
         $sims = Auth::user()->sims;
         return Excel::download(new ExportPartnerSim($sims),'danh-sach-sim.xlsx');
+    }
+
+    public function exportPartNer2($id)
+    {
+        # code...
+
+        return Excel::download(new ExportSimOfPartner($id),'danh-sach-sim.xlsx');
     }
 }

@@ -19,6 +19,7 @@ use App\Models\SimRequest;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Imports\ImportSimCard;
+use App\Models\History;
 use App\Models\RequestStatus;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\App;
@@ -49,7 +50,6 @@ class SimCardController extends Controller
             $file = $request->file('file');
             Excel::import(new ImportSim, $file);
         } else {
-            dd($request->all());
         }
         return back();
     }
@@ -70,10 +70,16 @@ class SimCardController extends Controller
             'network' => __('network')
         ]);
 
-        SimCard::create([
+        $sim = SimCard::create([
             'phone' => $request->number,
             'iccid' => $request->iccid,
             'sim_network_id' => $request->network
+        ]);
+
+        History::create([
+            'sim_card_id'=>$sim->id,
+            'user_id'=>Auth::user()->id,
+            'action'=>0
         ]);
         return back();
     }
@@ -105,11 +111,20 @@ class SimCardController extends Controller
             $oldIccid = $sim->iccid;
         }
 
+        $oldSim = $sim->load('network')->toJson();
+
         $sim->update([
             'phone' => $request->number,
             'iccid' => $request->iccid,
             'old_iccid' => $oldIccid,
             'sim_network_id' => $request->network,
+        ]);
+
+        History::create([
+            'sim_card_id'=>$sim->id,
+            'user_id'=>Auth::user()->id,
+            'action'=>1,
+            'content'=> $oldSim
         ]);
         return back();
     }
@@ -145,6 +160,12 @@ class SimCardController extends Controller
                 ]);
                 SimOwner::where('sim_card_id', $sim->id)->delete();
             }
+            History::create([
+                'sim_card_id'=>$sim->id,
+                'user_id'=>Auth::user()->id,
+                'action'=>1,
+                'content'=> $sim->load('network')->toJson()
+            ]);
             $sim->update([
                 'status' => $request->status
             ]);
@@ -177,19 +198,31 @@ class SimCardController extends Controller
         $image = Upload::store($request->file('image'));
         foreach ($sims as $sim) {
             # code...
-            $sim->partner()->updateOrCreate(
-                [
-                ],
-                [
-                    'user_id' => $request->partner,
-                    'expired'=>Carbon::today()->addMonths($sim->network->duration)->toDateString(),
-                    'origin_price' => $sim->network->lease_price,
-                ]
-            );
+            // $sim->partner()->updateOrCreate(
+            //     [
+            //     ],
+            //     [
+            //         'user_id' => $request->partner,
+            //         'expired'=>Carbon::today()->addMonths($sim->network->duration)->toDateString(),
+            //         'origin_price' => $sim->network->lease_price,
+            //     ]
+            // );
+            $user->sims()->updateOrCreate([],[
+                'sim_card_id'=>$sim->id,
+                'expired'=>Carbon::today()->addMonths($sim->network->duration)->toDateString(),
+                'origin_price' => $sim->network->lease_price,
+            ]);
+            History::create([
+                'sim_card_id'=>$sim->id,
+                'user_id'=>Auth::user()->id,
+                'action'=>4,
+                'content'=> $sim->load('network')->toJson()
+            ]);
             $sim->update([
                 'is_rent'=>true,
                 'expired'=>Carbon::today()->addMonths($sim->network->duration)->toDateString()
             ]);
+
 
             $user->invoices()->create([
                 'sim_card_id'=>$sim->id,
@@ -234,6 +267,19 @@ class SimCardController extends Controller
                 'image' => $imageUrl,
                 'from_date'=> Carbon::today()->toDateString(),
                 'to_date'=>Carbon::today()->addMonths($sim->network->duration)->toDateString()
+            ]);
+
+            History::create([
+                'sim_card_id'=>$sim->id,
+                'user_id'=>Auth::user()->id,
+                'action'=>4,
+                'content'=> $sim->load('network')->toJson()
+            ]);
+            $customer->sims()->create([
+                'sim_card_id'=>$sim->id,
+                'expired'=>Carbon::today()->addMonths($sim->network->duration)->toDateString(),
+                'origin_price'=>$sim->network->lease_price,
+                // 'lease_price'=>$sim->nerwork->lease_price
             ]);
             $sim->update([
                 'is_rent'=>true,
@@ -299,10 +345,23 @@ class SimCardController extends Controller
                 'from_date'=> Carbon::today()->toDateString(),
                 'to_date'=>Carbon::today()->addMonths($sim->network->duration)->toDateString()
             ]);
+            History::create([
+                'sim_card_id'=>$sim->id,
+                'user_id'=>Auth::user()->id,
+                'action'=>4,
+                'content'=> $sim->load('network')->toJson()
+            ]);
+            $customer->sims()->create([
+                'sim_card_id'=>$sim->id,
+                'expired'=>Carbon::today()->addMonths($sim->network->duration)->toDateString(),
+                'origin_price'=>$sim->network->lease_price,
+                // 'lease_price'=>$sim->nerwork->lease_price
+            ]);
             $sim->update([
                 'is_rent'=>true,
                 'expired'=>Carbon::today()->addMonths($sim->network->duration)->toDateString()
             ]);
+
             DB::commit();
         } catch (\Throwable $th) {
             //throw $th;
@@ -324,9 +383,7 @@ class SimCardController extends Controller
     public function showRequest(Request $request)
     {
         # code...
-        // $all = SimCard::whereNotNull(['origin_price', 'lease_price'])->doesntHave('partner')->doesntHave('request')->get();
         $requests = RequestStatus::where('user_id', Auth::user()->id)->get();
-
         return view('dealer.product.request', [  'requestes' => $requests]);
     }
 
@@ -391,6 +448,12 @@ class SimCardController extends Controller
                 'from_date'=> $invoice->from_date,
                 'to_date'=>Carbon::parse($invoice->to_date)->addMonths($sim->network->duration)->toDateString()
             ]);
+            History::create([
+                'sim_card_id'=>$sim->id,
+                'user_id'=>Auth::user()->id,
+                'action'=>5,
+                'content'=> $sim->load('network')->toJson()
+            ]);
             $sim->update([
                 'expired'=>Carbon::today()->addMonths($sim->network->duration)->toDateString()
             ]);
@@ -418,7 +481,14 @@ class SimCardController extends Controller
     public function delete($id)
     {
         # code...
-        $sim = SimCard::findOrFail($id)->delete();
+        $sim = SimCard::findOrFail($id);
+        History::create([
+            'sim_card_id'=>$sim->id,
+            'user_id'=>Auth::user()->id,
+            'action'=>3,
+            'content'=> $sim->load('network')->toJson()
+        ]);
+        $sim->delete();
         return back()->with(['success' => __('Delete successfully')]);
     }
 
@@ -445,6 +515,37 @@ class SimCardController extends Controller
         # code...
         // dd($request->all());
         Invoice::whereIn('id', $request->id)->delete();
+        return back();
+    }
+
+    public function historyChange(SimCard $sim)
+    {
+        # code...
+        // dd($sim->histories);
+        return view('admin.pages.history-change',['histories'=>$sim->histories->load('sim.network')]);
+    }
+
+    public function deleteHistoryChange(History $history)
+    {
+        # code...
+        $history->delete();
+        return back();
+    }
+
+    public function updateExpired(Request $request)
+    {
+        # code...
+        // dd($request->all());
+        $sim= SimCard::find($request->sim);
+        $sim->update([
+            'expired'=>$request->date
+        ]);
+        $owner = SimOwner::where('sim_card_id',$sim->id)->first();
+        if($owner){
+            $owner->update([
+                'expired'=>$request->date
+            ]);
+        }
         return back();
     }
 

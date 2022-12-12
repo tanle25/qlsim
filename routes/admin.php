@@ -74,6 +74,10 @@ Route::group(['middleware'=>['auth','role:admin']],function(){
     Route::get('get-wifi-package/{id}',[RequestController::class,'editPackage']);
     Route::post('update-wifi-package',[RequestController::class,'updateWifiPackage']);
     Route::post('delete-wifi-network',[RequestController::class,'deletePackage']);
+    Route::get('lich-su-thay-doi/{sim}',[SimCardController::class,'historyChange']);
+    Route::get('xoa-lich-su-thay-doi/{history}',[SimCardController::class,'deleteHistoryChange']);
+    Route::post('cap-nhat-han-su-dung',[SimCardController::class,'updateExpired']);
+    Route::get('export-sim-partner/{id}',[ExportController::class,'exportPartNer2']);
 });
 Route::get('export-sim',[ExportController::class,'exportAll']);
 Route::get('lich-su/{sim}',[SimCardController::class,'history']);

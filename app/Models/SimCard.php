@@ -89,6 +89,12 @@ class SimCard extends Model
         return $this->hasOne(SimNetwork::class,'id','sim_network_id');
     }
 
+    public function histories()
+    {
+        # code...
+        return $this->hasMany(History::class);
+    }
+
 
 
 }
