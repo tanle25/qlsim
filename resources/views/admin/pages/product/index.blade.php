@@ -177,8 +177,7 @@
         <li class="context-menu-item change-status" data-status="3">
 
             <a href="#"
-                class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-white">{{__('temporarily
-                cut')}}</a>
+                class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-white">{{__('temporarily cut')}}</a>
         </li>
         <li class="context-menu-item change-status" data-status="4">
 
