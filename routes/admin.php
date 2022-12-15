@@ -8,6 +8,7 @@ use App\Http\Controllers\RequestController;
 use App\Http\Controllers\SimCardController;
 use App\Http\Controllers\DashBoardController;
 use App\Http\Controllers\ExportController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\RequestStatusController;
 use App\Http\Controllers\SimNetworkController;
@@ -80,6 +81,11 @@ Route::group(['middleware'=>['auth','role:admin']],function(){
     Route::post('cap-nhat-han-su-dung/{sim}',[SimCardController::class,'updateExpired']);
     Route::post('cap-nhat-ngay-cho-thue/{sim}',[SimCardController::class,'updateRentedAt']);
     Route::post('cap-nhat-ngay-them/{sim}',[SimCardController::class,'updateCreated']);
+    Route::get('lich-su-thay-doi',[HomeController::class,'history']);
+    Route::get('sim-da-xoa',[HomeController::class,'trash']);
+    Route::get('khoi-phuc-sim-da-xoa/{sim}',[HomeController::class,'restore']);
+    Route::get('xoa-vinh-vien-sim/{sim}',[HomeController::class,'delete']);
+
 
 
 });

@@ -68,7 +68,7 @@ return[
     'action'=>[
         0=>'Thêm sim',
         1=>'Sửa sim',
-        3=>'delete sim',
+        3=>'Xoá',
         4=>'Cho thuê',
         5=>'Gia hạn',
         6=>'Huỷ'

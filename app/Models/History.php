@@ -14,7 +14,7 @@ class History extends Model
     {
         # code...
         // return $this->hasOne(SimCard::class,'id','sim_card_id');
-        return $this->belongsTo(SimCard::class,'sim_card_id','id');
+        return $this->belongsTo(SimCard::class,'sim_card_id','id')->withTrashed();
     }
 
     public function request()

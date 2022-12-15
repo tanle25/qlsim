@@ -51,6 +51,21 @@ return [
                     'role'=>['dealer','collab']
                 ],
 
+                [
+                    'text'=>'Lịch sử thay đổi',
+                    'icon'=>'fal fa-circle',
+                    'active_icon'=>'fad fa-circle',
+                    'url'=>'admin/lich-su-thay-doi',
+                    'role'=>'admin'
+                ],
+                [
+                    'text'=>'Sim đã xoá',
+                    'icon'=>'fal fa-circle',
+                    'active_icon'=>'fad fa-circle',
+                    'url'=>'admin/sim-da-xoa',
+                    'role'=>'admin'
+                ],
+
                 // [
                 //     'text'=>'pakage',
                 //     'icon'=>'fal fa-circle',

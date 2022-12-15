@@ -57,7 +57,7 @@ class SimCardController extends Controller
     {
         # code...
         $request->validate([
-            'number' => 'required|digits:10|unique:sim_cards,phone',
+            'number' => 'required|digits_between:10,15|unique:sim_cards,phone',
             'iccid' => 'required|unique:sim_cards,iccid',
             'network' => 'required'
         ], [
