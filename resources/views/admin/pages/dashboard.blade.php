@@ -121,7 +121,7 @@
         </div>
     </div>
 
-    <div class="w-full max-w-full px-3 mb-6 sm:w-1/2 sm:flex-none xl:mb-2 lg:w-1/3 xl:w-1/4">
+    {{-- <div class="w-full max-w-full px-3 mb-6 sm:w-1/2 sm:flex-none xl:mb-2 lg:w-1/3 xl:w-1/4">
         <div
             class="relative flex flex-col min-w-0 break-words bg-white shadow-xl dark:bg-slate-850 dark:shadow-dark-xl rounded-2xl bg-clip-border">
             <div class="flex-auto p-4">
@@ -143,7 +143,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
 
     <div class="w-full max-w-full px-3 mb-6 sm:w-1/2 sm:flex-none xl:mb-2 lg:w-1/3 xl:w-1/4">
         <div

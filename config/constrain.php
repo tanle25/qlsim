@@ -66,11 +66,12 @@ return[
     ],
 
     'action'=>[
-        0=>'add sim',
-        1=>'edit sim',
+        0=>'Thêm sim',
+        1=>'Sửa sim',
         3=>'delete sim',
-        4=>'rent',
-        5=>'extend'
+        4=>'Cho thuê',
+        5=>'Gia hạn',
+        6=>'Huỷ'
     ]
 
 ];

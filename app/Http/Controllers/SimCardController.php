@@ -198,17 +198,9 @@ class SimCardController extends Controller
         $image = Upload::store($request->file('image'));
         foreach ($sims as $sim) {
             # code...
-            // $sim->partner()->updateOrCreate(
-            //     [
-            //     ],
-            //     [
-            //         'user_id' => $request->partner,
-            //         'expired'=>Carbon::today()->addMonths($sim->network->duration)->toDateString(),
-            //         'origin_price' => $sim->network->lease_price,
-            //     ]
-            // );
-            $user->sims()->updateOrCreate([],[
+            $user->sims()->updateOrCreate([
                 'sim_card_id'=>$sim->id,
+            ],[
                 'expired'=>Carbon::today()->addMonths($sim->network->duration)->toDateString(),
                 'origin_price' => $sim->network->lease_price,
             ]);
@@ -532,11 +524,11 @@ class SimCardController extends Controller
         return back();
     }
 
-    public function updateExpired(Request $request)
+    public function updateExpired(SimCard $sim, Request $request)
     {
         # code...
         // dd($request->all());
-        $sim= SimCard::find($request->sim);
+        // $sim= SimCard::find($request->sim);
         $sim->update([
             'expired'=>$request->date
         ]);
@@ -546,6 +538,27 @@ class SimCardController extends Controller
                 'expired'=>$request->date
             ]);
         }
+        return back();
+    }
+
+    public function updateRentedAt(SimCard $sim, Request $request)
+    {
+        # code...
+        $owner = SimOwner::where('sim_card_id',$sim->id)->first();
+        if($owner){
+            $owner->update([
+                'created_at'=>$request->date
+            ]);
+        }
+        return back();
+    }
+
+    public function updateCreated(SimCard $sim, Request $request)
+    {
+        # code...
+        $sim->update([
+            'created_at'=>$request->date
+        ]);
         return back();
     }
 

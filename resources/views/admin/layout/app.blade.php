@@ -5,7 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="apple-touch-icon" sizes="76x76" href="{{asset('backend/assets/img/apple-icon.png')}}" />
-    <link rel="icon" type="image/png" href="{{asset('backend/assets/img/laravel-logo.png')}}" />
+    <link rel="icon" type="image/png" href="{{asset('logo.jpg')}}" />
     <title>{{env('APP_NAME')}}</title>
     <!--     Fonts and icons     -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
@@ -38,7 +38,7 @@
                 sidenav-close></i>
             <a class="block px-8 py-6 m-0 text-size-sm whitespace-nowrap dark:text-white text-slate-700"
                 href="{{url('admin')}}" target="_blank">
-                <img src="{{asset('backend/assets/img/laravel-logo.png')}}"
+                <img src="{{asset('logo.jpg')}}"
                     class="inline h-full max-w-full transition-all duration-200 ease-nav-brand max-h-8"
                     alt="main_logo" />
                 {{-- <img src="{{asset('backend/assets/img/logo-ct.png')}}"

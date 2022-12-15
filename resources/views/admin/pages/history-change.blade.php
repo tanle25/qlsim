@@ -60,7 +60,7 @@
                         <p class="text-color whitespace-no-wrap">{{$history->request->user->name ?? ''}}</p>
                     </td>
                     <td>
-                        <p class="text-color whitespace-no-wrap">{{config("constrain.action.$history->action")}}</p>
+                        <p class="text-color whitespace-no-wrap">{{__(config("constrain.action.$history->action")) }}</p>
                     </td>
                     <td>
                         <p class="text-color whitespace-no-wrap">{{$history->created_at->format('d-m-Y')}}</p>

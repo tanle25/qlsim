@@ -101,9 +101,9 @@
         <li class="context-menu-item" data-status="1">
             <a href="#" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-white">{{__('active')}}</a>
         </li>
-        {{-- <li class="context-menu-item" data-status="4">
+        <li class="context-menu-item" data-status="4">
             <a href="#" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-white">{{__('Cancel')}}</a>
-        </li> --}}
+        </li>
         <li class="context-menu-item" data-status="3">
             <a href="#" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-white">{{__('temporarily cut')}}</a>
         </li>

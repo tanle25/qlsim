@@ -114,32 +114,32 @@ return [
         //     'url'=>'dealer/doanh-thu',
         //     'role'=>['dealer','collab']
         // ],
-        [
-            'text'=>'register wifi',
-            'icon'=>'fal fa-router',
-            'sub'=>[
-                [
-                    'text'=>'list',
-                    'icon'=>'fal fa-circle',
-                    'active_icon'=>'fad fa-circle',
-                    'url'=>'danh-sach-yeu-cau',
-                ],
-                [
-                    'text'=>'network',
-                    'icon'=>'fal fa-circle',
-                    'active_icon'=>'fad fa-circle',
-                    'url'=>'admin/nha-mang',
-                    'role'=>'admin'
-                ],
-                [
-                    'text'=>'pakage',
-                    'icon'=>'fal fa-circle',
-                    'active_icon'=>'fad fa-circle',
-                    'url'=>'admin/goi-cuoc-wifi',
-                    'role'=>'admin'
-                ],
-            ]
-        ],
+        // [
+        //     'text'=>'register wifi',
+        //     'icon'=>'fal fa-router',
+        //     'sub'=>[
+        //         [
+        //             'text'=>'list',
+        //             'icon'=>'fal fa-circle',
+        //             'active_icon'=>'fad fa-circle',
+        //             'url'=>'danh-sach-yeu-cau',
+        //         ],
+        //         [
+        //             'text'=>'network',
+        //             'icon'=>'fal fa-circle',
+        //             'active_icon'=>'fad fa-circle',
+        //             'url'=>'admin/nha-mang',
+        //             'role'=>'admin'
+        //         ],
+        //         [
+        //             'text'=>'pakage',
+        //             'icon'=>'fal fa-circle',
+        //             'active_icon'=>'fad fa-circle',
+        //             'url'=>'admin/goi-cuoc-wifi',
+        //             'role'=>'admin'
+        //         ],
+        //     ]
+        // ],
 
         ['header'=>'user manager','role'=>['admin','dealer']],
 
