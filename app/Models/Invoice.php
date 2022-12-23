@@ -31,7 +31,7 @@ class Invoice extends Model
     public function sim()
     {
         # code...
-        return $this->hasOne(SimCard::class, 'id','sim_card_id');
+        return $this->hasOne(SimCard::class, 'id','sim_card_id')->withTrashed();
     }
 
     public function getTypeAttribute()
