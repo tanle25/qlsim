@@ -12,8 +12,7 @@ class CustomerController extends Controller
     public function index(Request $request)
     {
         # code...
-        $custommers = Customer::with('bills')->get();
-        // dd($custommers->first()->bills);
+        $custommers = Customer::all();
         return view('admin.customer.index',['customers'=>$custommers]);
     }
 }
