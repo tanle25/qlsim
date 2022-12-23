@@ -18,7 +18,7 @@ class Bill extends Model
     public function modelable()
     {
         # code...
-        return $this->morphTo();
+        return $this->morphTo()->withTrashed();
     }
 
     public function partner()

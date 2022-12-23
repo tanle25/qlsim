@@ -27,12 +27,6 @@
                                 {{__('pakage name')}}
                             </th>
                             <th>
-                                {{__('Ngày thuê')}}
-                            </th>
-                            <th>
-                                {{__('Ngày hết hạn')}}
-                            </th>
-                            <th>
                                 {{__('Facebook')}}
                             </th>
                             {{-- <th class="nosort"></th> --}}
@@ -40,11 +34,11 @@
                     </thead>
                     <tbody>
                         @foreach ($customers as $customer )
-                        @foreach ($customer->invoice as $bill )
+                        @foreach ($customer->bills as $bill )
                         {{-- @dd($bill) --}}
                         <tr>
                             @if ($loop->first)
-                               <td rowspan="{{$customer->invoice->count()}}">
+                               <td rowspan="{{$customer->bills->count()}}">
                                 <div class="ml-3">
                                     <p class="text-color whitespace-no-wrap">
                                         {{$customer->name}}
@@ -53,22 +47,16 @@
                             </td>
                             @endif
                             <td>
-                                <p class="text-color whitespace-no-wrap">{{$bill->sim->phone}}</p>
+                                <p class="text-color whitespace-no-wrap">{{$bill->modelable->phone}}</p>
                             </td>
                             <td>
-                                <p class="text-color whitespace-no-wrap">{{$bill->sim->iccid}}</p>
+                                <p class="text-color whitespace-no-wrap">{{$bill->modelable->iccid}}</p>
                             </td>
                             <td>
-                                <p class="text-color whitespace-no-wrap">{{$bill->sim->network->name}}</p>
-                            </td>
-                            <td>
-                                <p class="text-color whitespace-no-wrap">{{$bill->from_date->format('d-m-Y')}}</p>
-                            </td>
-                            <td>
-                                <p class="text-color whitespace-no-wrap">{{$bill->to_date->format('d-m-Y')}}</p>
+                                <p class="text-color whitespace-no-wrap">{{$bill->packageable->name}}</p>
                             </td>
                             @if ($loop->first)
-                                <td rowspan="{{$customer->invoice->count()}}">
+                                <td rowspan="{{$customer->bills->count()}}">
                                 <p class="text-color whitespace-no-wrap"><a class="text-blue-500 font-medium hover:font-normal hover:text-blue-400" href="{{$customer->facebook}}" target="_blank" rel="noopener noreferrer"> {{$customer->facebook}}</a></p>
                             </td>
                             @endif
