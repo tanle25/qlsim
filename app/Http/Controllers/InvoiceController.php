@@ -13,7 +13,7 @@ class InvoiceController extends Controller
     public function index()
     {
         # code...
-        $invoices = Invoice::all();
+        $invoices = Invoice::with('sim')->get();
         return view('admin.pages.statis',['statis'=>$invoices]);
     }
 
