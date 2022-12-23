@@ -27,6 +27,12 @@
                                 {{__('pakage name')}}
                             </th>
                             <th>
+                                {{__('Ngày thuê')}}
+                            </th>
+                            <th>
+                                {{__('Ngày hết hạn')}}
+                            </th>
+                            <th>
                                 {{__('Facebook')}}
                             </th>
                             {{-- <th class="nosort"></th> --}}
@@ -54,6 +60,12 @@
                             </td>
                             <td>
                                 <p class="text-color whitespace-no-wrap">{{$bill->sim->network->name}}</p>
+                            </td>
+                            <td>
+                                <p class="text-color whitespace-no-wrap">{{$bill->from_date->format('d-m-Y')}}</p>
+                            </td>
+                            <td>
+                                <p class="text-color whitespace-no-wrap">{{$bill->to_date->format('d-m-Y')}}</p>
                             </td>
                             @if ($loop->first)
                                 <td rowspan="{{$customer->invoice->count()}}">
