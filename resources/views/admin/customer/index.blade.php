@@ -34,11 +34,11 @@
                     </thead>
                     <tbody>
                         @foreach ($customers as $customer )
-                        @foreach ($customer->bills as $bill )
+                        @foreach ($customer->invoice as $bill )
                         {{-- @dd($bill) --}}
                         <tr>
                             @if ($loop->first)
-                               <td rowspan="{{$customer->bills->count()}}">
+                               <td rowspan="{{$customer->invoice->count()}}">
                                 <div class="ml-3">
                                     <p class="text-color whitespace-no-wrap">
                                         {{$customer->name}}
@@ -47,16 +47,16 @@
                             </td>
                             @endif
                             <td>
-                                <p class="text-color whitespace-no-wrap">{{$bill->modelable->phone}}</p>
+                                <p class="text-color whitespace-no-wrap">{{$bill->sim->phone}}</p>
                             </td>
                             <td>
-                                <p class="text-color whitespace-no-wrap">{{$bill->modelable->iccid}}</p>
+                                <p class="text-color whitespace-no-wrap">{{$bill->sim->iccid}}</p>
                             </td>
                             <td>
-                                <p class="text-color whitespace-no-wrap">{{$bill->packageable->name}}</p>
+                                <p class="text-color whitespace-no-wrap">{{$bill->sim->network->name}}</p>
                             </td>
                             @if ($loop->first)
-                                <td rowspan="{{$customer->bills->count()}}">
+                                <td rowspan="{{$customer->invoice->count()}}">
                                 <p class="text-color whitespace-no-wrap"><a class="text-blue-500 font-medium hover:font-normal hover:text-blue-400" href="{{$customer->facebook}}" target="_blank" rel="noopener noreferrer"> {{$customer->facebook}}</a></p>
                             </td>
                             @endif
