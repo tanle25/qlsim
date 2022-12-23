@@ -56,7 +56,7 @@
                                 <p class="text-color whitespace-no-wrap">{{$bill->sim->network->name}}</p>
                             </td>
                             @if ($loop->first)
-                                <td rowspan="{{$customer->bills->count()}}">
+                                <td rowspan="{{$customer->invoice->count()}}">
                                 <p class="text-color whitespace-no-wrap"><a class="text-blue-500 font-medium hover:font-normal hover:text-blue-400" href="{{$customer->facebook}}" target="_blank" rel="noopener noreferrer"> {{$customer->facebook}}</a></p>
                             </td>
                             @endif
