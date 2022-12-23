@@ -12,7 +12,7 @@ class CustomerController extends Controller
     public function index(Request $request)
     {
         # code...
-        $custommers = Customer::has('bill')->whereRelation('bill','modelable_type','App\Models\SimCard')->get();
+        $custommers = Customer::all();
         // dd($custommers->first()->bills);
         return view('admin.customer.index',['customers'=>$custommers]);
     }
