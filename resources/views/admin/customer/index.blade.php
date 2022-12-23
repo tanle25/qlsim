@@ -35,7 +35,7 @@
                     <tbody>
                         @foreach ($customers as $customer )
                         @foreach ($customer->bills as $bill )
-                        @dd($bill)
+                        @dd($bill->modelable)
                         <tr>
                             @if ($loop->first)
                                <td rowspan="{{$customer->bills->count()}}">
