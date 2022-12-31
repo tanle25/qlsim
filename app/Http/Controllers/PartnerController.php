@@ -87,7 +87,7 @@ class PartnerController extends Controller
 
         $partner = User::findOrFail($id);
         // dd($partner);
-        dd($partner->sims);
+        // dd($partner->sims);
         return view('admin.pages.list-sim',['sims'=>$partner->sims,'user'=>$partner]);
 
     }
