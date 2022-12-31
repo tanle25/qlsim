@@ -173,45 +173,45 @@
     <ul class="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownLeftButton">
         <li class="context-menu-item change-status" data-status="1">
 
-            <a href="#"
+            <a href="javascript:;"
                 class="block py-2 px-4 hover:hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-white">{{__('active')}}</a>
         </li>
         <li>
-            <a href="#" class="block py-2 px-4 hover:hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-white"
+            <a href="javascript:;" class="block py-2 px-4 hover:hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-white"
                 data-modal-toggle="edit-sim-modal">{{__('Edit')}}</a>
         </li>
         <li class="context-menu-item change-status" data-status="3">
 
-            <a href="#"
+            <a href="javascript:;"
                 class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-white">{{__('temporarily cut')}}</a>
         </li>
         <li class="context-menu-item change-status" data-status="4">
 
-            <a href="#"
+            <a href="javascript:;"
                 class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-white">{{__('Cancel')}}</a>
         </li>
         <li class="context-menu-item change-status" data-status="5">
-            <a href="#"
+            <a href="javascript:;"
                 class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-white">{{__('reset')}}</a>
         </li>
         <li class="invoice-btn">
-            <a href="#" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-white"
+            <a href="javascript:;" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-white"
                 data-modal-toggle="invoice-modal">{{__('Customer inofmation')}}</a>
         </li>
         <li id="rent-btn">
-            <a href="#" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-white"
+            <a href="javascript:;" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-white"
                 data-modal-toggle="rent-modal">{{__('rent')}}</a>
         </li>
         <li id="btn-extend">
-            <a href="#" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-white"
+            <a href="javascript:;" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-white"
                 data-modal-toggle="extend-modal">{{__('Extend')}}</a>
         </li>
         <li class="btn-delete-sim">
-            <a href="#"
+            <a href="javascript:;"
                 class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-white">{{__('Delete')}}</a>
         </li>
         <li class="btn-history">
-            <a href="#" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-white">{{__('Lịch sử
+            <a href="javascript:;" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-white">{{__('Lịch sử
                 thay đổi')}}</a>
         </li>
     </ul>
