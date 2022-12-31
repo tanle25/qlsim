@@ -41,6 +41,7 @@
             </thead>
             <tbody>
                 @foreach ($sims as $sim )
+                {{-- @dd($sim) --}}
                 <tr>
 
                     <td>

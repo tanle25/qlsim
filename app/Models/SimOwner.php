@@ -41,6 +41,6 @@ class SimOwner extends Model
     public function sim()
     {
         # code...
-        return $this->hasOne(SimCard::class,'id','sim_card_id');
+        return $this->hasOne(SimCard::class,'id','sim_card_id')->withTrashed();
     }
 }

@@ -160,10 +160,23 @@ class SimCardController extends Controller
                 ]);
                 SimOwner::where('sim_card_id', $sim->id)->delete();
             }
+            $action = 1;
+            $status = $request->status;
+            if($status == 1){
+                $action = 8;
+            }else if($status == 2){
+                $action = 8;
+            }else if($status == 3){
+                $action = 7;
+            }else if($status == 4){
+                $action =6;
+            }else if($status == 5){
+                $action = 9;
+            }
             History::create([
                 'sim_card_id'=>$sim->id,
                 'user_id'=>Auth::user()->id,
-                'action'=>1,
+                'action'=>$action,
                 'content'=> $sim->load('network')->toJson()
             ]);
             $sim->update([
@@ -316,9 +329,7 @@ class SimCardController extends Controller
         try {
             //code...
             $sim = SimCard::find($request->sim);
-            if ($sim->origin_price == null || $sim->lease_price == null) {
-                return back()->withErrors(['fail' => 'Sim chưa có giá nhập vào hoặc giá cho thuê']);
-            }
+
             $customer = Customer::create([
                 'name' => $request->name,
                 'address' => $request->address,
