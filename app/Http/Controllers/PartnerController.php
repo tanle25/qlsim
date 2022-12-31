@@ -110,7 +110,7 @@ class PartnerController extends Controller
             ]);
 
             History::create([
-                'sim_card_id'=>$sim->id,
+                'sim_card_id'=>$sim,
                 'user_id'=>Auth::user()->id,
                 'action'=>4
             ]);
