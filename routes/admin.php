@@ -56,7 +56,7 @@ Route::group(['middleware'=>['auth','role:admin']],function(){
     Route::get('nha-mang-sim',[SimNetworkController::class,'index']);
     Route::post('them-nha-mang-sim',[SimNetworkController::class,'store']);
     Route::post('gia-han-hop-dong',[SimCardController::class,'extendContract']);
-
+    Route::post('them-sim-vao-dai-ly/{user}', [PartnerController::class,'addSim']);
 
     Route::get('export-hom-nay', [ExportController::class,'exportToday']);
     Route::get('export-tuan-nay', [ExportController::class,'exportWeek']);

@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
+use App\Models\User;
+use App\Models\History;
 use App\Models\Partner;
 use App\Models\SimCard;
 use App\Models\SimOwner;
-use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PartnerController extends Controller
 {
@@ -75,9 +78,10 @@ class PartnerController extends Controller
     public function showListSim(Request $request)
     {
         # code...
-        // dd($request->all());
+
         $sims = SimOwner::whereIn('partner_id',$request->partner)->get();
-        // dd($sims);
+
+
         return view('admin.pages.list-sim',['sims'=>$sims]);
     }
 
@@ -86,10 +90,32 @@ class PartnerController extends Controller
         # code...
 
         $partner = User::findOrFail($id);
-        // dd($partner);
-        // dd($partner->sims);
-        return view('admin.pages.list-sim',['sims'=>$partner->sims,'user'=>$partner]);
+        $sim_not_rent = SimCard::has('network')->doesntHave('partner')->get();
 
+        // dd($sim_not_rent);
+        return view('admin.pages.list-sim',['sims'=>$partner->sims,'user'=>$partner,'sim_not_rent'=>$sim_not_rent]);
+
+    }
+
+    public function addSim(Request $request, User $user)
+    {
+        # code...
+        // dd($user, $request->all());
+        foreach($request->sim as $sim){
+            $simCard = SimCard::find($sim);
+            $user->sims()->create([
+                'sim_card_id'=>$sim,
+                'expired'=> Carbon::today()->addMonths($simCard->network->duration)->toDateString(),
+                'origin_price'=>$simCard->network->lease_price
+            ]);
+
+            History::create([
+                'sim_card_id'=>$sim->id,
+                'user_id'=>Auth::user()->id,
+                'action'=>4
+            ]);
+        }
+        return back()->with(['success'=>'Đã thêm sim vào đại lý']);
     }
 
     public function delete(Request $request)
