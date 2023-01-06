@@ -94,26 +94,5 @@
 const targetEl = document.getElementById('dropdownSearch');
 const triggerEl = document.getElementById('dropdownSearchButton');
 const dropdown = new Dropdown(targetEl, triggerEl);
-
-
-
-    $(document).ready( function () {
-        // myCalendar.init();
-        $('#product-table').DataTable( {
-            "order": [],
-            "columnDefs": [ {
-                'orderable': false,
-                "targets": 'nosort'
-                } ]
-        });
-
-
-
-    } );
-
-
-
-
-
 </script>
 @stop
