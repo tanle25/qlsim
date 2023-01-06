@@ -17,9 +17,9 @@ class PartnerController extends Controller
     public function index()
     {
         # code...
-        $partners = Partner::all();
+        // $partners = Partner::all();
         $users = User::role(['dealer','collab'])->get();
-        return view('admin.pages.partner.index',['partners'=>$partners,'users'=>$users]);
+        return view('admin.pages.partner.index',['users'=>$users]);
     }
 
     public function store(Request $request)
