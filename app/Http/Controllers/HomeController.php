@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\History;
 use App\Models\SimCard;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Session;
@@ -67,5 +68,12 @@ class HomeController extends Controller
         $simCard= SimCard::withTrashed()->where('id',$sim)->firstOrFail();
         $simCard->forceDelete();
         return back();
+    }
+
+    public function expiredContract()
+    {
+        # code...
+        $sims = SimCard::whereBetween('partner.expired',[Carbon::today()->subDays(5), Carbon::today()])->get();
+        dd($sims);
     }
 }

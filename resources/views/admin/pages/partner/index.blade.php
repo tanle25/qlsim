@@ -75,9 +75,9 @@
             <a id="btn-delete" href="#" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-white"  data-modal-toggle="alert-modal">{{__('Delete')}}</a>
         </li>
 
-        <li>
+        {{-- <li>
             <a id="btn-add-owner"  data-modal-toggle="owner-modal" href="#" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-white">{{__('Team Owner')}}</a>
-        </li>
+        </li> --}}
     </ul>
 </div>
 

@@ -86,7 +86,7 @@ Route::group(['middleware'=>['auth','role:admin']],function(){
     Route::get('sim-da-xoa',[HomeController::class,'trash']);
     Route::get('khoi-phuc-sim-da-xoa/{sim}',[HomeController::class,'restore']);
     Route::get('xoa-vinh-vien-sim/{sim}',[HomeController::class,'delete']);
-
+    Route::get('hop-dong-sap-het-han',[HomeController::class,'expiredContract']);
 
 
 });
