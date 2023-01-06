@@ -58,7 +58,7 @@ class SimCardController extends Controller
         # code...
         $request->validate([
             'number' => 'required|digits_between:10,15|unique:sim_cards,phone',
-            'iccid' => 'required|unique:sim_cards,iccid',
+            'iccid' => 'required|digits_between:10,20|unique:sim_cards,iccid',
             'network' => 'required'
         ], [
             'required' => __(':attribute required'),
@@ -92,8 +92,9 @@ class SimCardController extends Controller
             return redirect()->back()->withErrors(['not_found' => __('Not Found')]);
         }
         $request->validate([
-            'number' => 'required|unique:sim_cards,phone,' . $sim->id,
-            'iccid' => 'required|numeric|unique:sim_cards,iccid,' . $sim->id,
+
+            'number' => 'required|digits_between:10,15|unique:sim_cards,phone,' . $sim->id,
+            'iccid' => 'required|numeric|digits_between:10,20|unique:sim_cards,iccid,' . $sim->id,
             'network' => 'required'
         ], [
             'required' => __(':attribute required'),

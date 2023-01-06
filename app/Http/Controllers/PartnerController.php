@@ -45,7 +45,7 @@ class PartnerController extends Controller
         ]);
         $request->request->add(['status'=>1]);
         Partner::create($request->all());
-        dd($request);
+        // dd($request);
         return back();
     }
 
@@ -55,7 +55,7 @@ class PartnerController extends Controller
         $request->validate([
             'partner_id'=>'required|exists:partners,id',
             'name'=>'required',
-            'phone'=>'required',
+            'phone'=>'required|digits_between:10,15',
             'type'=>'required',
             'address'=>'required'
         ],[
