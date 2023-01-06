@@ -36,4 +36,6 @@ Route::group(['middleware'=>['auth','role:dealer|collab']], function(){
 
     Route::post('invite',[InviteController::class,'invite']);
     Route::get('export-sim',[ExportController::class,'exportPartner']);
+
+    Route::get('sim-da-huy',[SimCardController::class,'dealerCancel']);
 });

@@ -49,23 +49,14 @@
                             {{__('iccid')}}
                         </th>
                         <th class=" whitespace-nowrap">
-                            {{__('Old ICCID')}}
-                        </th>
-                        <th class=" whitespace-nowrap">
                             {{__('network')}}
                         </th>
-                        <th class=" whitespace-nowrap">
-                            {{__('custommers')}}
-                        </th>
-                        <th class=" whitespace-nowrap">
-                            {{__('type')}}
-                        </th>
+
+
                         <th class=" whitespace-nowrap">
                             {{__('Created at')}}
                         </th>
-                        <th class=" whitespace-nowrap">
-                            {{__('Ngày cho thuê')}}
-                        </th>
+
                         <th class=" whitespace-nowrap">
                             {{__('Ngày hết hạn')}}
                         </th>
@@ -81,29 +72,20 @@
                         <td>
                             <div class="ml-3">
                                 <a href="{{url('admin/lich-su', $simCard->id)}}" class="text-color whitespace-no-wrap">
-                                    {{$simCard->phone}}
+                                    {{$simCard->sim->phone}}
                                 </a>
                             </div>
                         </td>
                         <td>
-                            <p class="text-color whitespace-no-wrap">{{$simCard->iccid}}</p>
+                            <p class="text-color whitespace-no-wrap">{{$simCard->sim->iccid}}</p>
                             {{-- <p class="text-red-500 whitespace-no-wrap"><i>{{$simCard->old_iccid}}</i> </p> --}}
                         </td>
-                        <td>
-
-                            <p class="text-red-500 whitespace-no-wrap"><i>{{$simCard->old_iccid}}</i> </p>
-                        </td>
-                        <td>
-                            <p class="text-color whitespace-no-wrap">{{is_null($simCard->network) ? '' :
-                                $simCard->network->name}}</p>
-                        </td>
 
                         <td>
-                            <p class="text-color whitespace-no-wrap">{{ $simCard->partner->ownerable->name ?? ''}}</p>
+                            <p class="text-color whitespace-no-wrap">{{is_null($simCard->sim->network) ? '' :
+                                $simCard->sim->network->name}}</p>
                         </td>
-                        <td>
-                            {{$simCard->partner->type ?? ''}}
-                        </td>
+
 
                         <td>
                             <span data-href="{{url('admin/cap-nhat-ngay-them',$simCard->id)}}"
@@ -111,33 +93,23 @@
                                 {{$simCard->created_at->format('d-m-Y')}}
                             </span>
                         </td>
-
-                        <td>
-                            <span data-href="{{url('admin/cap-nhat-ngay-cho-thue',$simCard->id)}}"
-                                data-text="Cập nhật ngày cho thuê" class="show-popup">
-                                {{$simCard->partner ? $simCard->partner->created_at->format('d-m-Y') : ''}}
-                            </span>
-                        </td>
+{{-- @dd($simCard) --}}
 
                         <td>
                             <p data-href="{{url('admin/cap-nhat-han-su-dung',$simCard->id)}}"
                                 data-text="Cập nhật ngày hết hạn"
-                                class="show-popup whitespace-no-wrap {{ $simCard->partner  && $simCard->partner->expired->isPast() ? 'text-red-500' : ''}} ">
-                                {{$simCard->partner ? $simCard->partner->expired->format('d-m-Y') : '' }}
+                                class="show-popup whitespace-no-wrap {{  $simCard->expired->isPast() ? 'text-red-500' : ''}} ">
+                                {{$simCard->expired->format('d-m-Y')}}
                             </p>
                         </td>
                         <td>
 
-                            @if ($simCard->deleted_at !=null)
-                            <span class=" uppercase text-red-500">Đã xoá</span>
-                            @else
                             <span
-                                class="relative inline-block px-3 py-1 font-semibold {{config('constrain.sim_status.'.$simCard->status.'.color')}} leading-tight">
+                                class="relative inline-block px-3 py-1 font-semibold {{config('constrain.sim_status.'.$simCard->sim->status.'.color')}} leading-tight">
 
                                 <span
-                                    class="relative">{{__(config('constrain.sim_status.'.$simCard->status.'.text'))}}</span>
+                                    class="relative">{{__(config('constrain.sim_status.'.$simCard->sim->status.'.text'))}}</span>
                             </span>
-                            @endif
 
                         </td>
                         <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm text-right">
@@ -213,15 +185,14 @@
 </div>
 
 
-<form id="status-form" action="{{url('admin/update-status-sim')}}" method="post">
+
+</div>
+
+<form id="status-form" action="{{url('dealer/request-status-sim')}}" method="post">
     @csrf
     <input id="status-sim-id" type="hidden" name="sim_id">
     <input type="hidden" name="status">
 </form>
-
-</div>
-
-
 
 @stop
 
@@ -245,6 +216,6 @@ $('.context-menu-item').click(function(){
         $('#status-form input[name=status]').val($(this).data('status'));
         $('#status-form').submit();
     // }
-});
+})
 </script>
 @stop

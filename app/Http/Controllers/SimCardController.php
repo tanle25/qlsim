@@ -49,6 +49,15 @@ class SimCardController extends Controller
         return view('admin.pages.product.canceled-sim',['simCards'=>$sims]);
     }
 
+    public function dealerCancel()
+    {
+        # code...
+        $user = Auth::user();
+        $sims = $user->sims->where('sim.status',4);
+        // dd($sims);
+        return view('dealer.product.canceled-sim',['simCards'=>$sims]);
+    }
+
 
     public function import(Request $request)
     {
