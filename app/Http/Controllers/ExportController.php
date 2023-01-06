@@ -30,7 +30,6 @@ class ExportController extends Controller
     {
         # code...
         $date = Carbon::today();
-        // dd($date->firstOfMonth()->toDateString());
         $start = $date->startOfWeek()->toDateString();
         $end = $date->endOfWeek()->toDateString();
 
