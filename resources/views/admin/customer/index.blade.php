@@ -29,7 +29,7 @@
                             <th>
                                 {{__('pakage name')}}
                             </th>
-                            <th>
+                            <th class="w-75">
                                 {{__('Facebook')}}
                             </th>
                             {{-- <th class="nosort"></th> --}}
@@ -64,7 +64,7 @@
 
                             @if ($loop->first)
                                 <td rowspan="{{$customer->invoice->count()}}">
-                                <p class="text-color whitespace-no-wrap"><a class="text-blue-500 font-medium hover:font-normal hover:text-blue-400" href="{{$customer->facebook}}" target="_blank" rel="noopener noreferrer"> {{$customer->facebook}}</a></p>
+                                <p class="text-color whitespace-no-wrap"><a class="text-blue-500 font-medium hover:font-normal hover:text-blue-400 lowercase" href="{{$customer->facebook}}" target="_blank" rel="noopener noreferrer"> {{$customer->facebook}}</a></p>
                             </td>
                             @endif
 
