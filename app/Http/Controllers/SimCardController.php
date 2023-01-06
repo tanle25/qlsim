@@ -34,12 +34,19 @@ class SimCardController extends Controller
         # code...
         // $role = Auth::user()->roles;
         // dd($role);
-        $simCards = SimCard::orderBy('created_at', 'desc')->get();
+        $simCards = SimCard::orderBy('created_at', 'desc')->whereNot('status',4)->get();
         $partners = User::role(['dealer', 'collab'])->get();
         $customers = Customer::all();
         $packages = Pakage::all();
         $networks = SimNetwork::all();
         return view('admin.pages.product.index', ['simCards' => $simCards, 'partners' => $partners, 'customers' => $customers, 'packages' => $packages, 'networks' => $networks]);
+    }
+
+    public function canceledSim()
+    {
+        # code...
+        $sims = SimCard::whereStatus(4)->get();
+        return view('admin.pages.product.canceled-sim',['simCards'=>$sims]);
     }
 
 

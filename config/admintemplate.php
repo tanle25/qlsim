@@ -52,6 +52,14 @@ return [
                 ],
 
                 [
+                    'text'=>'Sim đã huỷ',
+                    'icon'=>'fal fa-circle',
+                    'active_icon'=>'fad fa-circle',
+                    'url'=>'admin/sim-da-huy',
+                    'role'=>'admin'
+                ],
+
+                [
                     'text'=>'Lịch sử thay đổi',
                     'icon'=>'fal fa-circle',
                     'active_icon'=>'fad fa-circle',

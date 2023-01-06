@@ -27,6 +27,7 @@ Route::group(['middleware'=>['auth','role:admin']],function(){
     Route::post('them-nguoi-dung',[UserManagermentController::class,'store']);
     Route::get('danh-sach-sim-yeu-cau',[RequestController::class,'showRequestSim']);
     Route::get('danh-sach-sim',[SimCardController::class,'index']);
+    Route::get('sim-da-huy',[SimCardController::class,'canceledSim']);
     Route::post('add-sim',[SimCardController::class,'store']);
     Route::post('import-sim',[SimCardController::class,'import']);
     Route::post('phan-phoi-sim',[SimCardController::class,'distribution']);
