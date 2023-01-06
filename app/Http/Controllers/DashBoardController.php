@@ -31,7 +31,7 @@ class DashBoardController extends Controller
         $requestStatus = RequestStatus::all();
         $dealers = Partner::all()->count();
         $wifiRequests = WifiRequest::whereNot('status',3)->get();
-        $simAlerts = SimCard::where('expired','=>',Carbon::today()->subDays(5)->toDateString())->get();
+        $simAlerts = SimOwner::whereBetween('expired',[Carbon::today(), Carbon::today()->addDays(5)])->limit(5)->get();
         $year = Carbon::today()->year;
         $month = Carbon::today()->month;
         $data = [];

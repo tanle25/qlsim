@@ -236,7 +236,7 @@
             <div class="p-4 pb-0 mb-0 rounded-t-4">
                 <div class="flex justify-between">
                     <h6 class="mb-2 dark:text-white">{{__('Contract is about to expire')}}</h6>
-                    <h6 class="dark:text-white text-sm text-blue-500"><a href="{{url('dealer/danh-sach-sim')}}">{{__('Read more')}}</a></h6>
+                    <h6 class="dark:text-white text-sm text-blue-500"><a href="{{url('admin/hop-dong-sap-het-han')}}">{{__('Read more')}}</a></h6>
 
                 </div>
             </div>
@@ -273,35 +273,25 @@
 
 
                         <tr>
-
+                            <td>
+                                <p class="text-color whitespace-no-wrap">{{$arlert->ownerable->name}}</p>
+                            </td>
                             <td>
                                 <div class="ml-3">
                                     <p class="text-color whitespace-no-wrap">
-                                        {{$arlert->phone}}
+                                        {{$arlert->sim->phone}}
                                     </p>
                                 </div>
                             </td>
                             <td>
-                                <p class="text-color whitespace-no-wrap">{{$arlert->iccid}}</p>
-                            </td>
-                            <td>
-                                <p class="text-color whitespace-no-wrap">{{is_null($arlert->network) ? '' : $arlert->network->name}}</p>
-                            </td>
-                            <td>
-                                <p class="text-color whitespace-no-wrap">{{ is_null($arlert->partner) ? '' : $arlert->partner->partner->name}}</p>
-                                {{-- @dd($arlert->partner->name) --}}
-                            </td>
-                            <td>
-                                <p class="text-color whitespace-no-wrap">
-                                    {{is_null($arlert->bill) ? '' : $arlert->bill->customer->name}}
-                                </p>
+                                <p class="text-color whitespace-no-wrap">{{$arlert->sim->iccid}}</p>
                             </td>
 
                             <td>
-                                <p class="text-color whitespace-no-wrap">
-                                    {{$arlert->status == 2 ? \Carbon\Carbon::parse($arlert->bill->end_at)->format('d/m/Y')  : '' }}
-                                </p>
+                                <p class="text-color whitespace-no-wrap">{{$arlert->expired->format('d-m-Y')}}</p>
                             </td>
+
+
 
                         </tr>
                         @endforeach

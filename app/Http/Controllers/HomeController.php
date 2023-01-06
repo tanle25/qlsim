@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\History;
 use App\Models\SimCard;
+use App\Models\SimOwner;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
@@ -73,7 +74,9 @@ class HomeController extends Controller
     public function expiredContract()
     {
         # code...
-        $sims = SimCard::whereBetween('partner.expired',[Carbon::today()->subDays(5), Carbon::today()])->get();
-        dd($sims);
+        // $sim = SimOwner::all();
+        $sims = SimOwner::whereBetween('expired',[Carbon::today(), Carbon::today()->addDays(5)])->get();
+        // dd($sims);
+        return view('admin.pages.hop-dong-sap-het-han',['sims'=>$sims]);
     }
 }
