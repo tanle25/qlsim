@@ -47,7 +47,7 @@
                                 <p class="text-color whitespace-no-wrap">{{__($user->roles->first()->name)}}</p>
                             </td>
                             <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm text-right">
-                                <button type="button" class="inline-block text-gray-500 hover:text-gray-700  btn-dropdown" data-dropdown-toggle="dropdownLeft" data-dropdown-placement="left" data-id="{{$user->id}}">
+                                <button type="button" class="inline-block text-gray-500 hover:text-gray-700  btn-dropdown" data-id="{{$user->id}}">
                                     <svg class="inline-block h-6 w-6 fill-current" viewBox="0 0 24 24">
                                         <path
                                             d="M12 6a2 2 0 110-4 2 2 0 010 4zm0 8a2 2 0 110-4 2 2 0 010 4zm-2 6a2 2 0 104 0 2 2 0 00-4 0z" />
@@ -64,7 +64,7 @@
     </div>
 </div>
 
-<div id="dropdownLeft" class="hidden z-10 w-44 bg-white rounded divide-y divide-gray-100 dark:bg-gray-700 border shadow-lg">
+{{-- <div id="dropdownLeft" class="hidden z-10 w-44 bg-white rounded divide-y divide-gray-100 dark:bg-gray-700 border shadow-lg">
     <ul class="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownLeftButton">
 
         <li id="btn-edit">
@@ -75,11 +75,8 @@
             <a id="btn-delete" href="#" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-white"  data-modal-toggle="alert-modal">{{__('Delete')}}</a>
         </li>
 
-        {{-- <li>
-            <a id="btn-add-owner"  data-modal-toggle="owner-modal" href="#" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-white">{{__('Team Owner')}}</a>
-        </li> --}}
     </ul>
-</div>
+</div> --}}
 
 {{-- EDIT PARTNER --}}
 <div id="edit-partner" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full">
@@ -204,11 +201,10 @@
 <script src="https://unpkg.com/flowbite@1.5.2/dist/flowbite.js"></script>
 
 <script>
-    const targetEl = document.getElementById('dropdownSearch');
-    const triggerEl = document.getElementById('search-user');
-    const dropdown = new Dropdown(targetEl, triggerEl);
+    // const targetEl = document.getElementById('dropdownSearch');
+    // const triggerEl = document.getElementById('search-user');
+    // const dropdown = new Dropdown(targetEl, triggerEl);
 
-        var users = @json($users);
         $('#product-table').DataTable( {
             "order": [],
             "columnDefs": [ {
@@ -217,75 +213,7 @@
                 } ]
         });
 
-        var partners = @json($partners);
-        var item = null;
-        $(document).ready(function () {
-            $('.btn-dropdown').click(function(){
-                let id = $(this).data('id');
-                item = partners.filter(item=>item.id==id);
-            });
-            $('#btn-edit').click(function(){
-                if(item != null && item.length > 0){
-                    $('#partner-name').val(item[0].name);
-                    $('#partner-phone').val(item[0].phone);
-                    $('#partner-type').val(item[0].type);
-                    $('#partner-address').val(item[0].address);
-                    $('#partner_id').val(item[0].id);
-                }
-            });
-            $('#btn-delete').click(function(){
-                $('#partner-id').val(item[0].id);
-            })
 
-            $('#search-user').on('focus', function(){
-            $('#dropdownSearch').css({
-                    width: $(this).width()
-                });
-            });
-
-            $('#search-user').on('input', function(){
-                    var keyword = $(this).val();
-                    if(keyword != ''){
-                        // dropdown.show();
-                    }
-                    var ul = $('#dropdownSearch ul');
-                    var expression = new RegExp(keyword, "i");
-                    let results = users;
-                    results = users.filter(function(item){
-                        return item.name.search(expression) != -1;
-                    });
-                    var li ='';
-
-
-                    $.each(results, function (index, item) {
-                        li += `<li  class="user-item hover:bg-gray-300" data-id="${item.id}" data-value="${item.name}">
-                                    <div class="ml-2 text-sm">
-                                        <div> <span class="font-medium text-base">${item.name}</span></div>
-                                        <p id="helper-radio-text-4" class="text-xs font-normal text-gray-500 dark:text-gray-300">${item.phone}</p>
-                                    </div>
-                                </li>`;
-                    });
-
-                    $(ul).html($(li));
-                    if(results.length < 1){
-                        $(ul).html(
-                            `<li>
-                                    <div class="ml-2 text-sm">
-                                        <div> <span class="font-medium text-base">No result</span></div>
-                                    </div>
-                                </li>`
-                        );
-                    }
-
-            });
-            $(document).on('click','.user-item', function(){
-                $('#search-user').val($(this).data('value'));
-                $('#user-id').val($(this).data('id'));
-                $('#partner-selected').val(item[0].id);
-                console.log('click');
-                dropdown.hide();
-            })
-        });
 
 </script>
 @stop
