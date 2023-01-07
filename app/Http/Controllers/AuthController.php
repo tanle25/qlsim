@@ -75,7 +75,7 @@ class AuthController extends Controller
         $request->validate([
             'name'=>'required',
             'email'=>'required|email:rfc,dns|unique:users,email',
-            'phone'=>'required|unique:users,phone',
+            'phone'=>'required|digits_between:10,15|unique:users,phone',
             'password'=>'required|min:8|confirmed'
         ],[
             'required'=>__(':attribute required'),

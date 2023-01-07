@@ -33,16 +33,16 @@
 
                     <td>
                         <div class="ml-3">
-                            <p class="text-color whitespace-no-wrap">
+                            <p class="text-color">
                                 {{$user->name}}
                             </p>
                         </div>
                     </td>
                     <td>
-                        <p class="text-color whitespace-no-wrap">{{$user->phone}}</p>
+                        <p class="text-color">{{$user->phone}}</p>
                     </td>
                     <td>
-                        <p class="text-color whitespace-no-wrap">{{$user->email}}</p>
+                        <p class="text-color">{{$user->email}}</p>
                     </td>
                     <td>
                         <p class="text-color whitespace-no-wrap">
