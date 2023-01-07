@@ -40,7 +40,7 @@ class ExportSimOfPartner implements FromCollection, WithHeadings, WithMapping
             $sim->sim->phone,
             $sim->sim->iccid,
             $sim->ownerable->name,
-            __(config("constrain.sim_status.".$sim->status.".text")),
+            __(config("constrain.sim_status.".$sim->sim->status.".text")),
             $sim->created_at,
             $sim->expired
         ];
