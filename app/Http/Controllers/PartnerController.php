@@ -87,10 +87,11 @@ class PartnerController extends Controller
         # code...
 
         $partner = User::findOrFail($id);
+        $sims = $partner->sims()->whereRelation('sim','deleted_at',null)->get();
         $sim_not_rent = SimCard::has('network')->doesntHave('partner')->get();
 
         // dd($sim_not_rent);
-        return view('admin.pages.list-sim',['sims'=>$partner->sims,'user'=>$partner,'sim_not_rent'=>$sim_not_rent]);
+        return view('admin.pages.list-sim',['sims'=>$sims,'user'=>$partner,'sim_not_rent'=>$sim_not_rent]);
 
     }
 
