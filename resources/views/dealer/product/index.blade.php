@@ -283,7 +283,7 @@ const dropdown = new Dropdown(targetEl, triggerEl);
 
         var customers = @json($customers);
         var sims = @json($simCards);
-        console.log(sims);
+        // console.log(sims);
         $('#product-table').DataTable( {
             "order": [],
             "columnDefs": [ {

@@ -58,13 +58,13 @@ return [
                     'url'=>'admin/sim-da-huy',
                     'role'=>'admin'
                 ],
-                [
-                    'text'=>'Sim đã huỷ',
-                    'icon'=>'fal fa-circle',
-                    'active_icon'=>'fad fa-circle',
-                    'url'=>'dealer/sim-da-huy',
-                    'role'=>['dealer','collab']
-                ],
+                // [
+                //     'text'=>'Sim đã huỷ',
+                //     'icon'=>'fal fa-circle',
+                //     'active_icon'=>'fad fa-circle',
+                //     'url'=>'dealer/sim-da-huy',
+                //     'role'=>['dealer','collab']
+                // ],
                 [
                     'text'=>'Lịch sử thay đổi',
                     'icon'=>'fal fa-circle',

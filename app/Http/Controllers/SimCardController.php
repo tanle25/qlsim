@@ -53,7 +53,7 @@ class SimCardController extends Controller
     {
         # code...
         $user = Auth::user();
-        dd($user->sims);
+        // dd($user->sims);
         $sims = $user->sims()->whereRelation('sim','status',4)->get();
         // dd($sims);
         return view('dealer.product.canceled-sim',['simCards'=>$sims]);
