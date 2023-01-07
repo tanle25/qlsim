@@ -66,6 +66,7 @@ class RequestStatusController extends Controller
             ]);
             if($request->request == 4){
                 $sim->partner->delete();
+                $sim->update(['is_rent'=>0]);
             }
             $request->update([
                 'status'=>1
