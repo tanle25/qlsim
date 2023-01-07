@@ -37,7 +37,7 @@
             <i class="absolute top-0 right-0 p-4 opacity-50 cursor-pointer fas fa-times dark:text-white text-slate-400 xl:hidden"
                 sidenav-close></i>
             <a class="block px-8 py-6 m-0 text-size-sm whitespace-nowrap dark:text-white text-slate-700"
-                href="{{url('admin')}}" target="_blank">
+                href="{{url('/')}}" target="_blank">
                 <img src="{{asset('logo.jpg')}}"
                     class="inline h-full max-w-full transition-all duration-200 ease-nav-brand max-h-8"
                     alt="main_logo" />
