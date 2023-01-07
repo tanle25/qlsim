@@ -12,7 +12,7 @@
         <div class="bg-white w-full md:w-1/2 flex flex-col items-center py-10 px-8  justify-center">
             <form action="{{url('verify-otp')}}" class="otp-form" name="otp-form" method="POST">
                 @csrf
-
+                @dd($user)
                 <div class="title">
                   <h3>{{__('OTP verifycation')}}</h3>
                   <p class="info">{{__('An OTP has been send to you email',['email'=>$user->email])}}</p>

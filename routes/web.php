@@ -64,10 +64,6 @@ Route::get('reset-password', function(){
     return view('login.reset-password');
 });
 
-Route::get('test', function(){
-    $sim = SimCard::find(1);
-    dd($sim->is_rent);
-});
 
 Route::post('tim-nguoi-dung',[InviteController::class,'searchUser']);
 Route::get('images-cli',[LeechContentController::class,'images']);
