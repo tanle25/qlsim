@@ -29,7 +29,7 @@ class ExportSimOfPartner implements FromCollection, WithHeadings, WithMapping
     {
         # code...
         return [
-            'Số điện thoại','ICCID','Tên đại lý','Ngày thuê','Ngày hết hạn'
+            'Số điện thoại','ICCID','Tên đại lý','Trạng thái','Ngày thuê','Ngày hết hạn'
         ];
     }
 
@@ -40,6 +40,7 @@ class ExportSimOfPartner implements FromCollection, WithHeadings, WithMapping
             $sim->sim->phone,
             $sim->sim->iccid,
             $sim->ownerable->name,
+            __(config("constrain.sim_status.".$sim->status.".text")),
             $sim->created_at,
             $sim->expired
         ];
