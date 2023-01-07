@@ -4,7 +4,7 @@
 {{__('OTP verifycation')}}
 @stop
 @php
-        $user = Session::has('verifyUser') ? Session::get('verifyUser')->id : Auth::user()->id;
+        $user = Session::has('verifyUser') ? Session::get('verifyUser') : Auth::user();
 @endphp
 @section('content')
 <div class="bg-gradient-to-tr from-green-300 to-green-600 h-screen w-full flex justify-center items-center">
@@ -12,7 +12,6 @@
         <div class="bg-white w-full md:w-1/2 flex flex-col items-center py-10 px-8  justify-center">
             <form action="{{url('verify-otp')}}" class="otp-form" name="otp-form" method="POST">
                 @csrf
-                @dd($user)
                 <div class="title">
                   <h3>{{__('OTP verifycation')}}</h3>
                   <p class="info">{{__('An OTP has been send to you email',['email'=>$user->email])}}</p>
