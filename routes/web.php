@@ -76,7 +76,12 @@ Route::get('get-wifi-network/{id}',[RequestController::class,'edit']);
 
 Route::group(['middleware'=>['auth']],function(){
     Route::get('/', function () {
-        return view('welcome');
+        // return view('welcome');
+        if(Auth::user()->hasRole('admin')){
+            return redirect('admin');
+        }else{
+            return redirect('dealer');
+        }
     });
     Route::get('get-wifi-request/{id}',[RequestController::class,'editRequest']);
     Route::post('update-wifi-request',[RequestController::class,'updateRequest']);
