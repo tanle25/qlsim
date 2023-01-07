@@ -121,7 +121,13 @@ class UserManagermentController extends Controller
             'user_id'=>__('user')
         ]);
 
+
+
         $user = User::find($request->user_id);
+
+        if($user->hasRole('admin')){
+            return back()->withErrors(['fail'=>'Bạn không thể xoá tài khoản này']);
+        }
         $user->invoices()->delete();
         $user->delete();
         return back()->with(['success'=>__('Delete successfully')]);
