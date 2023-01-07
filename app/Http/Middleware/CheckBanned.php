@@ -17,11 +17,11 @@ class CheckBanned
      */
     public function handle(Request $request, Closure $next)
     {
-        if(auth()->check() && (auth()->user()->status == 0)){
+        if(auth()->check() && (auth()->user()->status == 1)){
             Auth::logout();
             $request -> session() -> invalidate();
             $request -> session() -> regenerateToken();
-            return redirect() -> route('login')->withErrors('error','Tài khoản của bạn bị vô hiệu hóa');
+            return redirect() -> route('login')->withErrors('Tài khoản của bạn bị vô hiệu hóa');
         }
         return $next($request);
     }
