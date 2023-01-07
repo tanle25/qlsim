@@ -28,7 +28,7 @@ class UserManagermentController extends Controller
             'name'=>'required',
             'email'=>'required|email:rfc,dns|unique:users,email',
             'password'=>'required',
-            'phone'=>'required|unique:users,phone',
+            'phone'=>'required|digits_between:10,15|unique:users,phone',
 
         ],[
             'required'=>__(':attribute required'),
@@ -72,7 +72,7 @@ class UserManagermentController extends Controller
                 ->uncompromised()
             ],
             'email'=>'required|email:rfc,dns|unique:users,email,'.$user->id,
-            'phone'=>'required|unique:users,phone,'.$user->id,
+            'phone'=>'required|digits_between:10,15|unique:users,phone,'.$user->id,
 
         ],[
             'required'=>__(':attribute required'),
