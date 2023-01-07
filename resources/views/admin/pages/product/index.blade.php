@@ -202,10 +202,10 @@
             <a href="javascript:;" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-white"
                 data-modal-toggle="rent-modal">{{__('rent')}}</a>
         </li>
-        <li id="btn-extend">
+        {{-- <li id="btn-extend">
             <a href="javascript:;" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-white"
                 data-modal-toggle="extend-modal">{{__('Extend')}}</a>
-        </li>
+        </li> --}}
         <li class="btn-delete-sim">
             <a href="javascript:;"
                 class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-white">{{__('Delete')}}</a>
@@ -590,6 +590,7 @@ var changeUrl = '';
         // initDatePicker();
         $('.invoice-btn').click(function(){
             let id = item[0].id;
+            console.log(id);
 
             $.ajax({
                 type: "get",
@@ -600,7 +601,7 @@ var changeUrl = '';
                     $('#invoice-modal .modal-body').addClass('hidden');
                 },
                 success: function (response) {
-                    // console.log(response);
+                    console.log(response);
                     var date = new Date(Date.parse(response.end_at));
                     $('#invoice-modal .modal-loader').addClass('hidden');
                     $('#invoice-modal .modal-body').removeClass('hidden');

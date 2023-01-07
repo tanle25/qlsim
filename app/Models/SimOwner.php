@@ -43,4 +43,10 @@ class SimOwner extends Model
         # code...
         return $this->hasOne(SimCard::class,'id','sim_card_id')->withTrashed();
     }
+
+    public function sim_active()
+    {
+        # code...
+        return $this->hasOne(SimCard::class,'id','sim_card_id')->whereNot('status',4)->withTrashed();
+    }
 }

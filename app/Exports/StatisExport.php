@@ -39,7 +39,7 @@ class StatisExport implements FromCollection, WithMapping, WithHeadings, WithCol
             $invoice->sim->phone,
             $invoice->sim->network->price,
             $invoice->price,
-            Date::dateTimeToExcel($invoice->created_at),
+            $invoice->created_at,
 
         ];
     }

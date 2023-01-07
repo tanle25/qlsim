@@ -97,6 +97,12 @@ class User extends Authenticatable
         return $this->morphMany(SimOwner::class,'ownerable');
     }
 
+    public function sim_active()
+    {
+        # code...
+        return $this->morphMany(SimOwner::class,'ownerable')->whereNot('sim.status',4);
+    }
+
     public function invoices()
     {
         # code...

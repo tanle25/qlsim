@@ -53,7 +53,7 @@ class SimCardController extends Controller
     {
         # code...
         $user = Auth::user();
-        $sims = $user->sims->where('sim.status',4);
+        $sims = $user->sims()->whereRelation('sim','status',4)->get();
         // dd($sims);
         return view('dealer.product.canceled-sim',['simCards'=>$sims]);
     }
@@ -396,8 +396,9 @@ class SimCardController extends Controller
     public function getBill($id)
     {
         # code...
-        $sim = SimCard::with(['bill.customer', 'bill.modelable'])->where('id', $id)->first();
-        return response()->json($sim->bill);
+        $sim = SimCard::with('invoices')->where('id', $id)->first();
+        // return 'test';
+        return response()->json($sim);
     }
 
     public function showRequest(Request $request)

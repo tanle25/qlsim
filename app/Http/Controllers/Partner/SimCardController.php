@@ -24,7 +24,8 @@ class SimCardController extends Controller
     {
         # code...
         $user = Auth::user();
-        $simCards = $user->sims->where('sim.status','!=',4);
+        $simCards = $user->sims()->whereRelation('sim','status','!=',4)->get();
+        // dd($user->sims()->whereRelation('sim','status','!=',4)->get());
         $customers = Customer::all();
         // $packages = PartnerPackage::all();
 
