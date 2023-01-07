@@ -138,7 +138,7 @@
         <a href="#" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{{__('Edit')}}</a>
       </li>
       <li >
-        <a href="#" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{{__('Delete')}}</a>
+        <a href="#" class="btn-delete block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{{__('Delete')}}</a>
       </li>
 
     </ul>
