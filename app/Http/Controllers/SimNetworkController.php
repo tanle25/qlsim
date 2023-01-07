@@ -18,10 +18,11 @@ class SimNetworkController extends Controller
     {
         # code...
         $request->validate([
+
             'name'=>'required|unique:sim_networks,name',
             'price'=>'required|numeric',
             'lease_price'=>'required|numeric',
-            'duration'=>'required|integer'
+            'duration'=>'required|integer|min:1'
         ],[
             'required'=>__(':attribute required'),
             'unique'=>__(':attribute exists'),
@@ -58,7 +59,7 @@ class SimNetworkController extends Controller
             'name'=>'required',
             'price'=>'required|integer',
             'lease_price'=>'required|integer',
-            'duration'=>'required|integer'
+            'duration'=>'required|integer|min:1'
         ],[
             'required'=>__(':attribute required'),
             'integer'=>__(':attribute invalid')
