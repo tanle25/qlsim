@@ -396,7 +396,7 @@ class SimCardController extends Controller
     public function getBill($id)
     {
         # code...
-        $sim = SimCard::with('invoices')->where('id', $id)->first();
+        $sim = SimCard::with('last_invoice.invoiceable')->where('id', $id)->first();
         // return 'test';
         return response()->json($sim);
     }

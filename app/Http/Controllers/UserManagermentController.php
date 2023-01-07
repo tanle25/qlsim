@@ -122,6 +122,7 @@ class UserManagermentController extends Controller
         ]);
 
         $user = User::find($request->user_id);
+        $user->invoices()->delete();
         $user->delete();
         return back()->with(['success'=>__('Delete successfully')]);
     }

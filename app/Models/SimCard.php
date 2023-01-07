@@ -66,6 +66,12 @@ class SimCard extends Model
        return $this->hasMany(Invoice::class);
     }
 
+    public function last_invoice()
+    {
+        # code...
+        return $this->hasOne(Invoice::class)->latest();
+    }
+
     public function invoices()
     {
         # code...
