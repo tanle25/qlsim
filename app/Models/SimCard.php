@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Auth;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Casts\Attribute;
@@ -16,6 +17,18 @@ class SimCard extends Model
     protected $casts=[
         'is_rent'=>'boolean'
     ];
+
+    // public static function boot(){
+    //     parent::boot();
+    //     static::deleting(function($sim){
+    //         $sim->deleted_by = Auth::user()->id;
+    //         $sim->save();
+    //     });
+    //     static::forceDeleted(function($sim){
+    //         $sim->deleted_by = null;
+    //         $sim->save();
+    //     });
+    // }
 
     protected function expired() : Attribute
     {
