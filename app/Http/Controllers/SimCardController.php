@@ -32,8 +32,6 @@ class SimCardController extends Controller
     public function index()
     {
         # code...
-        // $role = Auth::user()->roles;
-        // dd($role);
         $simCards = SimCard::orderBy('created_at', 'desc')->whereNot('status',4)->get();
         $partners = User::role(['dealer', 'collab'])->get();
         $customers = Customer::all();
@@ -41,6 +39,13 @@ class SimCardController extends Controller
         $networks = SimNetwork::all();
         return view('admin.pages.product.index', ['simCards' => $simCards, 'partners' => $partners, 'customers' => $customers, 'packages' => $packages, 'networks' => $networks]);
     }
+
+    // public function getByAjax()
+    // {
+    //     # code...
+    //     $simCards = SimCard::orderBy('created_at', 'desc')->whereNot('status',4)->get();
+    //     return response()->json($simCards);
+    // }
 
     public function canceledSim()
     {
@@ -81,7 +86,7 @@ class SimCardController extends Controller
             'required' => __(':attribute required'),
             'integer' => __(':attribute invalid'),
             'unique' => __(':attribute exists'),
-            'digits_between'=>':attribute từ :min - :max'
+            'digits_between'=>':attribute từ :min - :max số'
         ], [
             'number' => __('phone'),
             'iccid' => 'ICCID',
@@ -118,6 +123,7 @@ class SimCardController extends Controller
             'required' => __(':attribute required'),
             'numeric' => __(':attribute invalid'),
             'unique' => __(':attribute exists'),
+            'digits_between'=>':attribute từ :min - :max số'
         ], [
             'number' => __('phone'),
             'iccid' => 'ICCID',
@@ -310,12 +316,14 @@ class SimCardController extends Controller
                 'expired'=>Carbon::today()->addMonths($sim->network->duration)->toDateString()
             ]);
             DB::commit();
+            return back()->with(['success'=>'Thành công']);
         } catch (\Throwable $th) {
             DB::rollBack();
+            return back()->withErrors(['fail'=>'Có lỗi xảy ra vui lòng thử lại sau']);
         }
 
 
-        return back();
+
     }
 
     public function rentSimNewCustomer(Request $request)
@@ -385,9 +393,11 @@ class SimCardController extends Controller
             ]);
 
             DB::commit();
+            return back()->with(['success'=>'Thành công']);
         } catch (\Throwable $th) {
             //throw $th;
             DB::rollBack();
+            return back()->withErrors(['fail'=>'Có lỗi xảy ra. vui lòng thử lại sau']);
         }
 
 

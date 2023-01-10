@@ -93,7 +93,6 @@
                         </td>
                         <td>
                             <p class="text-color whitespace-no-wrap">{{$simCard->iccid}}</p>
-                            {{-- <p class="text-red-500 whitespace-no-wrap"><i>{{$simCard->old_iccid}}</i> </p> --}}
                         </td>
                         <td>
 
@@ -162,6 +161,7 @@
                     @endforeach
                 </tbody>
             </table>
+            {{-- <livewire:sim-datatable> --}}
         </div>
     </div>
 </div>

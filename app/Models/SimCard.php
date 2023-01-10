@@ -18,17 +18,17 @@ class SimCard extends Model
         'is_rent'=>'boolean'
     ];
 
-    // public static function boot(){
-    //     parent::boot();
-    //     static::deleting(function($sim){
-    //         $sim->deleted_by = Auth::user()->id;
-    //         $sim->save();
-    //     });
-    //     static::forceDeleted(function($sim){
-    //         $sim->deleted_by = null;
-    //         $sim->save();
-    //     });
-    // }
+    public static function boot(){
+        parent::boot();
+        static::deleting(function($sim){
+            $sim->deleted_by = Auth::user()->id;
+            $sim->save();
+        });
+        static::restoring(function($sim){
+            $sim->deleted_by = null;
+            $sim->save();
+        });
+    }
 
     protected function expired() : Attribute
     {
