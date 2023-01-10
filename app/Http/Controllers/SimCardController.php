@@ -81,6 +81,7 @@ class SimCardController extends Controller
             'required' => __(':attribute required'),
             'integer' => __(':attribute invalid'),
             'unique' => __(':attribute exists'),
+            'digits_between'=>':attribute từ :min - :max'
         ], [
             'number' => __('phone'),
             'iccid' => 'ICCID',
