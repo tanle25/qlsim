@@ -21,7 +21,7 @@ Route::group(['middleware'=>['auth','role:admin']],function(){
     //     return view('admin.pages.dashboard');
     // })->name('admin');
     Route::get('/',[DashBoardController::class,'index'])->name('admin');
-    // Route::get('get-by-ajax', SimCardController::class,'getByAjax');
+    Route::get('get-by-ajax', [SimCardController::class,'getByAjax'])->name('sim.list');
     Route::get('nguoi-dung',[UserManagermentController::class,'index']);
     Route::post('sua-nguoi-dung',[UserManagermentController::class,'update']);
     Route::post('them-nguoi-dung',[UserManagermentController::class,'store']);

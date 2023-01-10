@@ -77,7 +77,7 @@
                         <th class="nosort"></th>
                     </tr>
                 </thead>
-                <tbody>
+                {{-- <tbody>
                     @foreach ($simCards as $simCard )
                     <tr>
                         <td>
@@ -159,63 +159,64 @@
                         </td>
                     </tr>
                     @endforeach
-                </tbody>
+                </tbody> --}}
             </table>
             {{-- <livewire:sim-datatable> --}}
         </div>
+        <div id="dropdownLeft"
+        class="hidden z-10 w-44 bg-white rounded divide-y divide-gray-100 dark:bg-gray-700 border shadow-lg" data-target="">
+        <ul class="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownLeftButton">
+            <li class="context-menu-item change-status" data-status="1">
+
+                <a href="javascript:;"
+                    class="block py-2 px-4 hover:hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-white">{{__('active')}}</a>
+            </li>
+            <li>
+                <a href="javascript:;" class="block py-2 px-4 hover:hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-white"
+                    data-modal-toggle="edit-sim-modal">{{__('Edit')}}</a>
+            </li>
+            <li class="context-menu-item change-status" data-status="3">
+
+                <a href="javascript:;"
+                    class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-white">{{__('temporarily cut')}}</a>
+            </li>
+            <li class="context-menu-item change-status" data-status="4">
+
+                <a href="javascript:;"
+                    class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-white">{{__('Cancel')}}</a>
+            </li>
+            <li class="context-menu-item change-status" data-status="5">
+                <a href="javascript:;"
+                    class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-white">{{__('reset')}}</a>
+            </li>
+            <li class="invoice-btn">
+                <a href="javascript:;" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-white"
+                    data-modal-toggle="invoice-modal">{{__('Customer inofmation')}}</a>
+            </li>
+            <li id="rent-btn">
+                <a href="javascript:;" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-white"
+                    data-modal-toggle="rent-modal">{{__('rent')}}</a>
+            </li>
+            {{-- <li id="btn-extend">
+                <a href="javascript:;" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-white"
+                    data-modal-toggle="extend-modal">{{__('Extend')}}</a>
+            </li> --}}
+            <li class="btn-delete-sim">
+                <a href="javascript:;"
+                    class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-white">{{__('Delete')}}</a>
+            </li>
+            <li class="btn-history">
+                <a href="javascript:;" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-white">{{__('Lịch sử
+                    thay đổi')}}</a>
+            </li>
+        </ul>
+    </div>
     </div>
 </div>
 
 </div>
 
-<div id="dropdownLeft"
-    class="hidden z-10 w-44 bg-white rounded divide-y divide-gray-100 dark:bg-gray-700 border shadow-lg" data-target="">
-    <ul class="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownLeftButton">
-        <li class="context-menu-item change-status" data-status="1">
 
-            <a href="javascript:;"
-                class="block py-2 px-4 hover:hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-white">{{__('active')}}</a>
-        </li>
-        <li>
-            <a href="javascript:;" class="block py-2 px-4 hover:hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-white"
-                data-modal-toggle="edit-sim-modal">{{__('Edit')}}</a>
-        </li>
-        <li class="context-menu-item change-status" data-status="3">
-
-            <a href="javascript:;"
-                class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-white">{{__('temporarily cut')}}</a>
-        </li>
-        <li class="context-menu-item change-status" data-status="4">
-
-            <a href="javascript:;"
-                class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-white">{{__('Cancel')}}</a>
-        </li>
-        <li class="context-menu-item change-status" data-status="5">
-            <a href="javascript:;"
-                class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-white">{{__('reset')}}</a>
-        </li>
-        <li class="invoice-btn">
-            <a href="javascript:;" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-white"
-                data-modal-toggle="invoice-modal">{{__('Customer inofmation')}}</a>
-        </li>
-        <li id="rent-btn">
-            <a href="javascript:;" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-white"
-                data-modal-toggle="rent-modal">{{__('rent')}}</a>
-        </li>
-        {{-- <li id="btn-extend">
-            <a href="javascript:;" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-white"
-                data-modal-toggle="extend-modal">{{__('Extend')}}</a>
-        </li> --}}
-        <li class="btn-delete-sim">
-            <a href="javascript:;"
-                class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-white">{{__('Delete')}}</a>
-        </li>
-        <li class="btn-history">
-            <a href="javascript:;" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-white">{{__('Lịch sử
-                thay đổi')}}</a>
-        </li>
-    </ul>
-</div>
 
 <div id="rent-modal" tabindex="-1"
     class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 md:inset-0 h-modal md:h-full">
@@ -482,51 +483,6 @@
     </div>
 </div>
 
-{{-- <form action="{{url('admin/thay-doi-ngay-tao')}}" method="post">
-    @csrf
-    <div id="edit-creeated" tabindex="-1"
-        class="fixed top-0 left-0 right-0 z-50 hidden p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-modal md:h-full">
-        <div class="relative w-full h-full max-w-md md:h-auto">
-            <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-                <button type="button"
-                    class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white close-edited">
-                    <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd"
-                            d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                            clip-rule="evenodd"></path>
-                    </svg>
-                    <span class="sr-only">Close modal</span>
-                </button>
-                <div class="p-6 text-center">
-                    <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Cập nhật ngày hết hạn</h3>
-                    <input type="hidden" name="sim">
-                    <div class="relative mb-4">
-                        <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
-                            <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor"
-                                viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd"
-                                    d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
-                                    clip-rule="evenodd"></path>
-                            </svg>
-                        </div>
-                        <input type="date" name="date"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                            placeholder="Select date">
-                    </div>
-                    <button type="submit"
-                        class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2">
-                        Cập nhật
-                    </button>
-                    <button type="button"
-                        class="close-edited text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">No,
-                        cancel</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</form> --}}
-
 
 @include('admin.pages.components.edit-sim')
 @include('admin.pages.components.edit-sims')
@@ -537,6 +493,7 @@
     <input type="hidden" name="status">
 </form>
 
+
 @stop
 
 @section('js')
@@ -546,11 +503,16 @@
 <script src="https://unpkg.com/flowbite@1.5.4/dist/datepicker.js"></script>
 <script src="{{asset('backend/assets/js/test.js')}}"></script>
 <script>
+
+
+
     const targetEl = document.getElementById('dropdownSearch');
 const triggerEl = document.getElementById('dropdownSearchButton');
 const dropdown = new Dropdown(targetEl, triggerEl);
 
 const popupEl = document.getElementById('edit-expired');
+
+
 
 const options = {
   placement: 'center',
@@ -562,12 +524,12 @@ const modal = new Modal(popupEl, options);
 
 var changeUrl = '';
 
-    $('.show-popup').click(function(){
+    $(document).on('click','.show-popup',function(){
         var sim = $(this).data();
         $('#edit-expired form').attr('action',sim.href);
         $('#edit-expired h3').text(sim.text);
         modal.show();
-    });
+    })
     $('.close-datepicker').click(function(){
         modal.hide();
     })
@@ -578,13 +540,47 @@ var changeUrl = '';
         var customers = @json($customers);
         var sims = @json($simCards);
         var item =null;
-        $('#product-table').DataTable( {
-            "order": [],
-            "columnDefs": [ {
-                'orderable': false,
-                "targets": 'nosort'
-                } ]
-        });
+        // $('#product-table').DataTable( {
+        //     "order": [],
+        //     "columnDefs": [ {
+        //         'orderable': false,
+        //         "targets": 'nosort'
+        //         } ]
+        // });
+        var table = $('#product-table').DataTable({
+        processing: true,
+        serverSide: true,
+        "language": {
+            processing: "<span class='fa-stack fa-lg'>\n\
+                    <i class='fa fa-spinner fa-spin fa-stack-2x fa-fw'></i>\n\
+               </span>&nbsp;&nbsp;&nbsp;&nbsp;Processing ...",
+        },
+        ajax: "{{ route('sim.list') }}",
+        columns: [
+            // {data: 'DT_RowIndex', name: 'DT_RowIndex'},
+            {data:'input', name:'input'},
+            {data: 'phone', name: 'phone'},
+            {data: 'iccid', name: 'iccid'},
+            {data: 'old_iccid', name: 'old_iccid'},
+            {data: 'network', name: 'network'},
+            {data: 'customer', name: 'customer'},
+            {data: 'customer_type', name: 'customer_type'},
+            {data: 'created_at', name: 'created_at'},
+            {data: 'rent_at', name: 'rent_at'},
+            {data: 'expired_at', name: 'expired_at'},
+            {data: 'status', name: 'status'},
+            {data: 'action', name: 'action'},
+            // {data: 'dob', name: 'dob'},
+            // {
+            //     data: 'action',expired_at
+            //     name: 'action',
+            //     orderable: true,
+            //     searchable: true
+            // },
+        ]
+    });
+
+//   });
         // initDatePicker();
         $('.invoice-btn').click(function(){
             let id = item[0].id;
@@ -651,6 +647,14 @@ var changeUrl = '';
                 $('#rent-btn').removeClass('hidden');
                 $('#btn-extend').addClass('hidden')
             }
+            // dropdown2.show();
+            var offset = $(this).offset();
+            var top = offset.top;
+            var left = offset.left-300;
+
+
+            $('#dropdownLeft').removeClass('hidden').css({'position':'absolute', 'top':top -100,'right':50});
+            // toggleDropdown(offset);
         });
         $('.context-menu-item').click(function(){
             if(item.length > 0){
@@ -661,6 +665,14 @@ var changeUrl = '';
 
 
         });
+        $(document).on('click', function(event){
+            console.log($(event.target).is('button.btn-dropdown svg'));
+            if(!$(event.target).is('button.btn-dropdown svg')){
+                // console.log('...');
+                $("#dropdownLeft").addClass("hidden");
+            }
+        })
+
         $(document).on('change','#import-file',function(){
             $('#import-form').submit();
         });
@@ -714,5 +726,15 @@ var changeUrl = '';
             $(ul).append(li);
         });
     }
+
+    // function toggleDropdown(offset){
+    //     var isShow = $('#dropdownLeft').hasClass('hidden');
+    //     console.log(isShow);
+    //     if(!isShow){
+    //         $('#dropdownLeft').removeClass('hidden').css({'position':'absolute', 'top':top -100,'right':50});
+    //     }else{
+    //         $('#dropdownLeft').addClass('hidden');
+    //     }
+    // }
 </script>
 @stop

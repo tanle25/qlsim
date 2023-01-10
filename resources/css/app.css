@@ -306,4 +306,17 @@ p.text-color{
   .list-hover{
     @apply bg-gray-300;
   }
+
+
+
+  .dataTables_processing{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    padding: 30px;
+    transform: translate(-50%,-50%);
+    background-color: #fff;
+    border: 1px solid #ddd;
+    box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.3);
+  }
 /* shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline */

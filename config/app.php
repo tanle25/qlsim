@@ -198,6 +198,7 @@ return [
         Ichtrojan\Otp\OtpServiceProvider::class,
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
         // \App\Http\Facade\InvoiceFacade::class,
+        Yajra\DataTables\DataTablesServiceProvider::class,
 
     ],
 
@@ -217,6 +218,7 @@ return [
         'Otp' => Ichtrojan\Otp\Otp::class,
         'Invoice' => App\Http\Facade\InvoiceFacade::class,
         'Upload' => App\Http\Facade\UploadFacade::class,
+        'DataTables' => Yajra\DataTables\Facades\DataTables::class,
     ])->toArray(),
 
 ];

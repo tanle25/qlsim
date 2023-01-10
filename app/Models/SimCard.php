@@ -30,6 +30,12 @@ class SimCard extends Model
         });
     }
 
+    public function delete_by()
+    {
+        # code...
+        return $this->hasOne(User::class,'id','deleted_by');
+    }
+
     protected function expired() : Attribute
     {
         # code...

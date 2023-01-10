@@ -25,6 +25,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
+use Yajra\DataTables\Facades\DataTables;
 
 class SimCardController extends Controller
 {
@@ -40,12 +41,75 @@ class SimCardController extends Controller
         return view('admin.pages.product.index', ['simCards' => $simCards, 'partners' => $partners, 'customers' => $customers, 'packages' => $packages, 'networks' => $networks]);
     }
 
-    // public function getByAjax()
-    // {
-    //     # code...
-    //     $simCards = SimCard::orderBy('created_at', 'desc')->whereNot('status',4)->get();
-    //     return response()->json($simCards);
-    // }
+    public function getByAjax(Request $request)
+    {
+        # code...
+        if($request->ajax()){
+            $data =  SimCard::orderBy('created_at', 'desc')->whereNot('status',4)->get();
+            return DataTables::of($data)
+            ->addColumn('input', function($row){
+                return '<input form="share-sim" type="checkbox" name="sims[]" class="input-checkbox w-5 h-5"
+                value="'.$row->id.'">';
+            })
+            ->addColumn('network', function($row){
+                return $row->network->name ?? '';
+            })
+            ->addColumn('customer', function($row){
+                return $row->partner->ownerable->name ?? '';
+            })
+            ->addColumn('customer_type', function($row){
+                return $row->partner->type ?? '';
+            })
+            ->addColumn('created_at', function($row){
+                return "<span data-href='".url('admin/cap-nhat-ngay-them',$row->id)."'
+                data-text='Cập nhật ngày tạo' class='show-popup'>
+                ".$row->created_at->format('d-m-Y')."
+            </span>";
+            })
+            ->addColumn('rent_at', function($row){
+                $rent = $row->partner ? $row->partner->created_at->format('d-m-Y') : '';
+                return "<span data-href='".url('admin/cap-nhat-ngay-cho-thue',$row->id)."'
+                data-text='Cập nhật ngày cho thuê' class='show-popup'>
+                $rent
+            </span>";
+            })
+            ->addColumn('expired_at', function($row){
+                $expired = $row->partner ? $row->partner->expired->format('d-m-Y') : '';
+                return " <p data-href='".url('admin/cap-nhat-han-su-dung',$row->id)."'
+                data-text='Cập nhật ngày hết hạn'
+                class='show-popup whitespace-no-wrap {{ $row->partner  && $row->partner->expired->isPast() ? 'text-red-500' : ''}} '>
+                $expired
+            </p>";
+            })
+            ->addColumn('status', function($row){
+                $status = config('constrain.sim_status');
+                $statusText = __($status[$row->status]['text']) ;
+                $color = $status[$row->status]['color'];
+                return "<span
+                class='relative inline-block px-3 py-1 font-semibold ".$color." leading-tight'>
+
+                <span
+                    class='relative'>$statusText</span>
+            </span>";
+            })
+            ->addColumn('action', function($row){
+
+                return "<button type='button' class=\"inline-block text-gray-500 hover:text-gray-700 btn-dropdown\"
+                data-dropdown-toggle=\"dropdownLeft\" data-dropdown-placement=\"left\"
+                data-iccid='".$row->iccid."'
+                data-history='".url('admin/lich-su-thay-doi',$row->id)."'>
+                <svg class=\"inline-block h-6 w-6 fill-current\" viewBox=\"0 0 24 24\">
+                    <path
+                        d=\"M12 6a2 2 0 110-4 2 2 0 010 4zm0 8a2 2 0 110-4 2 2 0 010 4zm-2 6a2 2 0 104 0 2 2 0 00-4 0z\" />
+                </svg>
+            </button>";
+            })
+            ->rawColumns(['input','network','customer','created_at','rent_at','expired_at','status','action'])
+            ->make();
+        }
+
+
+    }
 
     public function canceledSim()
     {
