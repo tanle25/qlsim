@@ -88,7 +88,7 @@ class PartnerController extends Controller
 
         $partner = User::findOrFail($id);
         $sims = $partner->sims()->whereRelation('sim','deleted_at',null)->get();
-        $sim_not_rent = SimCard::has('network')->doesntHave('partner')->where('status',1)->get();
+        $sim_not_rent = SimCard::has('network')->doesntHave('partner')->where('status',1)->limit(30)->get();
 
         // dd($sim_not_rent);
         return view('admin.pages.list-sim',['sims'=>$sims,'user'=>$partner,'sim_not_rent'=>$sim_not_rent]);
